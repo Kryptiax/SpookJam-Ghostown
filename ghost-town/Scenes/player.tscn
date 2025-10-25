@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://de5bh4bi85eu3"]
+[gd_scene load_steps=6 format=3 uid="uid://de5bh4bi85eu3"]
 
 [ext_resource type="Script" uid="uid://dfgh3r1xvwkg7" path="res://Scripts/PlayerController.gd" id="1_cvnsp"]
 [ext_resource type="SpriteFrames" uid="uid://b2jj6cj5flf6f" path="res://Scenes/spriteframes.tres" id="2_6t5aa"]
+[ext_resource type="Script" uid="uid://d1b1xg52rab8s" path="res://Scenes/ray_cast_3d.gd" id="3_6t5aa"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_p8bfa"]
 
@@ -37,3 +38,30 @@ visible = false
 [node name="SpotLight3D" type="SpotLight3D" parent="Flashlight"]
 spot_range = 5.3320603
 spot_angle = 63.13604
+
+[node name="RayCast3D" type="RayCast3D" parent="Flashlight" groups=["torch"]]
+transform = Transform3D(1, 0, 0, 0, 0.9999966, 0.0026179908, 0, -0.0026179908, 0.9999966, 0, 0, 0)
+target_position = Vector3(0, 0, -10)
+collision_mask = 2
+collide_with_areas = true
+debug_shape_custom_color = Color(0.19818997, 0.43053874, 0, 1)
+debug_shape_thickness = 5
+script = ExtResource("3_6t5aa")
+
+[node name="RayCast3D2" type="RayCast3D" parent="Flashlight" groups=["torch"]]
+transform = Transform3D(1, 0, 0, 0, 0.9999966, 0.0026179908, 0, -0.0026179908, 0.9999966, 0, 0, 0)
+target_position = Vector3(-3.925, 0, -10)
+collision_mask = 2
+collide_with_areas = true
+debug_shape_custom_color = Color(0.19818997, 0.43053874, 0, 1)
+debug_shape_thickness = 5
+script = ExtResource("3_6t5aa")
+
+[node name="RayCast3D3" type="RayCast3D" parent="Flashlight" groups=["torch"]]
+transform = Transform3D(1, 0, 0, 0, 0.9999966, 0.0026179908, 0, -0.0026179908, 0.9999966, 0, 0, 0)
+target_position = Vector3(5.07, 0, -10)
+collision_mask = 2
+collide_with_areas = true
+debug_shape_custom_color = Color(0.19818997, 0.43053874, 0, 1)
+debug_shape_thickness = 5
+script = ExtResource("3_6t5aa")

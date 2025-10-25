@@ -8,6 +8,8 @@ const JUMP_VELOCITY = 4.5
 @onready var flashlight: Node3D = $Flashlight
 var flashlight_on = false
 
+func _input(event: InputEvent) -> void:
+	pass # if event.is_action_pressed(ui_left)
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
@@ -27,8 +29,13 @@ func _physics_process(delta: float) -> void:
 	
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
-		velocity.x = direction.z * SPEED
-		velocity.z = -direction.x * SPEED
+		var temp = direction
+		direction.x = temp.z
+		direction.y = temp.y
+		direction.z = -temp.x
+		#print(direction)
+		velocity.x = direction.x * SPEED
+		velocity.z = direction.z * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
@@ -36,7 +43,7 @@ func _physics_process(delta: float) -> void:
 	flashlight.visible = flashlight_on
 	if (flashlight_on == true):
 		
-		if (global_position != direction):
+		if (global_position + direction != global_position):
 			flashlight.look_at(global_position + direction, Vector3.UP)
 
 	move_and_slide()

@@ -23,3 +23,11 @@ func _physics_process(delta: float) -> void:
 	
 		
 	move_and_slide()
+
+
+func die() -> void:
+		print("eek")
+		var tween = create_tween()
+		tween.tween_property(self, "scale", Vector3(0,0,0), 1.0).from_current()
+		await get_tree().create_timer(0.75).timeout
+		queue_free()

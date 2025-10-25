@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://bluqj0q5jre6a"]
+[gd_scene load_steps=5 format=3 uid="uid://bluqj0q5jre6a"]
 
 [ext_resource type="Script" uid="uid://d4gj1jp550qyc" path="res://Scripts/ghost.gd" id="1_infc1"]
 
@@ -6,7 +6,13 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_infc1"]
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rcd3j"]
+radius = 1.0136719
+height = 2.0273438
+
 [node name="CharacterBody3D" type="CharacterBody3D" groups=["ghosts"]]
+collision_layer = 3
+collision_mask = 3
 script = ExtResource("1_infc1")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
@@ -18,3 +24,11 @@ mesh = SubResource("CapsuleMesh_66xur")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_infc1")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9934877, 0)
+shape = SubResource("CapsuleShape3D_rcd3j")
+
+[connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]

@@ -15,5 +15,5 @@ material_override = SubResource("StandardMaterial3D_brbld")
 use_collision = true
 
 [node name="CSGBox3D" type="CSGBox3D" parent="City"]
-transform = Transform3D(7.6658883, 0, 0, 0, 1.003867, 0, 0, 0, 10.026607, -0.050531805, 0, 0)
-size = Vector3(0.79345703, 1, 1)
+transform = Transform3D(7.6658883, 0, 0, 0, 1.003867, 0, 0, 0, 10.026607, -1.0354372, 0, 0)
+size = Vector3(0.30969238, 1, 1)

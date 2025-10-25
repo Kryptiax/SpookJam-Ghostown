@@ -11,8 +11,22 @@ config_version=5
 [application]
 
 config/name="Ghost Town"
+run/main_scene="uid://0lf8n6v1j6bu"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+WorldInfo="*res://Scripts/worldinfo.gd"
+
+[editor]
+
+version_control/autoload_on_startup=true
+
+[global_group]
+
+player=""
+ghosts=""
 
 [rendering]
 

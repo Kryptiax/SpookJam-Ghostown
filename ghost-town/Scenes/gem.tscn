@@ -1,6 +1,22 @@
-[gd_scene load_steps=2 format=3 uid="uid://jx5m2fkhkq2r"]
+[gd_scene load_steps=5 format=3 uid="uid://jx5m2fkhkq2r"]
 
 [ext_resource type="Script" uid="uid://dka10ra1toe02" path="res://Scenes/gembase.gd" id="1_bti4x"]
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bti4x"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bti4x"]
+albedo_color = Color(0.14509805, 1, 0.07058824, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_0xstn"]
+material = SubResource("StandardMaterial3D_bti4x")
+
 [node name="Gem" type="Node3D"]
 script = ExtResource("1_bti4x")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("CapsuleShape3D_bti4x")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_0xstn")

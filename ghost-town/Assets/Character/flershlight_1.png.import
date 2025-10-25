@@ -2,17 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://6u2qni7lnxbn"
-path.s3tc="res://.godot/imported/expfour111.png-19338e7c24861653868a1328b92171d5.s3tc.ctex"
+uid="uid://ct343empit73i"
+path.s3tc="res://.godot/imported/flershlight_1.png-37278201a24146bdf6869acf4d2a6099.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={
+"md5": "8873bdf8da913de224ad659e72acd9a1"
+}
 
 [deps]
 
-source_file="res://expfour111.png"
-dest_files=["res://.godot/imported/expfour111.png-19338e7c24861653868a1328b92171d5.s3tc.ctex"]
+source_file="res://Assets/Character/flershlight_1.png"
+dest_files=["res://.godot/imported/flershlight_1.png-37278201a24146bdf6869acf4d2a6099.s3tc.ctex"]
 
 [params]
 

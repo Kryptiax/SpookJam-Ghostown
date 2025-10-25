@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://diuugwu4pkiie"]
+[gd_scene load_steps=9 format=3 uid="uid://diuugwu4pkiie"]
 
-[ext_resource type="Script" uid="uid://y4477k7tx5o1" path="res://Scenes/PlayerController.gd" id="1_1vpby"]
+[ext_resource type="Script" uid="uid://dfgh3r1xvwkg7" path="res://Scripts/PlayerController.gd" id="1_afu10"]
 [ext_resource type="SpriteFrames" uid="uid://bbpixv45tdh4r" path="res://Scenes/spriteframes.tres" id="2_6n652"]
+[ext_resource type="PackedScene" uid="uid://kfl3w0ioxy4m" path="res://Assets/Character/flershlight.fbx" id="3_afu10"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_p8bfa"]
 
@@ -23,7 +24,7 @@ size = Vector3(50, 1, 50)
 [node name="Player" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.588048, 0)
 slide_on_ceiling = false
-script = ExtResource("1_1vpby")
+script = ExtResource("1_afu10")
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="Player"]
 pixel_size = 0.1
@@ -42,6 +43,9 @@ shape = SubResource("CapsuleShape3D_1vpby")
 transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, 0, 2, 5)
 
 [node name="Flashlight" type="Node3D" parent="Player"]
+
+[node name="flershlight" parent="Player/Flashlight" instance=ExtResource("3_afu10")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0.25, 0, 0)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Player/Flashlight"]
 spot_range = 5.3320603

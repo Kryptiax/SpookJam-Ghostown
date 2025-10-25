@@ -130,10 +130,8 @@ shape = SubResource("BoxShape3D_rmln3")
 [node name="CharacterBody3D" parent="." instance=ExtResource("4_lau5f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0712185, 0)
 
-[node name="Ghost" parent="." instance=ExtResource("5_6nc8a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.83356, 2.0941315, -11.315036)
-
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.38470364, 0)
 navigation_mesh = SubResource("NavigationMesh_6nc8a")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D"]
@@ -146,6 +144,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3062172, -21.503305)
 
 [node name="LeftSpawn" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 21.887844)
+
+[node name="CharacterBody3D2" parent="." instance=ExtResource("5_6nc8a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.069808, 0.8184614, 1.3955438)
 
 [connection signal="body_entered" from="RightArea" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_entered" from="RightArea" to="." method="_on_right_area_body_entered"]

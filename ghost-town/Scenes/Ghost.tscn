@@ -6,16 +6,15 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_infc1"]
 
-[node name="Ghost" type="Node3D" groups=["ghosts"]]
-
-[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8254663, 0)
+[node name="CharacterBody3D" type="CharacterBody3D" groups=["ghosts"]]
 script = ExtResource("1_infc1")
 
-[node name="NavigationAgent3D" type="NavigationAgent3D" parent="CharacterBody3D"]
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_66xur")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_infc1")

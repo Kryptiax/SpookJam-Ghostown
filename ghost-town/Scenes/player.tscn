@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://de5bh4bi85eu3"]
+
+[ext_resource type="Script" uid="uid://dfgh3r1xvwkg7" path="res://Scripts/PlayerController.gd" id="1_cvnsp"]
+[ext_resource type="SpriteFrames" uid="uid://b2jj6cj5flf6f" path="res://Scenes/spriteframes.tres" id="2_6t5aa"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_p8bfa"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1vpby"]
+radius = 1.0776367
+height = 2.5283203
+
+[node name="Player" type="CharacterBody3D" groups=["player"]]
+slide_on_ceiling = false
+script = ExtResource("1_cvnsp")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+pixel_size = 0.1
+billboard = 1
+texture_filter = 0
+sprite_frames = ExtResource("2_6t5aa")
+animation = &"north"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("CapsuleMesh_p8bfa")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.26416016, 0)
+shape = SubResource("CapsuleShape3D_1vpby")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, 0, 2, 5)
+visible = false
+
+[node name="Flashlight" type="Node3D" parent="."]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Flashlight"]
+spot_range = 5.3320603
+spot_angle = 63.13604

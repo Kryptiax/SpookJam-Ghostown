@@ -1,11 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://diuugwu4pkiie"]
+[gd_scene load_steps=5 format=3 uid="uid://diuugwu4pkiie"]
 
-[ext_resource type="Script" uid="uid://y4477k7tx5o1" path="res://Scenes/PlayerController.gd" id="1_1vpby"]
-[ext_resource type="SpriteFrames" uid="uid://bbpixv45tdh4r" path="res://Scenes/spriteframes.tres" id="2_6n652"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_p8bfa"]
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1vpby"]
+[ext_resource type="PackedScene" uid="uid://de5bh4bi85eu3" path="res://Scenes/player.tscn" id="1_1vpby"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1vpby"]
 size = Vector3(50, 1, 50)
@@ -20,32 +15,8 @@ size = Vector3(50, 1, 50)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 
-[node name="Player" type="CharacterBody3D" parent="."]
+[node name="Player" parent="." instance=ExtResource("1_1vpby")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.588048, 0)
-slide_on_ceiling = false
-script = ExtResource("1_1vpby")
-
-[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="Player"]
-pixel_size = 0.1
-texture_filter = 0
-sprite_frames = ExtResource("2_6n652")
-animation = &"north"
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
-visible = false
-mesh = SubResource("CapsuleMesh_p8bfa")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
-shape = SubResource("CapsuleShape3D_1vpby")
-
-[node name="Camera3D" type="Camera3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, 0, 2, 5)
-
-[node name="Flashlight" type="Node3D" parent="Player"]
-
-[node name="SpotLight3D" type="SpotLight3D" parent="Player/Flashlight"]
-spot_range = 5.3320603
-spot_angle = 63.13604
 
 [node name="Ground" type="StaticBody3D" parent="."]
 

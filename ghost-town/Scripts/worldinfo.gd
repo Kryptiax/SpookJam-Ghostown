@@ -1,6 +1,12 @@
 extends Node
 
-var direction: bool = true #left is true right is false
+enum DIRECTIONS  {
+	NORTH,
+	SOUTH,
+	EAST,
+	WEST
+}
+var direction: DIRECTIONS = DIRECTIONS.NORTH #left is true right is false
 var init: bool = false #left is true right is false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

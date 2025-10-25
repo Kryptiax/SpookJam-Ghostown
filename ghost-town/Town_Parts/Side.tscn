@@ -104,14 +104,14 @@ shape = SubResource("BoxShape3D_mbl57")
 [node name="LeftArea" type="Area3D" parent="."]
 
 [node name="Left" type="CollisionShape3D" parent="LeftArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.737671, 7.766552, 24.103392)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.737671, 7.766552, 24.55184)
 shape = SubResource("BoxShape3D_i3nr6")
 
 [node name="RightSpawn" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -23)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0901604, -20.718666)
 
 [node name="LeftSpawn" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 21.724312)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 21.032835)
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(-4.4703484e-08, -0.013665496, 0.99990666, -5.9733307e-10, 0.99990666, 0.013665496, -1, 1.361794e-11, -4.4707477e-08, 60.52121, 9.124836, 0.087064505)

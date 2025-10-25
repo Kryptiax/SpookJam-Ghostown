@@ -1,10 +1,10 @@
 extends Node3D
 const new_side = preload("uid://bd2yc86l7itq1")
-const playa = preload("res://Scenes/TempCharacter.tscn")
+const playa = preload("res://Scenes/player.tscn")
 var spawn = playa.instantiate()
 @onready var player: CharacterBody3D = $CharacterBody3D
-@onready var right_spawn: Node3D = $RightSpawn
-@onready var left_spawn: Node3D = $LeftSpawn
+@onready var east: Node3D = $EastSpawn
+@onready var west: Node3D = $WestSpawn
 @onready var station: Node3D = $Station
 
 var target = Vector3(0,0,0)
@@ -15,12 +15,17 @@ func _ready() -> void:
 		add_child(spawn)
 		WorldInfo.init = true
 	else:
-		if WorldInfo.direction:
-			spawn.position = right_spawn.global_position
-			add_child(spawn)
-		else:
-			spawn.position = left_spawn.global_position
-			add_child(spawn)
+		match WorldInfo.direction:
+			WorldInfo.DIRECTIONS.NORTH:
+				pass
+			WorldInfo.DIRECTIONS.SOUTH:
+				pass
+			WorldInfo.DIRECTIONS.EAST:
+				spawn.position = west.global_position
+				add_child(spawn)
+			WorldInfo.DIRECTIONS.WEST:
+				spawn.position = east.global_position
+				add_child(spawn)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -33,11 +38,11 @@ func _process(delta: float) -> void:
 
 func _on_left_area_body_entered(body: Node3D) -> void:
 	if body.is_in_group("player"):
-		WorldInfo.direction = true
+		WorldInfo.direction = WorldInfo.DIRECTIONS.WEST
 		get_tree().change_scene_to_packed(new_side)
 
 
 func _on_right_area_body_entered(body: Node3D) -> void:
 	if body.is_in_group("player"):
-		WorldInfo.direction = false
+		WorldInfo.direction = WorldInfo.DIRECTIONS.EAST
 		get_tree().change_scene_to_packed(new_side)

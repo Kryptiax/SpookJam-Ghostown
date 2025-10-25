@@ -1,7 +1,7 @@
 extends CharacterBody3D
 
 
-const SPEED = 5.0
+const SPEED = 15.0
 const JUMP_VELOCITY = 4.5
 
 @onready var anim = $AnimatedSprite3D
@@ -27,8 +27,8 @@ func _physics_process(delta: float) -> void:
 	
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
+		velocity.x = direction.z * SPEED
+		velocity.z = -direction.x * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
@@ -38,10 +38,7 @@ func _physics_process(delta: float) -> void:
 		
 		if (global_position != direction):
 			flashlight.look_at(global_position + direction, Vector3.UP)
-		else:
-			print_debug("FUCK YOU FUCK YOU")
-	else: 
-		print_debug("double gfuck you")
+
 	move_and_slide()
 	
 	var input_vector = Vector2(

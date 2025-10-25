@@ -1,19 +1,24 @@
 extends Node3D
 
-const character = preload("uid://dnbw6fwhru3yt")
-@onready var right_spawn: Node3D = $RightSpawn
-@onready var left_spawn: Node3D = $LeftSpawn
+const playa = preload("res://Scenes/player.tscn")
+var spawn = playa.instantiate()
+@onready var east: Node3D = $RightSpawn
+@onready var west: Node3D = $LeftSpawn
 var main = "res://Town_Parts/Main.tscn"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	var spawn = character.instantiate()
-	if WorldInfo.direction:
-		spawn.position = right_spawn.global_position
-		add_child(spawn)
-	else:
-		spawn.position = left_spawn.global_position
-		add_child(spawn)
+		match WorldInfo.direction:
+			WorldInfo.DIRECTIONS.NORTH:
+				pass
+			WorldInfo.DIRECTIONS.SOUTH:
+				pass
+			WorldInfo.DIRECTIONS.EAST:
+				spawn.position = west.global_position
+				add_child(spawn)
+			WorldInfo.DIRECTIONS.WEST:
+				spawn.position = east.global_position
+				add_child(spawn)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -22,13 +27,16 @@ func _process(delta: float) -> void:
 
 
 func _on_right_area_body_entered(body: Node3D) -> void:
-	pass # Replace with function body.
+	if body.is_in_group("player"):
+		WorldInfo.direction = WorldInfo.DIRECTIONS.EAST
+		print("yippie")
+		get_tree().change_scene_to_file(main)
 
 
 
 func _on_left_area_body_entered(body: Node3D) -> void:
 	print("chanhe")
 	if body.is_in_group("player"):
-		WorldInfo.direction = true
+		WorldInfo.direction = WorldInfo.DIRECTIONS.WEST #Side we are coming from
 		print("yippie")
 		get_tree().change_scene_to_file(main)

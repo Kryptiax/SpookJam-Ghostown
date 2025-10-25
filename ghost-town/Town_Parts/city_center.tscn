@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://cfre02u3h2541"]
+
+[ext_resource type="Texture2D" uid="uid://c8x1fvbwaqdim" path="res://Assets/Dark/texture_09.png" id="1_87s1a"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_la81a"]
+albedo_texture = ExtResource("1_87s1a")
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[node name="CityCenter" type="Node3D"]
+
+[node name="City" type="CSGCombiner3D" parent="."]
+transform = Transform3D(5.5887423, 0, 0, 0, 1, 0, 0, 0, 4.678951, 4.18157, 0.31652832, 0.070453644)
+material_override = SubResource("StandardMaterial3D_la81a")
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="City"]
+transform = Transform3D(7.6658883, 0, 0, 0, 1.003867, 0, 0, 0, 10.026607, -0.069247484, 0, 0)
+size = Vector3(0.9819336, 1, 1)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="City"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1450988, 3.3495255, -0.10461544)
+size = Vector3(1, 7.699051, 1.3258057)

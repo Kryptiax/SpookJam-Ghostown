@@ -4,12 +4,21 @@ extends CharacterBody3D
 const SPEED = 15.0
 const JUMP_VELOCITY = 4.5
 
+# Health Calc
+var currentHealth
+var maxHealth = 3
+signal health_changed(health)
+
 @onready var anim = $AnimatedSprite3D
 @onready var flashlight: Node3D = $Flashlight
 var flashlight_on = false
 
-func _input(event: InputEvent) -> void:
+func _ready() -> void:
+	currentHealth = maxHealth
+
+func _input(_event: InputEvent) -> void:
 	pass # if event.is_action_pressed(ui_left)
+
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
@@ -41,6 +50,9 @@ func _physics_process(delta: float) -> void:
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 	
 	flashlight.visible = flashlight_on
+	
+		
+	
 	if (flashlight_on == true):
 		
 		if (global_position + direction != global_position):
@@ -55,7 +67,20 @@ func _physics_process(delta: float) -> void:
 
 	if input_vector != Vector2.ZERO:
 		_update_animation(input_vector)
-		
+
+func take_damage(amount):
+	currentHealth -= amount
+	emit_signal("health_changed", currentHealth) # default loss is 1 health (1 heart)
+	print("Player took damage! Current health:", currentHealth)
+
+	if currentHealth <= 0:
+		die()
+
+func die():
+	print("Player is dead! gg go eat your own ass lil player guy fella guy mf bingle pisscon the wiper mr bean eat my shiny metal jolly lit")
+   	# Optional: disable movement, restart scene, play animation, etc.
+	#get_tree().reload_current_scene()
+
 func _update_animation(dir: Vector2) -> void:
 	var angle = dir.angle()  # Radians, 0 = east, counterclockwise
 

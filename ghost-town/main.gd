@@ -29,7 +29,7 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	target = spawn.global_transform.origin
 	get_tree().call_group("ghosts", "update_target_location", target)
 

@@ -27,6 +27,8 @@ func _on_right_area_body_entered(body: Node3D) -> void:
 
 
 func _on_left_area_body_entered(body: Node3D) -> void:
+	print("chanhe")
 	if body.is_in_group("player"):
 		WorldInfo.direction = true
+		print("yippie")
 		get_tree().change_scene_to_packed(MAIN)

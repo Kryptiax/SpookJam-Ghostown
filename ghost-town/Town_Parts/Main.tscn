@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://0lf8n6v1j6bu"]
 
-[ext_resource type="Script" uid="uid://b5xvcjqbkjabn" path="res://Town_Parts/main.gd" id="1_o7mvt"]
+[ext_resource type="Script" uid="uid://b5xvcjqbkjabn" path="res://main.gd" id="1_o7mvt"]
 [ext_resource type="Texture2D" uid="uid://ttcehit6uald" path="res://Assets/Dark/texture_08.png" id="2_lau5f"]
 [ext_resource type="PackedScene" uid="uid://dk7346dyrdsro" path="res://Scenes/Tree.tscn" id="3_6nc8a"]
 [ext_resource type="PackedScene" uid="uid://dnbw6fwhru3yt" path="res://Scenes/TempCharacter.tscn" id="4_lau5f"]
@@ -117,14 +117,14 @@ near = 0.001
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.38355446, 0)
 
 [node name="Right" type="CollisionShape3D" parent="RightArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5631409, 7.949175, -22.347483)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5631409, 7.949175, -23.917694)
 shape = SubResource("BoxShape3D_0te4u")
 
 [node name="LeftArea" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.111997604, -0.8149719)
 
 [node name="Left" type="CollisionShape3D" parent="LeftArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.737671, 7.766552, 23.918673)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.737671, 7.766552, 24.955706)
 shape = SubResource("BoxShape3D_rmln3")
 
 [node name="CharacterBody3D" parent="." instance=ExtResource("4_lau5f")]
@@ -140,6 +140,12 @@ navigation_mesh = SubResource("NavigationMesh_6nc8a")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8445883, 0)
 visible = false
 mesh = SubResource("PlaneMesh_6nc8a")
+
+[node name="RightSpawn" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3062172, -21.503305)
+
+[node name="LeftSpawn" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 21.887844)
 
 [connection signal="body_entered" from="RightArea" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_entered" from="RightArea" to="." method="_on_right_area_body_entered"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://bd2yc86l7itq1"]
 
-[ext_resource type="Script" uid="uid://rcxqt2dhflsc" path="res://Town_Parts/side_2.gd" id="1_u05wf"]
+[ext_resource type="Script" uid="uid://rcxqt2dhflsc" path="res://Scripts/side_2.gd" id="1_u05wf"]
 [ext_resource type="Texture2D" uid="uid://ttcehit6uald" path="res://Assets/Dark/texture_08.png" id="2_ibtkd"]
 [ext_resource type="PackedScene" uid="uid://dk7346dyrdsro" path="res://Scenes/Tree.tscn" id="3_wqpna"]
 

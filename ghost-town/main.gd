@@ -1,9 +1,20 @@
 extends Node3D
 const new_side = preload("uid://bd2yc86l7itq1")
+const playa = preload("res://Scenes/TempCharacter.tscn")
 @onready var player: CharacterBody3D = $CharacterBody3D
+@onready var right_spawn: Node3D = $RightSpawn
+@onready var left_spawn: Node3D = $LeftSpawn
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	var spawn = playa.instantiate()
+	if WorldInfo.direction:
+		spawn.position = right_spawn.global_position
+		add_child(spawn)
+	else:
+		spawn.position = left_spawn.global_position
+		add_child(spawn)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

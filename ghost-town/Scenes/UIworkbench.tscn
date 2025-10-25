@@ -1,0 +1,186 @@
+[gd_scene load_steps=22 format=3 uid="uid://dk0venuncrvxe"]
+
+[ext_resource type="Texture2D" uid="uid://dcngqe2tixsi4" path="res://Assets/UI/UIportrait-Sheet.png" id="1_0tsee"]
+[ext_resource type="Texture2D" uid="uid://bqqjb0chjqoui" path="res://Assets/UI/GEMUIBASEt.png" id="2_qpi3c"]
+[ext_resource type="Texture2D" uid="uid://it2yfdhv53q1" path="res://Assets/UI/purpleGem.png" id="3_lugua"]
+[ext_resource type="Texture2D" uid="uid://byhh1dgm6qykf" path="res://Assets/UI/greenGem.png" id="4_52iq6"]
+[ext_resource type="Texture2D" uid="uid://qnq0pkdbs4xa" path="res://Assets/UI/redGem.png" id="5_7ajln"]
+[ext_resource type="Texture2D" uid="uid://bcypedxvgfaqt" path="res://Assets/UI/heart uwu-Sheet.png" id="6_lugua"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cko03"]
+atlas = ExtResource("1_0tsee")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_texsv"]
+atlas = ExtResource("1_0tsee")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_heiww"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cko03")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_texsv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fqk00"]
+atlas = ExtResource("2_qpi3c")
+region = Rect2(0, 0, 35, 35)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g3ptm"]
+atlas = ExtResource("2_qpi3c")
+region = Rect2(35, 0, 35, 35)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cts2a"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fqk00")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g3ptm")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_52iq6"]
+atlas = ExtResource("6_lugua")
+region = Rect2(0, 0, 11, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7ajln"]
+atlas = ExtResource("6_lugua")
+region = Rect2(11, 0, 11, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cts2a"]
+atlas = ExtResource("6_lugua")
+region = Rect2(22, 0, 11, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7dj7c"]
+atlas = ExtResource("6_lugua")
+region = Rect2(33, 0, 11, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7ltk3"]
+atlas = ExtResource("6_lugua")
+region = Rect2(44, 0, 11, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ihr4"]
+atlas = ExtResource("6_lugua")
+region = Rect2(55, 0, 11, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_56ef4"]
+atlas = ExtResource("6_lugua")
+region = Rect2(66, 0, 11, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p22pb"]
+atlas = ExtResource("6_lugua")
+region = Rect2(77, 0, 11, 10)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5btu7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_52iq6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7ajln")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cts2a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7dj7c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7ltk3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8ihr4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_56ef4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p22pb")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="UIworkbench" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Portrait" type="AnimatedSprite2D" parent="CanvasLayer/GridContainer"]
+position = Vector2(72, 72.00001)
+scale = Vector2(5, 5)
+sprite_frames = SubResource("SpriteFrames_heiww")
+frame_progress = 0.59902
+speed_scale = 0.1
+
+[node name="GemHolder" type="AnimatedSprite2D" parent="CanvasLayer/GridContainer"]
+position = Vector2(72, 192)
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_cts2a")
+
+[node name="TF is this color" type="Sprite2D" parent="CanvasLayer/GridContainer/GemHolder"]
+visible = false
+texture = ExtResource("3_lugua")
+
+[node name="GreenGem" type="Sprite2D" parent="CanvasLayer/GridContainer/GemHolder"]
+visible = false
+texture = ExtResource("4_52iq6")
+
+[node name="RedGem" type="Sprite2D" parent="CanvasLayer/GridContainer/GemHolder"]
+visible = false
+texture = ExtResource("5_7ajln")
+
+[node name="HEART" type="AnimatedSprite2D" parent="CanvasLayer/GridContainer"]
+position = Vector2(160, 32)
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_5btu7")
+speed_scale = 2.0
+
+[node name="HEART2" type="AnimatedSprite2D" parent="CanvasLayer/GridContainer"]
+position = Vector2(200, 32)
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_5btu7")
+speed_scale = 2.0
+
+[node name="HEART3" type="AnimatedSprite2D" parent="CanvasLayer/GridContainer"]
+position = Vector2(240, 32)
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_5btu7")
+speed_scale = 2.0
+
+[node name="Panel" type="Panel" parent="CanvasLayer"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

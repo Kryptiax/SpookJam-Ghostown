@@ -9,6 +9,13 @@ var currentHealth
 var maxHealth = 3
 signal health_changed(health)
 
+# Gem Collection - send boolean when done
+signal red_collected(val)
+signal purple_collected(val)
+signal green_collected(val)
+var interactables_in_range = []  # goofy ahh box
+
+
 @onready var anim = $AnimatedSprite3D
 @onready var flashlight: Node3D = $Flashlight
 var flashlight_on = false
@@ -69,6 +76,17 @@ func _physics_process(delta: float) -> void:
 	if input_vector != Vector2.ZERO:
 		_update_animation(input_vector)
 
+	if Input.is_action_just_pressed("interact"):
+		var item = get_nearest_interactable()
+		if item and item.has_method("interact"):
+			item.interact(self)  # Optionally pass the player
+			if item.name == "RedGem":
+				red_collected.emit(true)
+			if item.name == "PurpleGem":
+				purple_collected.emit(true)
+			if item.name == "GreenGem":
+				green_collected.emit(true)
+
 func take_damage(amount):
 	currentHealth -= amount
 	emit_signal("health_changed", currentHealth) # default loss is 1 health (1 heart)
@@ -101,3 +119,25 @@ func _update_animation(dir: Vector2) -> void:
 		anim.play("north")
 	elif angle >= -3*PI/8 and angle < -PI/8:
 		anim.play("northeast")
+
+func _on_interact_area_entered(body: Node) -> void:
+	if body.is_in_group("interactable"):
+		interactables_in_range.append(body)
+
+func _on_interact_area_exited(body: Node) -> void:
+	if body.is_in_group("interactable"):
+		interactables_in_range.erase(body)
+	
+func get_nearest_interactable() -> Node:
+	if interactables_in_range.is_empty():
+		return null
+
+	var nearest = null
+	var min_dist = INF
+
+	for item in interactables_in_range:
+		var dist = global_position.distance_to(item.global_position)
+		if dist < min_dist:
+			min_dist = dist
+			nearest = item
+	return nearest

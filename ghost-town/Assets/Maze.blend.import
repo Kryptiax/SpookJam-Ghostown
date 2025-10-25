@@ -15,7 +15,6 @@ dest_files=["res://.godot/imported/Maze.blend-e1da20cec4abca2f5bc7817957bb61a9.s
 
 nodes/root_type=""
 nodes/root_name=""
-nodes/root_script=null
 nodes/apply_root_scale=true
 nodes/root_scale=1.0
 nodes/import_as_skeleton_bones=false

@@ -27,7 +27,6 @@ version_control/autoload_on_startup=true
 
 player=""
 ghosts=""
-torch=""
 
 [input]
 

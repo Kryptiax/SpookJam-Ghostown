@@ -1,17 +1,37 @@
-[gd_scene load_steps=3 format=3 uid="uid://cfre02u3h2541"]
+[gd_scene load_steps=8 format=3 uid="uid://cfre02u3h2541"]
 
-[ext_resource type="Texture2D" uid="uid://c8x1fvbwaqdim" path="res://Assets/Dark/texture_09.png" id="1_87s1a"]
+[ext_resource type="Material" uid="uid://cpy6ihqla1m5y" path="res://Scenes/TestMaterial.tres" id="1_87s1a"]
+[ext_resource type="Script" uid="uid://b8f525xjxamr0" path="res://Scripts/city_center.gd" id="1_la81a"]
+[ext_resource type="PackedScene" uid="uid://de5bh4bi85eu3" path="res://Scenes/player.tscn" id="3_lwxhc"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_la81a"]
-albedo_texture = ExtResource("1_87s1a")
-uv1_triplanar = true
-uv1_world_triplanar = true
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lwxhc"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_gh5ws"]
+sky_material = SubResource("ProceduralSkyMaterial_lwxhc")
+
+[sub_resource type="Environment" id="Environment_etsnd"]
+background_mode = 2
+sky = SubResource("Sky_gh5ws")
+tonemap_mode = 2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lwxhc"]
+size = Vector3(38.9104, 16.067627, 1)
 
 [node name="CityCenter" type="Node3D"]
+script = ExtResource("1_la81a")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_etsnd")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
 
 [node name="City" type="CSGCombiner3D" parent="."]
 transform = Transform3D(5.5887423, 0, 0, 0, 1, 0, 0, 0, 4.678951, 4.18157, 0.31652832, 0.070453644)
-material_override = SubResource("StandardMaterial3D_la81a")
+material_override = ExtResource("1_87s1a")
 use_collision = true
 
 [node name="CSGBox3D" type="CSGBox3D" parent="City"]
@@ -21,3 +41,50 @@ size = Vector3(0.9819336, 1, 1)
 [node name="CSGBox3D2" type="CSGBox3D" parent="City"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1450988, 3.3495255, -0.10461544)
 size = Vector3(1, 7.699051, 1.3258057)
+
+[node name="North" type="Area3D" parent="."]
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="North"]
+transform = Transform3D(0.99999547, 0, -0.0030194782, 0, 1, 0, 0.0030194782, 0, 0.99999547, 3.3434365, 9.847534, -22.398571)
+shape = SubResource("BoxShape3D_lwxhc")
+
+[node name="South" type="Area3D" parent="."]
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="South"]
+transform = Transform3D(0.99999547, 0, -0.0030194782, 0, 1, 0, 0.0030194782, 0, 0.99999547, 3.3434365, 9.847534, 23.087112)
+shape = SubResource("BoxShape3D_lwxhc")
+
+[node name="East" type="Area3D" parent="."]
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="East"]
+transform = Transform3D(0.0015184437, 0, 0.99999887, 0, 1, 0, -0.99999887, 0, 0.0015184437, 23.99053, 9.847534, 1.1950907)
+shape = SubResource("BoxShape3D_lwxhc")
+
+[node name="West" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="West"]
+transform = Transform3D(0.0015184437, 0, 0.99999887, 0, 1, 0, -0.99999887, 0, 0.0015184437, -16.555544, 9.847534, 1.1311766)
+shape = SubResource("BoxShape3D_lwxhc")
+
+[node name="NorthSpawn" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20.58352)
+
+[node name="SouthSpawn" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 20.049835)
+
+[node name="EastSpawn" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.611988, 0, 0)
+
+[node name="WestSpawn" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.255611, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.6841781, 0.72931504, 0, -0.72931504, 0.6841781, 2.035406, 21.023586, 30.440138)
+
+[node name="Player" parent="." instance=ExtResource("3_lwxhc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6207318, 5.575101, 12.371323)
+
+[connection signal="body_entered" from="North" to="." method="_on_north_body_entered"]
+[connection signal="body_entered" from="South" to="." method="_on_south_body_entered"]
+[connection signal="body_entered" from="East" to="." method="_on_east_body_entered"]
+[connection signal="body_entered" from="West" to="." method="_on_west_body_entered"]

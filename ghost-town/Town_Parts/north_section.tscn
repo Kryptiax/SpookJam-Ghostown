@@ -1,13 +1,37 @@
-[gd_scene load_steps=3 format=3 uid="uid://cmoh73uocqwxi"]
+[gd_scene load_steps=8 format=3 uid="uid://cmoh73uocqwxi"]
 
+[ext_resource type="Script" uid="uid://bkwmvr8hkjnlg" path="res://Scripts/north_section.gd" id="1_brbld"]
 [ext_resource type="Texture2D" uid="uid://c8x1fvbwaqdim" path="res://Assets/Dark/texture_09.png" id="1_e2quv"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_brbld"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_vmcat"]
+sky_material = SubResource("ProceduralSkyMaterial_brbld")
+
+[sub_resource type="Environment" id="Environment_5sjnq"]
+background_mode = 2
+sky = SubResource("Sky_vmcat")
+tonemap_mode = 2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_brbld"]
 albedo_texture = ExtResource("1_e2quv")
 uv1_triplanar = true
 uv1_world_triplanar = true
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_e2quv"]
+size = Vector3(15.532166, 30.963623, 1)
+
 [node name="North Section" type="Node3D"]
+script = ExtResource("1_brbld")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_5sjnq")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
 
 [node name="City" type="CSGCombiner3D" parent="."]
 transform = Transform3D(5.5887423, 0, 0, 0, 1, 0, 0, 0, 4.678951, 4.18157, 0.31652832, 0.070453644)
@@ -15,5 +39,43 @@ material_override = SubResource("StandardMaterial3D_brbld")
 use_collision = true
 
 [node name="CSGBox3D" type="CSGBox3D" parent="City"]
-transform = Transform3D(7.6658883, 0, 0, 0, 1.003867, 0, 0, 0, 10.026607, -1.0354372, 0, 0)
-size = Vector3(0.30969238, 1, 1)
+transform = Transform3D(7.6658883, 0, 0, 0, 1.003867, 0, 0, 0, 10.026607, -0.81857073, 0, 0.91306746)
+size = Vector3(0.36627197, 1, 0.8178711)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="City"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8262312, 5.640375, 0.695412)
+size = Vector3(0.30969238, 14.502125, 8.177902)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="City"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15755808, 5.8763905, 0.7300819)
+size = Vector3(0.30969238, 14.974155, 8.197433)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.8730839, 0.4875701, 0, -0.4875701, 0.8730839, -0.5352802, 9.397301, 17.442055)
+fov = 73.96929
+
+[node name="North" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6487694, 0, 2.303421)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="North"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4419861, 14.981812, -19.525196)
+shape = SubResource("BoxShape3D_e2quv")
+
+[node name="South" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="South"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.101984, 14.981812, 23.62352)
+shape = SubResource("BoxShape3D_e2quv")
+
+[node name="Camera3D2" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.8671316, 0.49807918, 0, -0.49807918, 0.8671316, 0, 48.946243, 69.50467)
+fov = 39.9
+
+[node name="South Spawn" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2762032, 16.630535)
+
+[node name="North Spawn" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.123575, -12.281517)
+
+[connection signal="body_entered" from="North" to="." method="_on_north_body_entered"]
+[connection signal="body_entered" from="South" to="." method="_on_south_body_entered"]

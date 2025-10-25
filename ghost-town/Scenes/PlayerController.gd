@@ -4,6 +4,7 @@ extends CharacterBody3D
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 
+@onready var anim = $AnimatedSprite3D
 @onready var flashlight: Node3D = $Flashlight
 var flashlight_on = false
 
@@ -42,3 +43,31 @@ func _physics_process(delta: float) -> void:
 	else: 
 		print_debug("double gfuck you")
 	move_and_slide()
+	
+	var input_vector = Vector2(
+		Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left"),
+		Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
+		).normalized()
+
+	if input_vector != Vector2.ZERO:
+		_update_animation(input_vector)
+		
+func _update_animation(dir: Vector2) -> void:
+	var angle = dir.angle()  # Radians, 0 = east, counterclockwise
+
+	if angle >= -PI/8 and angle < PI/8:
+		anim.play("east")
+	elif angle >= PI/8 and angle < 3*PI/8:
+		anim.play("southeast")
+	elif angle >= 3*PI/8 and angle < 5*PI/8:
+		anim.play("south")
+	elif angle >= 5*PI/8 and angle < 7*PI/8:
+		anim.play("southwest")
+	elif angle >= 7*PI/8 or angle < -7*PI/8:
+		anim.play("west")
+	elif angle >= -7*PI/8 and angle < -5*PI/8:
+		anim.play("northwest")
+	elif angle >= -5*PI/8 and angle < -3*PI/8:
+		anim.play("north")
+	elif angle >= -3*PI/8 and angle < -PI/8:
+		anim.play("northeast")

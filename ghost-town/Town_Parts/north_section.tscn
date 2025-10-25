@@ -64,15 +64,16 @@ shape = SubResource("BoxShape3D_e2quv")
 [node name="South" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="South"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.101984, 14.981812, 23.62352)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.101984, 14.981812, 23.108036)
 shape = SubResource("BoxShape3D_e2quv")
 
 [node name="Camera3D2" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.8671316, 0.49807918, 0, -0.49807918, 0.8671316, 0, 48.946243, 69.50467)
+current = true
 fov = 39.9
 
 [node name="South Spawn" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2762032, 16.630535)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.9079094, 12.1977005)
 
 [node name="North Spawn" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.123575, -12.281517)

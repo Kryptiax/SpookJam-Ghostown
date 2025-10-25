@@ -27,10 +27,6 @@ environment = SubResource("Environment_g8rmm")
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 shadow_enabled = true
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -8.626, 10.182, -31.852)
-fov = 77.5
-
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(0.31294623, 0, 0, 0, 0.31294623, 0, 0, 0, 0.31294623, -8.740045, 4.5323353, -14.167216)
 use_collision = true
@@ -38,10 +34,14 @@ size = Vector3(110.76272, 0.09082031, 115.76172)
 material = ExtResource("2_7fqr4")
 
 [node name="Player" parent="." instance=ExtResource("3_7fqr4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.331057, 8.667652, -25.817661)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.331057, 8.667652, -0.8520937)
+
+[node name="Camera3D2" type="Camera3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 0.5508887, 0.83457875, 0, -0.83457875, 0.5508887, -0.2949438, 4.406782, 5.5169497)
+fov = 56.266533
 
 [node name="CSGMesh3D" type="CSGMesh3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 7.62, 0, 0, 0, 1, -25.586117, 7.1165943, -35)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 7.62, 0, 8.742278e-08, 0, -1, 6.9185486, 7.1165943, 5.3220024)
 use_collision = true
 mesh = ExtResource("1_3sv3c")
 material = ExtResource("2_7fqr4")

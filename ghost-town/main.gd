@@ -2,7 +2,6 @@ extends Node3D
 const new_side = preload("uid://bd2yc86l7itq1")
 const playa = preload("res://Scenes/player.tscn")
 var spawn = playa.instantiate()
-@onready var player: CharacterBody3D = $CharacterBody3D
 @onready var east: Node3D = $EastSpawn
 @onready var west: Node3D = $WestSpawn
 @onready var station: Node3D = $Station
@@ -10,6 +9,7 @@ var spawn = playa.instantiate()
 var target = Vector3(0,0,0)
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	WorldInfo.topDown = false
 	if !WorldInfo.init:
 		spawn.position = station.global_position
 		add_child(spawn)

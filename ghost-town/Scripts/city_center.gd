@@ -1,5 +1,5 @@
 extends Node3D
-
+@onready var origin: Node3D = $Spawn
 const north_room = preload("uid://cmoh73uocqwxi")
 const south_room = preload("uid://cmoh73uocqwxi")
 const east_room = preload("uid://0lf8n6v1j6bu")
@@ -16,7 +16,7 @@ var spawn = playa.instantiate()
 func _ready() -> void:
 	WorldInfo.topDown = true
 	if !WorldInfo.init:
-		spawn.position = global_position
+		spawn.position = origin.global_position
 		add_child(spawn)
 		WorldInfo.init = true
 	else:

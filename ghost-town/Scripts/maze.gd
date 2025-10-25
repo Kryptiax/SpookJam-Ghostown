@@ -11,6 +11,7 @@ var spawn = playa.instantiate()
 var target = Vector3(0,0,0)
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	WorldInfo.topDown = true
 	match WorldInfo.direction:
 			WorldInfo.DIRECTIONS.NORTH:
 				spawn.position = south_spawn.global_position

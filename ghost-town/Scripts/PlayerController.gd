@@ -38,10 +38,11 @@ func _physics_process(delta: float) -> void:
 	
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
-		var temp = direction
-		direction.x = temp.z
-		direction.y = temp.y
-		direction.z = -temp.x
+		if !WorldInfo.topDown:
+			var temp = direction
+			direction.x = temp.z
+			direction.y = temp.y
+			direction.z = -temp.x
 		#print(direction)
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED

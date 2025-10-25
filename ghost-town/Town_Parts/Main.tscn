@@ -141,8 +141,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3062172, -21.503305)
 [node name="LeftSpawn" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 21.887844)
 
+[node name="Station" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0693383, 2.4802399, -0.40950394)
+
 [node name="CharacterBody3D2" parent="." instance=ExtResource("5_6nc8a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.069808, 0.8184614, 1.3955438)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.069808, 0.8184614, 18.53826)
+
+[node name="CharacterBody3D3" parent="." instance=ExtResource("5_6nc8a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.1510725, 0.8184614, 16.661352)
+
+[node name="CharacterBody3D4" parent="." instance=ExtResource("5_6nc8a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.1510725, 0.8184614, -7.3124466)
+
+[node name="CharacterBody3D5" parent="." instance=ExtResource("5_6nc8a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.1510725, 0.8184614, 5.7378616)
 
 [connection signal="body_entered" from="RightArea" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_entered" from="RightArea" to="." method="_on_right_area_body_entered"]

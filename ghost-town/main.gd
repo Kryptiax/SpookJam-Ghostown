@@ -5,15 +5,22 @@ var spawn = playa.instantiate()
 @onready var player: CharacterBody3D = $CharacterBody3D
 @onready var right_spawn: Node3D = $RightSpawn
 @onready var left_spawn: Node3D = $LeftSpawn
+@onready var station: Node3D = $Station
+
 var target = Vector3(0,0,0)
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	if WorldInfo.direction:
-		spawn.position = right_spawn.global_position
+	if !WorldInfo.init:
+		spawn.position = station.global_position
 		add_child(spawn)
+		WorldInfo.init = true
 	else:
-		spawn.position = left_spawn.global_position
-		add_child(spawn)
+		if WorldInfo.direction:
+			spawn.position = right_spawn.global_position
+			add_child(spawn)
+		else:
+			spawn.position = left_spawn.global_position
+			add_child(spawn)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

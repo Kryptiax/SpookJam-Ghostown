@@ -1,9 +1,9 @@
 extends Node3D
 
 const character = preload("uid://dnbw6fwhru3yt")
-const MAIN = preload("uid://0lf8n6v1j6bu")
 @onready var right_spawn: Node3D = $RightSpawn
 @onready var left_spawn: Node3D = $LeftSpawn
+var main = "res://Town_Parts/Main.tscn"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -27,6 +27,8 @@ func _on_right_area_body_entered(body: Node3D) -> void:
 
 
 func _on_left_area_body_entered(body: Node3D) -> void:
+	print("chanhe")
 	if body.is_in_group("player"):
 		WorldInfo.direction = true
-		get_tree().change_scene_to_packed(MAIN)
+		print("yippie")
+		get_tree().change_scene_to_file(main)

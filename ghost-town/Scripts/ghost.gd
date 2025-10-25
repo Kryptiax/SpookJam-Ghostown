@@ -8,7 +8,6 @@ var timer: float = 0.0
 var SPEED = 2
 
 func update_target_location(target_location):
-	print(target_location)
 	nav_agent.set_target_position(target_location)
 	
 func _ready() -> void:

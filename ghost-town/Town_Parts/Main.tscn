@@ -5,11 +5,11 @@
 [ext_resource type="BoxMesh" uid="uid://bmdhgyklhlfog" path="res://Town_Parts/BoxMesh.tres" id="3_0te4u"]
 [ext_resource type="PackedScene" uid="uid://dk7346dyrdsro" path="res://Scenes/Tree.tscn" id="3_6nc8a"]
 [ext_resource type="Script" uid="uid://kj5qio3yldpe" path="res://Scripts/box_one.gd" id="3_rmln3"]
-[ext_resource type="Script" uid="uid://dmn0jaraxuroa" path="res://Town_Parts/box_2.gd" id="4_rr8wn"]
-[ext_resource type="Script" uid="uid://pfdceqy1yw1d" path="res://Town_Parts/box_4.gd" id="5_0maa8"]
+[ext_resource type="Script" path="res://Town_Parts/box_2.gd" id="4_rr8wn"]
+[ext_resource type="Script" path="res://Town_Parts/box_4.gd" id="5_0maa8"]
 [ext_resource type="PackedScene" uid="uid://bluqj0q5jre6a" path="res://Scenes/Ghost.tscn" id="5_6nc8a"]
 [ext_resource type="PackedScene" uid="uid://bd117desyxv0m" path="res://Scenes/Pads.tscn" id="5_rmln3"]
-[ext_resource type="Script" uid="uid://4mvenybxqrwt" path="res://Town_Parts/box_3.gd" id="6_864rk"]
+[ext_resource type="Script" path="res://Town_Parts/box_3.gd" id="6_864rk"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_idj7w"]
 sky_curve = 0.19792612

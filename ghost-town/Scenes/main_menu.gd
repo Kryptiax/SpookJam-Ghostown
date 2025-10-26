@@ -1,7 +1,7 @@
 extends Control
 
 @onready var options: TextureRect = $Options
-@onready var credits_bg: TextureRect = $"Options/VBoxContainer/Credits/Credits BG"
+#@onready var credits_bg: TextureRect = $"Options/VBoxContainer/Credits/Credits BG"
 @onready var optionsBox: VBoxContainer = $Options/VBoxContainer
 var muted
 var credits
@@ -48,12 +48,11 @@ func _on_mute_pressed() -> void:
 	pass # Replace with function body.
 
 
-func _on_credits_pressed() -> void:
-	credits = !credits
-	if credits == true:
-		optionsBox.hide()
-		credits_bg.show()
-	else:
-		optionsBox.show()
-		credits_bg.hide()
-	pass # Replace with function body.
+#func _on_credits_pressed() -> void:
+#	credits = !credits
+#	if credits == true:
+#		credits_bg.show()
+#	else:
+#		optionsBox.show()
+#		credits_bg.hide()
+#	pass # Replace with function body.

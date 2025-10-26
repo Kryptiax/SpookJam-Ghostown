@@ -1,14 +1,14 @@
 [gd_scene load_steps=5 format=3 uid="uid://ltjmq60vcmre"]
 
 [ext_resource type="Script" uid="uid://dka10ra1toe02" path="res://Scenes/gembase.gd" id="1_j8osl"]
+[ext_resource type="ArrayMesh" uid="uid://26qoavyqyb55" path="res://Assets/Models/gamejamgemsgeode.obj" id="2_4117m"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bti4x"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bti4x"]
-albedo_color = Color(0.8, 0, 0, 1)
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_0xstn"]
-material = SubResource("StandardMaterial3D_bti4x")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4117m"]
+albedo_color = Color(0.77103627, 0, 0.037745964, 1)
+metallic_specular = 1.0
+roughness = 0.0
 
 [node name="RedGem" type="Area3D" groups=["interactable"]]
 script = ExtResource("1_j8osl")
@@ -17,4 +17,6 @@ script = ExtResource("1_j8osl")
 shape = SubResource("CapsuleShape3D_bti4x")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("CapsuleMesh_0xstn")
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.20642537, 0, -0.2599172)
+mesh = ExtResource("2_4117m")
+surface_material_override/0 = SubResource("StandardMaterial3D_4117m")

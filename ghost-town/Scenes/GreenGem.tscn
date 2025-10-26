@@ -1,14 +1,15 @@
 [gd_scene load_steps=5 format=3 uid="uid://jx5m2fkhkq2r"]
 
 [ext_resource type="Script" uid="uid://dka10ra1toe02" path="res://Scenes/gembase.gd" id="1_bti4x"]
+[ext_resource type="ArrayMesh" uid="uid://26qoavyqyb55" path="res://Assets/Models/gamejamgemsgeode.obj" id="2_vgmge"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bti4x"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bti4x"]
-albedo_color = Color(0.14509805, 1, 0.07058824, 1)
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_0xstn"]
-material = SubResource("StandardMaterial3D_bti4x")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6dv6r"]
+albedo_color = Color(0.015872259, 0.48502564, 2.8878452e-07, 1)
+metallic = 0.76
+metallic_specular = 1.0
+refraction_enabled = true
 
 [node name="GreenGem" type="Area3D" groups=["interactable"]]
 script = ExtResource("1_bti4x")
@@ -17,4 +18,6 @@ script = ExtResource("1_bti4x")
 shape = SubResource("CapsuleShape3D_bti4x")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("CapsuleMesh_0xstn")
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.21527588, 0, -0.2549709)
+mesh = ExtResource("2_vgmge")
+surface_material_override/0 = SubResource("StandardMaterial3D_6dv6r")

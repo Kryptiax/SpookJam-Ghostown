@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://b2fxfv5ekjcux"]
+[gd_scene load_steps=39 format=3 uid="uid://b2fxfv5ekjcux"]
 
 [ext_resource type="Script" uid="uid://b8f525xjxamr0" path="res://Scripts/city_center.gd" id="1_la81a"]
 [ext_resource type="Texture2D" uid="uid://36by4xo2ne0d" path="res://Assets/Imported/grass_3.png" id="2_lwxhc"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://ch0ju440y0r3y" path="res://Assets/Imported/cobblestone_1.png" id="11_x0d7p"]
 [ext_resource type="ArrayMesh" uid="uid://dpkunxxhdgvyg" path="res://Assets/Models/mountains.obj" id="12_v2k6v"]
 [ext_resource type="ArrayMesh" uid="uid://hu7kahst5eg" path="res://Assets/Models/tree.obj" id="13_t6v16"]
+[ext_resource type="PackedScene" uid="uid://ucx7jdqfkweo" path="res://Town_Parts/Town.tscn" id="15_x0d7p"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lwxhc"]
 sky_top_color = Color(0.38431373, 0.3529412, 0.54901963, 1)
@@ -2299,6 +2300,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.27952957, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.0441895, 3.2654572, -0.3889904)
 shape = SubResource("BoxShape3D_t6v16")
+
+[node name="People" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6577396, 1.0851545, 17.652597)
+visible = false
+
+[node name="Node3D" parent="People" instance=ExtResource("15_x0d7p")]
+
+[node name="Node3D2" parent="People" instance=ExtResource("15_x0d7p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.024618, 0, -24.834108)
+
+[node name="Node3D3" parent="People" instance=ExtResource("15_x0d7p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.490845, 0, -12.811794)
 
 [connection signal="body_entered" from="North" to="." method="_on_north_body_entered"]
 [connection signal="body_entered" from="East" to="." method="_on_east_body_entered"]

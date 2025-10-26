@@ -1,5 +1,6 @@
 extends Node3D
 @onready var origin: Node3D = $Spawn
+@onready var people: Node3D = $People
 const north_room = preload("uid://cmoh73uocqwxi")
 const south_room = preload("uid://cmoh73uocqwxi")
 const west_room = "res://Scenes/SetSimonSays.tscn"
@@ -12,9 +13,11 @@ var spawn = playa.instantiate()
 @onready var west: Node3D = $WestSpawn
 @onready var Orign: Node3D = $Spawn
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	if WorldInfo.all_gems == true:
+		people.visible = true
+		
 	WorldInfo.topDown = true
 	if !WorldInfo.init:
 		spawn.position = Orign.global_position

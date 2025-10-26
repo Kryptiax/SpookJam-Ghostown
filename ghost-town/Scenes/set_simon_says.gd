@@ -3,6 +3,7 @@ const new_side = preload("uid://bd2yc86l7itq1")
 const playa = preload("res://Scenes/player.tscn")
 var spawn = playa.instantiate()
 @onready var west: Node3D = $Spawn
+const CITY_CENTER = preload("uid://b2fxfv5ekjcux")
 
 @onready var box_one: MeshInstance3D = $City/BoxOne
 @onready var box_two: MeshInstance3D = $City/BoxTwo
@@ -33,4 +34,4 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 	print("play_new_side")
 	if body.is_in_group("player"):
 			WorldInfo.direction = WorldInfo.DIRECTIONS.EAST
-			get_tree().change_scene_to_packed(new_side)
+			get_tree().change_scene_to_packed(CITY_CENTER)

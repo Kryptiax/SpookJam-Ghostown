@@ -73,6 +73,7 @@ func update_Gems():
 		tf_is_this_color.visible = false
 		green.visible = false
 		red.visible = false
+		WorldInfo.all_gems = true
 		gem_holder.frame = 1
 		
 

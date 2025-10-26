@@ -1,7 +1,6 @@
-[gd_scene load_steps=39 format=3 uid="uid://cfre02u3h2541"]
+[gd_scene load_steps=38 format=3 uid="uid://cfre02u3h2541"]
 
 [ext_resource type="Script" uid="uid://b8f525xjxamr0" path="res://Scripts/city_center.gd" id="1_la81a"]
-[ext_resource type="PackedScene" uid="uid://de5bh4bi85eu3" path="res://Scenes/player.tscn" id="2_2ul3p"]
 [ext_resource type="Texture2D" uid="uid://36by4xo2ne0d" path="res://Assets/Imported/grass_3.png" id="2_lwxhc"]
 [ext_resource type="Texture2D" uid="uid://bmvv8l085mmwq" path="res://Assets/Imported/cobblestone_3.png" id="3_gh5ws"]
 [ext_resource type="Texture2D" uid="uid://b25500jl3vwpi" path="res://Assets/Imported/dirty_1.png" id="3_lwxhc"]
@@ -124,10 +123,6 @@ albedo_color = Color(0.06666667, 0.21176471, 0, 1)
 
 [node name="CityCenter" type="Node3D"]
 script = ExtResource("1_la81a")
-
-[node name="Player" parent="." instance=ExtResource("2_2ul3p")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.2624464, 5.575095, 15.830031)
-visible = false
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_etsnd")
@@ -1851,10 +1846,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.611988, 0, 0)
 
 [node name="WestSpawn" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.486269, 1.9277897, 0)
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.6841781, 0.72931504, 0, -0.72931504, 0.6841781, 2.035406, 21.023586, 30.440138)
-visible = false
 
 [node name="Spawn" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.06517, 5.918457, 0)

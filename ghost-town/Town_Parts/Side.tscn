@@ -160,7 +160,7 @@ transform = Transform3D(0.86602527, 0, -0.4999999, 0, 1, 0, 0.4999999, 0, 0.8660
 [node name="RightArea" type="Area3D" parent="."]
 
 [node name="Right" type="CollisionShape3D" parent="RightArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5631409, 7.949175, -22.347483)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5631409, 7.949175, -21.977015)
 shape = SubResource("BoxShape3D_mbl57")
 
 [node name="LeftArea" type="Area3D" parent="."]

@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Ghost Town"
-run/main_scene="uid://0lf8n6v1j6bu"
+run/main_scene="uid://b2fxfv5ekjcux"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 

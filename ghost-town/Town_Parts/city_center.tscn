@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://cfre02u3h2541"]
+[gd_scene load_steps=38 format=3 uid="uid://b2fxfv5ekjcux"]
 
 [ext_resource type="Script" uid="uid://b8f525xjxamr0" path="res://Scripts/city_center.gd" id="1_la81a"]
 [ext_resource type="Texture2D" uid="uid://36by4xo2ne0d" path="res://Assets/Imported/grass_3.png" id="2_lwxhc"]
@@ -1849,7 +1849,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.338406, 1.7830973, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.125329, 1.9277897, 0.48255157)
 
 [node name="Spawn" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.06517, 5.918457, 0)
+transform = Transform3D(-0.30652606, 0, 0.9518623, 0, 1, 0, -0.9518623, 0, -0.30652606, 6.6707897, 5.918457, 4.163227)
 
 [node name="Fountain" type="MeshInstance3D" parent="."]
 transform = Transform3D(-0.44088203, 0.044588815, -1.9502909, 0.20124438, 1.9898494, 0, 1.9403926, -0.19624254, -0.44313103, 3.0434308, 0, 0)

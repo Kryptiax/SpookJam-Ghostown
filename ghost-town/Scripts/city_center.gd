@@ -2,18 +2,24 @@ extends Node3D
 @onready var origin: Node3D = $Spawn
 const north_room = preload("uid://cmoh73uocqwxi")
 const south_room = preload("uid://cmoh73uocqwxi")
-const east_room = preload("uid://c3j4n1tww7w5c")
-const west_room = preload("uid://bd2yc86l7itq1")
+const west_room = preload("uid://c3j4n1tww7w5c")
+const  east_room = preload("uid://bd2yc86l7itq1")
 const playa = preload("res://Scenes/player.tscn")
 var spawn = playa.instantiate()
 @onready var north: Node3D = $NorthSpawn
 @onready var south: Node3D = $SouthSpawn
 @onready var east: Node3D = $EastSpawn
 @onready var west: Node3D = $WestSpawn
+@onready var Orign: Node3D = $Spawn
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	WorldInfo.topDown = true
+	if !WorldInfo.init:
+		spawn.position = Orign.global_position
+		add_child(spawn)
+		WorldInfo.init = true
 	match WorldInfo.direction:
 		WorldInfo.DIRECTIONS.NORTH:
 			spawn.position = south.global_position

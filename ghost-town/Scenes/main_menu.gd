@@ -9,6 +9,7 @@ var credits
 func _ready() -> void:
 	muted = false
 	credits = false
+	options.hide()
 	pass # Replace with function body.
 
 
@@ -18,7 +19,7 @@ func _process(_delta: float) -> void:
 
 
 func _on_play_pressed() -> void:
-	get_tree().load("res://Scripts/city_center.gd")
+	get_tree().change_scene_to_file("res://Town_Parts/city_center.tscn")
 	pass # Replace with function body.
 
 

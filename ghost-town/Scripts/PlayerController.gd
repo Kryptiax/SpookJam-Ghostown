@@ -27,78 +27,78 @@ func _ready() -> void:
 	currentHealth = maxHealth
 	pausedB = false
 
+func _unhandled_input(event):
+	if event.is_action_pressed("ui_cancel"):
+		print("pause toggle")
+		pausedB = !pausedB
+		paused.emit(pausedB)
+		get_tree().paused = pausedB
+
 func _input(_event: InputEvent) -> void:
 	pass # if event.is_action_pressed(ui_left)
 
 func _physics_process(delta: float) -> void:
-	# Add the gravity.
-	if not is_on_floor():
-		velocity += get_gravity() * delta
+	if pausedB == false:
+		# Add the gravity.
+		if not is_on_floor():
+			velocity += get_gravity() * delta
 
-	# Handle jump
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
+		# Handle jump
+		if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+			velocity.y = JUMP_VELOCITY
 
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	var input_dir := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-	#var flashlight_toggle := Input.i("flashlight_toggle")
-	
-	if Input.is_action_just_pressed("flashlight_toggle"):
-		flashlight_on = !flashlight_on
-	
-	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	if direction:
-		if !WorldInfo.topDown:
-			var temp = direction
-			direction.x = temp.z
-			direction.y = temp.y
-			direction.z = -temp.x
-		#print(direction)
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
-	
-	if Input.is_action_just_pressed("ui_cancel"):
-		print("pasued or wtvr idk")
-		pausedB = !pausedB
-		paused.emit(pausedB)
+		# Get the input direction and handle the movement/deceleration.
+		# As good practice, you should replace UI actions with custom gameplay actions.
+		var input_dir := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+		#var flashlight_toggle := Input.i("flashlight_toggle")
 		
-		get_tree().paused = pausedB
-	
-	flashlight.visible = flashlight_on
-	if (flashlight_on == true):
+		if Input.is_action_just_pressed("flashlight_toggle"):
+			flashlight_on = !flashlight_on
 		
-		if (global_position + direction != global_position):
-			flashlight.look_at(global_position + direction, Vector3.UP)
-
-	move_and_slide()
+		var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+		if direction:
+			if !WorldInfo.topDown:
+				var temp = direction
+				direction.x = temp.z
+				direction.y = temp.y
+				direction.z = -temp.x
+			#print(direction)
+			velocity.x = direction.x * SPEED
+			velocity.z = direction.z * SPEED
+		else:
+			velocity.x = move_toward(velocity.x, 0, SPEED)
+			velocity.z = move_toward(velocity.z, 0, SPEED)
 	
-	var input_vector = Vector2(
-		Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left"),
-		Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
-		).normalized()
+		flashlight.visible = flashlight_on
+		if (flashlight_on == true):
+			if (global_position + direction != global_position):
+				flashlight.look_at(global_position + direction, Vector3.UP)
 
-	if input_vector != Vector2.ZERO:
-		_update_animation(input_vector)
+		move_and_slide()
 	
-	#print(get_nearest_interactable())
-	if Input.is_action_just_pressed("interact"):
-		print("interact - pressed!")
-		var item = get_nearest_interactable()
-		if item and item.has_method("interact"):
-			item.interact()  # Optionally pass the player
-			print(item.name)
-			if item.name == "RedGem":
-				red_collected.emit(true)
-			if item.name == "PurpleGem":
-				purple_collected.emit(true)
-			if item.name == "GreenGem":
-				#print("greengem retreieved again fuck u")
-				green_collected.emit(true)
-				print("emittred")
+		var input_vector = Vector2(
+			Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left"),
+			Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
+			).normalized()
+
+		if input_vector != Vector2.ZERO:
+			_update_animation(input_vector)
+		
+		#print(get_nearest_interactable())
+		if Input.is_action_just_pressed("interact"):
+			print("interact - pressed!")
+			var item = get_nearest_interactable()
+			if item and item.has_method("interact"):
+				item.interact()  # Optionally pass the player
+				print(item.name)
+				if item.name == "RedGem":
+					red_collected.emit(true)
+				if item.name == "PurpleGem":
+					purple_collected.emit(true)
+				if item.name == "GreenGem":
+					#print("greengem retreieved again fuck u")
+					green_collected.emit(true)
+					print("emittred")
 
 func take_damage(amount):
 	currentHealth -= amount

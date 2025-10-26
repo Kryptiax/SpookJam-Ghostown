@@ -70,18 +70,18 @@ func _on_player_health_changed(health: Variant) -> void:
 
 
 func _on_player_green_collected(val: Variant) -> void:
-	green_gem = true
+	green_gem = val
 	update_Gems()
 	pass # Replace with function body.
 
 
 func _on_player_purple_collected(val: Variant) -> void:
-	purple_gem = true
+	purple_gem = val
 	update_Gems()
 	pass # Replace with function body.
 
 
 func _on_player_red_collected(val: Variant) -> void:
-	red_gem = true
+	red_gem = val
 	update_Gems()
 	pass # Replace with function body.

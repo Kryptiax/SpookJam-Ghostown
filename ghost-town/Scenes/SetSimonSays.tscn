@@ -2,11 +2,13 @@
 
 [ext_resource type="Script" uid="uid://dilig58hvoljy" path="res://Scenes/set_simon_says.gd" id="1_ii7v6"]
 [ext_resource type="PackedScene" uid="uid://bjk3nw3sq1n31" path="res://Scenes/SimonSays.tscn" id="1_ta11i"]
-[ext_resource type="Material" uid="uid://cpy6ihqla1m5y" path="res://Scenes/TestMaterial.tres" id="2_eux5r"]
-[ext_resource type="PackedScene" uid="uid://de5bh4bi85eu3" path="res://Scenes/player.tscn" id="3_eux5r"]
+[ext_resource type="Material" uid="uid://05hnpiotbfqw" path="res://Scenes/Black.tres" id="3_ii7v6"]
 [ext_resource type="Script" uid="uid://cl6muaajej7od" path="res://Scenes/before.gd" id="3_ta11i"]
 
 [sub_resource type="TorusMesh" id="TorusMesh_eux5r"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ii7v6"]
+size = Vector3(3.0424805, 30.993286, 38.416748)
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_ii7v6")
@@ -19,20 +21,22 @@ transform = Transform3D(3.250465, 0, 0, 0, 3.250465, 0, 0, 0, 3.250465, 0.233316
 
 [node name="Simon Says" type="CSGCombiner3D" parent="."]
 transform = Transform3D(3.250465, 0, 0, 0, 3.250465, 0, 0, 0, 3.250465, -0.070000716, -2.4166393, 3.9139838)
-material_override = ExtResource("2_eux5r")
 use_collision = true
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Simon Says"]
 transform = Transform3D(10.404807, 0, 0, 0, 0.84209067, 0, 0, 0, 9.372475, 1.1148461, -0.35546875, -0.31119543)
 size = Vector3(2.6322632, 0.2890625, 1.0664063)
+material = ExtResource("3_ii7v6")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="Simon Says"]
 transform = Transform3D(6.064977, 0, 0, 0, 4.12693, 0, 0, 0, 1, 4.8766, 5.2634106, -4.714445)
 size = Vector3(3.2456913, 2.764557, 0.0024414063)
+material = ExtResource("3_ii7v6")
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="Simon Says"]
 transform = Transform3D(0.62859315, 0, -0.9946146, 0, 4.12693, 0, 6.0323143, 0, 0.10364312, -4.757486, 5.2229905, -1.3876956)
 size = Vector3(2.0749054, 2.605133, 0.0024414063)
+material = ExtResource("3_ii7v6")
 
 [node name="Inbetweengame" type="Timer" parent="."]
 one_shot = true
@@ -40,7 +44,7 @@ autostart = true
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Inbetweengame"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7764874, 0)
-light_energy = 1.558
+light_energy = 0.648
 omni_range = 4096.0
 omni_attenuation = 0.13
 
@@ -52,11 +56,20 @@ script = ExtResource("3_ta11i")
 [node name="GameTimer" type="Timer" parent="."]
 wait_time = 0.5
 
-[node name="Player" parent="." instance=ExtResource("3_eux5r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.2725406, 1.580167, 8.528011)
+[node name="Spawn" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.482433, 0, 0)
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.656322, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(0.99853575, 0, -0.05409624, 0, 1, 0, 0.05409624, 0, 0.99853575, -1.1999435, 14.996643, 5.8848877)
+shape = SubResource("BoxShape3D_ii7v6")
 
 [connection signal="blue" from="RespondPads" to="Before" method="_on_respond_pads_blue"]
 [connection signal="green" from="RespondPads" to="Before" method="_on_respond_pads_green"]
 [connection signal="red" from="RespondPads" to="Before" method="_on_respond_pads_red"]
 [connection signal="yellow" from="RespondPads" to="Before" method="_on_respond_pads_yellow"]
 [connection signal="timeout" from="Inbetweengame" to="Before" method="_on_inbetweengame_timeout"]
+[connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

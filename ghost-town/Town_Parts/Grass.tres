@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://gqi6k6j4t8ne"]
+
+[ext_resource type="Texture2D" uid="uid://36by4xo2ne0d" path="res://Assets/Imported/grass_3.png" id="1_to12i"]
+
+[resource]
+albedo_color = Color(0.6156863, 0.6666667, 0.7529412, 1)
+albedo_texture = ExtResource("1_to12i")
+uv1_scale = Vector3(23.12, 23.12, 23.12)

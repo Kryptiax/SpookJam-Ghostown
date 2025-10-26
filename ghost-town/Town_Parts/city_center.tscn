@@ -3,10 +3,10 @@
 [ext_resource type="Script" uid="uid://b8f525xjxamr0" path="res://Scripts/city_center.gd" id="1_la81a"]
 [ext_resource type="Texture2D" uid="uid://36by4xo2ne0d" path="res://Assets/Imported/grass_3.png" id="2_lwxhc"]
 [ext_resource type="Texture2D" uid="uid://bmvv8l085mmwq" path="res://Assets/Imported/cobblestone_3.png" id="3_gh5ws"]
-[ext_resource type="Texture2D" uid="uid://b25500jl3vwpi" path="res://Assets/Imported/dirty_1.png" id="3_lwxhc"]
 [ext_resource type="Texture2D" uid="uid://c0kx5p11yq7ui" path="res://Assets/Imported/sand_3.png" id="3_ug3c1"]
 [ext_resource type="Shader" uid="uid://cjubq8yq7u2yx" path="res://Shaders/grass.gdshader" id="4_etsnd"]
 [ext_resource type="Texture2D" uid="uid://gtbjharmeq4d" path="res://Assets/Imported/dirty_3.png" id="4_i5dpb"]
+[ext_resource type="Material" uid="uid://v4w62fiwdxp4" path="res://Town_Parts/Ground.tres" id="4_t6v16"]
 [ext_resource type="Texture2D" uid="uid://xa2hvipi3fca" path="res://Shaders/GRASSJAM2.png" id="5_swef6"]
 [ext_resource type="ArrayMesh" uid="uid://blba5nip6ahg6" path="res://Assets/Models/gamejamfountain (1).obj" id="8_1t63h"]
 [ext_resource type="ArrayMesh" uid="uid://dd32fx42tmh7" path="res://Assets/Models/gamejamhouse.obj" id="9_neva4"]
@@ -37,6 +37,7 @@ fog_enabled = true
 fog_light_color = Color(0.47728622, 0.5678473, 0.59982944, 1)
 fog_light_energy = 0.65
 fog_sun_scatter = 0.45
+fog_density = 0.003
 fog_sky_affect = 0.855
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gh5ws"]
@@ -57,9 +58,6 @@ uv1_triplanar = true
 lightmap_size_hint = Vector2i(12, 12)
 material = SubResource("StandardMaterial3D_t6v16")
 size = Vector2(3, 3)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_swef6"]
-albedo_texture = ExtResource("3_lwxhc")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1t63h"]
 albedo_texture = ExtResource("4_i5dpb")
@@ -121,6 +119,9 @@ albedo_color = Color(0.32422742, 0.21261787, 0.06687831, 1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_546er"]
 albedo_color = Color(0.06666667, 0.21176471, 0, 1)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_t6v16"]
+size = Vector3(10.67749, 7.854706, 9.956112)
+
 [node name="CityCenter" type="Node3D"]
 script = ExtResource("1_la81a")
 
@@ -149,133 +150,133 @@ mesh = SubResource("PlaneMesh_2ul3p")
 [node name="MiddleBox" type="CSGBox3D" parent="City/Flooring"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1450988, 0.32809782, 4.927513)
 size = Vector3(1, 0.5, 1)
-material = SubResource("StandardMaterial3D_swef6")
+material = ExtResource("4_t6v16")
 
 [node name="MiddleBox2" type="CSGBox3D" parent="City/Flooring"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1450988, 0.32809782, 3.961898)
 size = Vector3(1, 0.5, 1)
-material = SubResource("StandardMaterial3D_swef6")
+material = ExtResource("4_t6v16")
 
 [node name="MiddleBox3" type="CSGBox3D" parent="City/Flooring"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1450988, 0.32809782, 2.9631567)
 size = Vector3(1, 0.5, 1)
-material = SubResource("StandardMaterial3D_swef6")
+material = ExtResource("4_t6v16")
 
 [node name="MiddleBox4" type="CSGBox3D" parent="City/Flooring"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1450988, 0.32809782, 1.9667327)
 size = Vector3(1, 0.5, 1)
-material = SubResource("StandardMaterial3D_swef6")
+material = ExtResource("4_t6v16")
 
 [node name="MiddleBox5" type="CSGBox3D" parent="City/Flooring"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1450988, 0.32809782, 0.9779782)
 size = Vector3(1, 0.5, 1)
-material = SubResource("StandardMaterial3D_swef6")
+material = ExtResource("4_t6v16")
 
 [node name="MiddleBox6" type="CSGBox3D" parent="City/Flooring"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1450988, 0.32809782, -0.017667059)
 size = Vector3(1, 0.5, 1)
-material = SubResource("StandardMaterial3D_swef6")
+material = ExtResource("4_t6v16")
 
 [node name="MiddleBox7" type="CSGBox3D" parent="City/Flooring"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1450988, 0.32809782, -1.0140911)
 size = Vector3(1, 0.5, 1)
-material = SubResource("StandardMaterial3D_swef6")
+material = ExtResource("4_t6v16")
 
 [node name="MiddleBox8" type="CSGBox3D" parent="City/Flooring"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1450988, 0.32809782, -2.0028455)
 size = Vector3(1, 0.5, 1)
-material = SubResource("StandardMaterial3D_swef6")
+material = ExtResource("4_t6v16")
 
 [node name="MiddleBox9" type="CSGBox3D" parent="City/Flooring"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1450988, 0.32809782, -3.0069983)
 size = Vector3(1, 0.5, 1)
-material = SubResource("StandardMaterial3D_swef6")
+material = ExtResource("4_t6v16")
 
 [node name="MiddleBox10" type="CSGBox3D" parent="City/Flooring"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1450988, 0.32809782, -4.0034227)
 size = Vector3(1, 0.5, 1)
-material = SubResource("StandardMaterial3D_swef6")
+material = ExtResource("4_t6v16")
 
 [node name="MiddleBox11" type="CSGBox3D" parent="City/Flooring"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1450988, 0.32809782, -4.9921765)
 size = Vector3(1, 0.5, 1)
-material = SubResource("StandardMaterial3D_swef6")
+material = ExtResource("4_t6v16")
 
 [node name="MiddleBox12" type="CSGBox3D" parent="City/Flooring"]
 transform = Transform3D(-4.3711385e-08, 0, -0.9999999, 0, 1, 0, 1, 0, -4.3711385e-08, -4.2887144, 0.32809782, -0.012309469)
 size = Vector3(1, 0.5, 1)
-material = SubResource("StandardMaterial3D_swef6")
+material = ExtResource("4_t6v16")
 
 [node name="MiddleBox26" type="CSGBox3D" parent="City/Flooring"]
 transform = Transform3D(-4.3671093e-08, 0.04292191, -0.9990781, 1.8761768e-09, 0.9990784, 0.04292193, 1, 7.336375e-16, -4.3711385e-08, -5.2593136, -0.7679095, -0.012309469)
 material_override = SubResource("StandardMaterial3D_1t63h")
 size = Vector3(1, 16.443878, 1)
-material = SubResource("StandardMaterial3D_swef6")
+material = ExtResource("4_t6v16")
 
 [node name="MiddleBox13" type="CSGBox3D" parent="City/Flooring"]
 transform = Transform3D(-4.3711385e-08, 0, -0.9999999, 0, 1, 0, 1, 0, -4.3711385e-08, -3.4802935, 0.32809782, -0.014163277)
 size = Vector3(1, 0.5, 1)
-material = SubResource("StandardMaterial3D_swef6")
+material = ExtResource("4_t6v16")
 
 [node name="MiddleBox14" type="CSGBox3D" parent="City/Flooring"]
 transform = Transform3D(-4.3711385e-08, 0, -0.9999999, 0, 1, 0, 1, 0, -4.3711385e-08, -2.6441388, 0.32809782, -0.016080681)
 size = Vector3(1, 0.5, 1)
-material = SubResource("StandardMaterial3D_swef6")
+material = ExtResource("4_t6v16")
 
 [node name="MiddleBox15" type="CSGBox3D" parent="City/Flooring"]
 transform = Transform3D(-4.3711385e-08, 0, -0.9999999, 0, 1, 0, 1, 0, -4.3711385e-08, -1.8099244, 0.32809782, -0.017993636)
 size = Vector3(1, 0.5, 1)
-material = SubResource("StandardMaterial3D_swef6")
+material = ExtResource("4_t6v16")
 
 [node name="MiddleBox16" type="CSGBox3D" parent="City/Flooring"]
 transform = Transform3D(-4.3711385e-08, 0, -0.9999999, 0, 1, 0, 1, 0, -4.3711385e-08, -0.98213065, 0.32809782, -0.019891867)
 size = Vector3(1, 0.5, 1)
-material = SubResource("StandardMaterial3D_swef6")
+material = ExtResource("4_t6v16")
 
 [node name="MiddleBox17" type="CSGBox3D" parent="City/Flooring"]
 transform = Transform3D(-4.3711385e-08, 0, -0.9999999, 0, 1, 0, 1, 0, -4.3711385e-08, -1.1325243, 0.32809782, -1.026275)
 size = Vector3(1, 0.5, 1)
-material = SubResource("StandardMaterial3D_swef6")
+material = ExtResource("4_t6v16")
 
 [node name="MiddleBox23" type="CSGBox3D" parent="City/Flooring"]
 transform = Transform3D(-4.3711385e-08, 0, -0.9999999, 0, 1, 0, 1, 0, -4.3711385e-08, 0.8284172, 0.32809782, -1.0080884)
 size = Vector3(1, 0.5, 1)
-material = SubResource("StandardMaterial3D_swef6")
+material = ExtResource("4_t6v16")
 
 [node name="MiddleBox24" type="CSGBox3D" parent="City/Flooring"]
 transform = Transform3D(-4.3711385e-08, 0, -0.9999999, 0, 1, 0, 1, 0, -4.3711385e-08, 0.8545004, 0.32809782, 0.97488034)
 size = Vector3(1, 0.5, 1)
-material = SubResource("StandardMaterial3D_swef6")
+material = ExtResource("4_t6v16")
 
 [node name="MiddleBox25" type="CSGBox3D" parent="City/Flooring"]
 transform = Transform3D(-4.3711385e-08, 0, -0.9999999, 0, 1, 0, 1, 0, -4.3711385e-08, -1.1420596, 0.32809782, 0.984875)
 size = Vector3(1, 0.5, 1)
-material = SubResource("StandardMaterial3D_swef6")
+material = ExtResource("4_t6v16")
 
 [node name="MiddleBox18" type="CSGBox3D" parent="City/Flooring"]
 transform = Transform3D(-4.3711385e-08, 0, -0.9999999, 0, 1, 0, 1, 0, -4.3711385e-08, 0.68564653, 0.32809782, -0.023716282)
 size = Vector3(1, 0.5, 1)
-material = SubResource("StandardMaterial3D_swef6")
+material = ExtResource("4_t6v16")
 
 [node name="MiddleBox19" type="CSGBox3D" parent="City/Flooring"]
-transform = Transform3D(-4.3711385e-08, 0, -0.9999999, 0, 1, 0, 1, 0, -4.3711385e-08, 1.5861328, 0.32809782, -0.025614511)
-size = Vector3(1, 0.5, 0.85461426)
-material = SubResource("StandardMaterial3D_swef6")
+transform = Transform3D(-4.3711385e-08, 0, -0.9999999, 0, 1, 0, 1, 0, -4.3711385e-08, 1.5134399, 0.32809782, -0.025614515)
+size = Vector3(1, 0.5, 1)
+material = ExtResource("4_t6v16")
 
 [node name="MiddleBox20" type="CSGBox3D" parent="City/Flooring"]
-transform = Transform3D(-4.3711385e-08, 0, -0.9999999, 0, 1, 0, 1, 0, -4.3711385e-08, 2.4341424, 0.32809782, -0.027542304)
-size = Vector3(1, 0.5, 0.8399658)
-material = SubResource("StandardMaterial3D_swef6")
+transform = Transform3D(-4.3711385e-08, 0, -0.9999999, 0, 1, 0, 1, 0, -4.3711385e-08, 2.3541253, 0.32809782, -0.027542308)
+size = Vector3(1, 0.5, 1)
+material = ExtResource("4_t6v16")
 
 [node name="MiddleBox21" type="CSGBox3D" parent="City/Flooring"]
-transform = Transform3D(-4.3711385e-08, 0, -0.9999999, 0, 1, 0, 1, 0, -4.3711385e-08, 3.2657325, 0.32809782, -0.029455263)
-size = Vector3(1, 0.5, 0.84521484)
-material = SubResource("StandardMaterial3D_swef6")
+transform = Transform3D(-4.3711385e-08, 0, -0.9999999, 0, 1, 0, 1, 0, -4.3711385e-08, 3.1883402, 0.32809782, -0.029455265)
+size = Vector3(1, 0.5, 1)
+material = ExtResource("4_t6v16")
 
 [node name="MiddleBox22" type="CSGBox3D" parent="City/Flooring"]
 transform = Transform3D(-4.3711385e-08, 0, -0.9999999, 0, 1, 0, 1, 0, -4.3711385e-08, 4.0161333, 0.32809782, -0.031353496)
 size = Vector3(1, 0.5, 1)
-material = SubResource("StandardMaterial3D_swef6")
+material = ExtResource("4_t6v16")
 
 [node name="Grass" type="Node3D" parent="City"]
 transform = Transform3D(0.17893113, 0, 0, 0, 1, 0, 7.5929706e-16, 0, 0.21372312, -0.7482127, 0.4531753, -0.015057165)
@@ -1769,8 +1770,8 @@ size = Vector3(3.2597656, 8, 0.1)
 material = SubResource("StandardMaterial3D_etsnd")
 
 [node name="Walls4" type="CSGBox3D" parent="City/Walls"]
-transform = Transform3D(-4.3711406e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -1.4787357, 0, 5.8781633)
-size = Vector3(3.3774414, 8, 0.1)
+transform = Transform3D(-4.3711424e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -1.4787357, 0, 5.368519)
+size = Vector3(4.3967285, 8, 0.1)
 material = SubResource("StandardMaterial3D_etsnd")
 
 [node name="Walls6" type="CSGBox3D" parent="City/Walls"]
@@ -1836,16 +1837,16 @@ transform = Transform3D(0.0015184437, 0, 0.99999887, 0, 1, 0, -0.99999887, 0, 0.
 shape = SubResource("BoxShape3D_lwxhc")
 
 [node name="NorthSpawn" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.077115, -20.138905)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.423418, 2.1239023, -20.138905)
 
 [node name="SouthSpawn" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.076191, 20.049835)
 
 [node name="EastSpawn" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.611988, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.338406, 1.7830973, 0)
 
 [node name="WestSpawn" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.486269, 1.9277897, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.125329, 1.9277897, 0.48255157)
 
 [node name="Spawn" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.06517, 5.918457, 0)
@@ -2297,6 +2298,13 @@ mesh = ExtResource("13_t6v16")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_csps6")
 surface_material_override/1 = SubResource("StandardMaterial3D_546er")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.27952957, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.0441895, 3.2654572, -0.3889904)
+shape = SubResource("BoxShape3D_t6v16")
 
 [connection signal="body_entered" from="North" to="." method="_on_north_body_entered"]
 [connection signal="body_entered" from="South" to="." method="_on_south_body_entered"]

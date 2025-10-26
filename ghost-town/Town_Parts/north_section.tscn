@@ -1,7 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://cmoh73uocqwxi"]
+[gd_scene load_steps=12 format=3 uid="uid://cmoh73uocqwxi"]
 
 [ext_resource type="Script" uid="uid://bkwmvr8hkjnlg" path="res://Scripts/north_section.gd" id="1_brbld"]
-[ext_resource type="Texture2D" uid="uid://c8x1fvbwaqdim" path="res://Assets/Dark/texture_09.png" id="1_e2quv"]
+[ext_resource type="Texture2D" uid="uid://b25500jl3vwpi" path="res://Assets/Imported/dirty_1.png" id="2_5sjnq"]
+[ext_resource type="ArrayMesh" uid="uid://dpkunxxhdgvyg" path="res://Assets/Models/mountains.obj" id="3_dvxwm"]
+[ext_resource type="Material" uid="uid://dblqxbtcksjkg" path="res://Town_Parts/Moutain.tres" id="4_uncje"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_brbld"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -15,13 +17,19 @@ background_mode = 2
 sky = SubResource("Sky_vmcat")
 tonemap_mode = 2
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_brbld"]
-albedo_texture = ExtResource("1_e2quv")
-uv1_triplanar = true
-uv1_world_triplanar = true
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s77jb"]
+albedo_texture = ExtResource("2_5sjnq")
+uv1_scale = Vector3(6.645, 0.825, 9.865)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_e2quv"]
 size = Vector3(15.532166, 30.963623, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5sjnq"]
+albedo_color = Color(0.09239707, 0.09239706, 0.09239706, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_dvxwm"]
+material = SubResource("StandardMaterial3D_5sjnq")
+size = Vector3(0.86, 2.025, 0.915)
 
 [node name="North Section" type="Node3D"]
 script = ExtResource("1_brbld")
@@ -35,44 +43,86 @@ shadow_enabled = true
 
 [node name="City" type="CSGCombiner3D" parent="."]
 transform = Transform3D(5.5887423, 0, 0, 0, 1, 0, 0, 0, 4.678951, 4.18157, 0.31652832, 0.070453644)
-material_override = SubResource("StandardMaterial3D_brbld")
 use_collision = true
 
 [node name="CSGBox3D" type="CSGBox3D" parent="City"]
 transform = Transform3D(7.6658883, 0, 0, 0, 1.003867, 0, 0, 0, 10.026607, -0.81857073, 0, -8.255396)
 size = Vector3(0.36627197, 1, 3.5986023)
-
-[node name="CSGBox3D2" type="CSGBox3D" parent="City"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.8435335, 23.6042, 2.519518)
-size = Vector3(14.344299, 50.42977, 27.447247)
-
-[node name="CSGBox3D3" type="CSGBox3D" parent="City"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.2039146, 23.267374, 3.897633)
-size = Vector3(14.402405, 49.75612, 24.016705)
+material = SubResource("StandardMaterial3D_s77jb")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.8730839, 0.4875701, 0, -0.4875701, 0.8730839, -0.5352802, 9.397301, 17.442055)
+transform = Transform3D(1, 0, 0, 0, 0.9921998, -0.124657914, 0, 0.124657914, 0.9921998, 0, 11.279907, 37.26732)
 current = true
-fov = 73.96929
+fov = 70.0
 
 [node name="North" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6487694, 0, 2.303421)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="North"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4419861, 14.981812, -19.525196)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.99785995, 14.981812, -34.25231)
 shape = SubResource("BoxShape3D_e2quv")
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="North Spawn" type="Node3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1338863, 2.422618, -14.6685505)
+
+[node name="Mountains" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.22995, 5.8336334, -74)
+mesh = ExtResource("3_dvxwm")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("4_uncje")
+
+[node name="Mountains2" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(0.9964826, 0, 0.083799586, 0, 1.705, 0, -0.083799586, 0, 0.9964826, 25.072952, -4, 12.870247)
+mesh = ExtResource("3_dvxwm")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("4_uncje")
+
+[node name="Mountains3" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.072952, -4.714939, 71.7817)
+mesh = ExtResource("3_dvxwm")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("4_uncje")
+
+[node name="Mountains4" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1.855, 0, 0, 0, 1, -20.38942, -4, -69.71901)
+mesh = ExtResource("3_dvxwm")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("4_uncje")
+
+[node name="Mountains5" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1.6, 0, 0, 0, 1, -21.053757, -3.1517334, 17.151237)
+mesh = ExtResource("3_dvxwm")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("4_uncje")
+
+[node name="Mountains6" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1.72, 0, 0, 0, 1, -22.88972, -4, 76.06269)
+mesh = ExtResource("3_dvxwm")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("4_uncje")
 
 [node name="South" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="South"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.101984, 14.981812, 23.108036)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.101984, 14.981812, 16.504364)
 shape = SubResource("BoxShape3D_e2quv")
 
 [node name="South Spawn" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4263515, 20.563457)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4263515, 5.4555206)
 
 [node name="North Spawn" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1338863, 2.422618, -14.6685505)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4263515, -25.585846)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(19.213806, 0, 0, 0, 19.213806, 0, 0, 0, 19.213806, 0, 10.858, -40.928)
+mesh = SubResource("BoxMesh_dvxwm")
+
+[node name="Mountains" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.06357118, 0, 1.6893908, 0, 1.6905863, 0, -1.6893908, 0, 0.06357118, 34.283405, 7.6382055, -63.68281)
+mesh = ExtResource("3_dvxwm")
+surface_material_override/0 = ExtResource("4_uncje")
 
 [connection signal="body_entered" from="North" to="." method="_on_north_body_entered"]
 [connection signal="body_entered" from="South" to="." method="_on_south_body_entered"]

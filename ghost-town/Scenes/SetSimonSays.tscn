@@ -40,7 +40,7 @@ size = Vector3(2.0749054, 2.605133, 0.0024414063)
 material = ExtResource("3_ii7v6")
 
 [node name="GreenGem" parent="." instance=ExtResource("4_ii7v6")]
-transform = Transform3D(0.8813034, 0, 0.47255078, 0, 1, 0, -0.47255078, 0, 0.8813034, 2.1097322, -1.519067, -1.6124897)
+transform = Transform3D(0.8813034, 0, 0.47255078, 0, 1, 0, -0.47255078, 0, 0.8813034, 0.3213811, -1.519067, 5.7033195)
 visible = false
 
 [node name="Inbetweengame" type="Timer" parent="."]

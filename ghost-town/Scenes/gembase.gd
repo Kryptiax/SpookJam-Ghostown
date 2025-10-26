@@ -3,7 +3,7 @@ extends Area3D
 @onready var anims: AnimationPlayer = $AnimationPlayer
 
 func _ready():
-	if self.name == "PurpleGem":
+	if self.name == "PurpleGem" or self.name == "GreenGem":
 		anims.play("turn")
 	add_to_group("interactable")
 	if self.is_in_group("interactable"):

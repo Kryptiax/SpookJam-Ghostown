@@ -66,3 +66,4 @@ func check_success():
 	if box_one.correct and box_two.correct and box_three.correct and box_four.correct:
 		if !gem_collected:
 			give_gem()
+			gem_collected = true

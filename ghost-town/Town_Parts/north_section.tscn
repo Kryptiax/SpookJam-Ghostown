@@ -116,11 +116,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4263515, 5.4555206)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4263515, -25.585846)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(19.213806, 0, 0, 0, 19.213806, 0, 0, 0, 19.213806, 0, 10.858, -40.928)
+transform = Transform3D(7.564, 0, 0, 0, 7.564, 0, 0, 0, 7.564, 0, 4.521364, -35.468044)
 mesh = SubResource("BoxMesh_dvxwm")
 
 [node name="Mountains" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.06357118, 0, 1.6893908, 0, 1.6905863, 0, -1.6893908, 0, 0.06357118, 34.283405, 7.6382055, -63.68281)
+transform = Transform3D(0.06357118, 0, 1.6893908, 0, 1.6905863, 0, -1.6893908, 0, 0.06357118, 34.27273, 7.7909155, -62.395924)
 mesh = ExtResource("3_dvxwm")
 surface_material_override/0 = ExtResource("4_uncje")
 

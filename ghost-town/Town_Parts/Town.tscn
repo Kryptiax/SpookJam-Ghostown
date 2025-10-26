@@ -1,20 +1,59 @@
-[gd_scene load_steps=8 format=3 uid="uid://ucx7jdqfkweo"]
+[gd_scene load_steps=11 format=3 uid="uid://ucx7jdqfkweo"]
 
+[ext_resource type="Script" uid="uid://bmfyg8ukfi4ys" path="res://Town_Parts/town.gd" id="1_k55rh"]
 [ext_resource type="Material" uid="uid://ddi5dcnpcec5" path="res://Scenes/PadsYellow.tres" id="1_l4i18"]
 [ext_resource type="Material" uid="uid://gqi6k6j4t8ne" path="res://Town_Parts/Grass.tres" id="2_k55rh"]
 [ext_resource type="Material" uid="uid://el0es42ntdjq" path="res://Scenes/PadsRed.tres" id="3_atola"]
 [ext_resource type="Material" uid="uid://n17m3x17hjv2" path="res://Scenes/PadsGreen.tres" id="4_0vhxw"]
-[ext_resource type="Material" uid="uid://v4w62fiwdxp4" path="res://Town_Parts/Ground.tres" id="5_be461"]
 [ext_resource type="Material" uid="uid://5mk4lnifn57c" path="res://Scenes/PadsBlue'.tres" id="6_8i45y"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_pjjs5"]
 
+[sub_resource type="Animation" id="Animation_vew77"]
+resource_name = "new_animation"
+length = 0.308
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Blue:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.57518387, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_l4i18"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Blue:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_k55rh"]
+_data = {
+&"RESET": SubResource("Animation_l4i18"),
+&"new_animation": SubResource("Animation_vew77")
+}
+
 [node name="Node3D" type="Node3D"]
+script = ExtResource("1_k55rh")
 
 [node name="Blue" type="MeshInstance3D" parent="."]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Blue"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.947882, 0.8498781, 2.604507)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.337279, 0.8498781, 2.604507)
 mesh = SubResource("CapsuleMesh_pjjs5")
 skeleton = NodePath("../..")
 surface_material_override/0 = ExtResource("1_l4i18")
@@ -24,12 +63,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.183542, 0.8498781, -3.2718
 mesh = SubResource("CapsuleMesh_pjjs5")
 skeleton = NodePath("../..")
 surface_material_override/0 = ExtResource("2_k55rh")
-
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="Blue"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.9560976, 0.8498781, -12.458517)
-mesh = SubResource("CapsuleMesh_pjjs5")
-skeleton = NodePath("../..")
-surface_material_override/0 = ExtResource("3_atola")
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="Blue"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.841994, 0.8498781, -5.979078)
@@ -41,7 +74,7 @@ surface_material_override/0 = ExtResource("4_0vhxw")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.19369984, 0.84987617, -8.853461)
 mesh = SubResource("CapsuleMesh_pjjs5")
 skeleton = NodePath("../..")
-surface_material_override/0 = ExtResource("5_be461")
+surface_material_override/0 = ExtResource("3_atola")
 
 [node name="MeshInstance3D6" type="MeshInstance3D" parent="Blue"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.786435, 0.84987617, -6.9039106)
@@ -60,3 +93,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.213565, 0.84987617, -3.9039
 mesh = SubResource("CapsuleMesh_pjjs5")
 skeleton = NodePath("../..")
 surface_material_override/0 = ExtResource("6_8i45y")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_k55rh")
+}

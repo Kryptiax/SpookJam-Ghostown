@@ -2303,12 +2303,17 @@ shape = SubResource("BoxShape3D_t6v16")
 
 [node name="People" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6577396, 1.0851545, 17.652597)
-visible = false
 
 [node name="Node3D" parent="People" instance=ExtResource("15_x0d7p")]
 
+[node name="Node3D5" parent="People" instance=ExtResource("15_x0d7p")]
+transform = Transform3D(-0.16957311, 0, -0.9855176, 0, 1, 0, 0.9855176, 0, -0.16957311, -14.59799, 0, -12.61385)
+
 [node name="Node3D2" parent="People" instance=ExtResource("15_x0d7p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.024618, 0, -24.834108)
+
+[node name="Node3D4" parent="People" instance=ExtResource("15_x0d7p")]
+transform = Transform3D(0.8265996, 0, 0.5627905, 0, 1, 0, -0.5627905, 0, 0.8265996, -7.487217, 1.9073486e-06, -25.865698)
 
 [node name="Node3D3" parent="People" instance=ExtResource("15_x0d7p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.490845, 0, -12.811794)

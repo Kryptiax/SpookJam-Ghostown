@@ -15,6 +15,9 @@ signal purple_collected(val)
 signal green_collected(val)
 var interactables_in_range = []  # goofy ahh box
 
+# Pause Menu
+signal paused(val)
+var pausedB
 
 @onready var anim = $AnimatedSprite3D
 @onready var flashlight: Node3D = $Flashlight
@@ -22,6 +25,7 @@ var flashlight_on = false
 
 func _ready() -> void:
 	currentHealth = maxHealth
+	pausedB = false
 
 func _input(_event: InputEvent) -> void:
 	pass # if event.is_action_pressed(ui_left)
@@ -57,10 +61,14 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 	
-	flashlight.visible = flashlight_on
-	
+	if Input.is_action_just_pressed("ui_cancel"):
+		print("pasued or wtvr idk")
+		pausedB = !pausedB
+		paused.emit(pausedB)
 		
+		get_tree().paused = pausedB
 	
+	flashlight.visible = flashlight_on
 	if (flashlight_on == true):
 		
 		if (global_position + direction != global_position):
@@ -75,7 +83,7 @@ func _physics_process(delta: float) -> void:
 
 	if input_vector != Vector2.ZERO:
 		_update_animation(input_vector)
-
+	
 	#print(get_nearest_interactable())
 	if Input.is_action_just_pressed("interact"):
 		print("interact - pressed!")

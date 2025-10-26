@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dk0venuncrvxe"]
+[gd_scene load_steps=24 format=3 uid="uid://dk0venuncrvxe"]
 
 [ext_resource type="Texture2D" uid="uid://dcngqe2tixsi4" path="res://Assets/UI/UIportrait-Sheet.png" id="1_0tsee"]
 [ext_resource type="Script" uid="uid://mi4lml24qw21" path="res://Scenes/ui_driver.gd" id="1_52iq6"]
@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://byhh1dgm6qykf" path="res://Assets/UI/greenGem.png" id="4_52iq6"]
 [ext_resource type="Texture2D" uid="uid://qnq0pkdbs4xa" path="res://Assets/UI/redGem.png" id="5_7ajln"]
 [ext_resource type="Texture2D" uid="uid://bcypedxvgfaqt" path="res://Assets/UI/heart uwu-Sheet.png" id="6_lugua"]
+
+[sub_resource type="Theme" id="Theme_52iq6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cko03"]
 atlas = ExtResource("1_0tsee")
@@ -130,6 +132,119 @@ script = ExtResource("1_52iq6")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
+[node name="PauseMenu" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/PauseMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.42751735
+anchor_top = 0.27700618
+anchor_right = 0.42751735
+anchor_bottom = 0.27700618
+offset_left = -28.5
+offset_top = -11.5
+offset_right = 28.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(4, 4)
+theme = SubResource("Theme_52iq6")
+text = "Paused"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/PauseMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -52.0
+offset_top = -50.5
+offset_right = 52.0
+offset_bottom = 50.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PauseMenu/MarginContainer"]
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+alignment = 1
+
+[node name="RESUME" type="Button" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+action_mode = 0
+text = "Resume"
+
+[node name="QUIT" type="Button" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+mouse_filter = 1
+text = "Quit"
+
+[node name="DeathScreen" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/DeathScreen"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -64.0
+offset_top = 88.0
+offset_right = -7.0
+offset_bottom = 111.0
+grow_horizontal = 2
+scale = Vector2(4, 4)
+theme = SubResource("Theme_52iq6")
+text = "Paused"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/DeathScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -52.0
+offset_top = -50.5
+offset_right = 52.0
+offset_bottom = 50.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.9686619, 1.9958156)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/DeathScreen/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+alignment = 1
+
+[node name="RESUME" type="Button" parent="CanvasLayer/DeathScreen/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "MAIN MENU"
+
+[node name="QUIT" type="Button" parent="CanvasLayer/DeathScreen/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "RESUME"
+
 [node name="GridContainer" type="GridContainer" parent="CanvasLayer"]
 anchors_preset = 15
 anchor_right = 1.0
@@ -184,10 +299,7 @@ sprite_frames = SubResource("SpriteFrames_5btu7")
 animation = &"lose"
 speed_scale = 2.0
 
-[node name="Panel" type="Panel" parent="CanvasLayer"]
-visible = false
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[connection signal="pressed" from="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer/RESUME" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer/QUIT" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="CanvasLayer/DeathScreen/MarginContainer/VBoxContainer/RESUME" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="CanvasLayer/DeathScreen/MarginContainer/VBoxContainer/QUIT" to="." method="_on_quit_pressed"]

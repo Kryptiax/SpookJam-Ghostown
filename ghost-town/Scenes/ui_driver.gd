@@ -14,6 +14,11 @@ var red_gem
 var green_gem
 var purple_gem
 
+@onready var pause_menu: Control = $CanvasLayer/PauseMenu
+var paused
+
+signal changePause(val)
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# instantiate gem state - may be an issue LATER
@@ -22,6 +27,7 @@ func _ready() -> void:
 	purple_gem = false
 	update_Gems()
 	
+	paused = false
 	# instantiate health
 	update_hearts(3)
 	health_found = 3
@@ -29,9 +35,14 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-
+func process(_delta: float) -> void:
 	pass
+
+func pauseMenu():
+	if paused:
+		pause_menu.show()
+	else:
+		pause_menu.hide()
 
 func update_hearts(health):
 	match health:
@@ -86,3 +97,19 @@ func _on_player_red_collected(val: Variant) -> void:
 	red_gem = val
 	update_Gems()
 	pass # Replace with function body.
+
+
+func _on_player_paused(val: Variant) -> void:
+	paused = val
+	pauseMenu()
+	pass # Replace with function body.
+
+
+func _on_quit_pressed() -> void:
+	get_tree().quit()
+
+
+func _on_resume_pressed() -> void:
+	paused = !paused
+	pauseMenu()
+	changePause.emit(paused)

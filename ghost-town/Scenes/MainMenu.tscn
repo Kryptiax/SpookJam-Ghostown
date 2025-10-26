@@ -1,0 +1,115 @@
+[gd_scene load_steps=6 format=3 uid="uid://p436v43h7hfg"]
+
+[ext_resource type="Script" uid="uid://c2o76o2yf67fd" path="res://Scenes/main_menu.gd" id="1_tt5f1"]
+
+[sub_resource type="Gradient" id="Gradient_853f1"]
+offsets = PackedFloat32Array(0.06666667, 0.41333333, 0.6888889)
+colors = PackedColorArray(0.28628203, 0.28628203, 0.28628203, 1, 0.51000094, 0.20773235, 0.47985828, 1, 0.825946, 0.47512603, 0.6445318, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_8saeu"]
+gradient = SubResource("Gradient_853f1")
+
+[sub_resource type="Gradient" id="Gradient_tt5f1"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_853f1"]
+gradient = SubResource("Gradient_tt5f1")
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tt5f1")
+
+[node name="Menu" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.0088594, 1)
+texture = SubResource("GradientTexture2D_8saeu")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -101.0
+offset_right = 70.0
+grow_vertical = 0
+scale = Vector2(1.0242378, 0.9030831)
+
+[node name="Play" type="Button" parent="Menu/VBoxContainer"]
+layout_mode = 2
+text = "Play"
+
+[node name="Options" type="Button" parent="Menu/VBoxContainer"]
+layout_mode = 2
+text = "Options"
+
+[node name="Quit" type="Button" parent="Menu/VBoxContainer"]
+layout_mode = 2
+text = "Quit"
+
+[node name="Options" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_853f1")
+
+[node name="CreditsText" type="RichTextLabel" parent="Options"]
+visible = false
+layout_mode = 0
+offset_left = 521.5
+offset_top = 273.5
+offset_right = 630.5
+offset_bottom = 273.5
+scale = Vector2(0.6338607, 1.4630994)
+text = "Credits to:
+
+Arexxuru - Itch.io
+Thomas Gamboa - Itch.io
+Alexis Tjarks - ERAU GDC"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Options"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -54.5
+offset_top = -33.0
+offset_right = 54.5
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.0035129, 0.98849475)
+
+[node name="Mute" type="Button" parent="Options/VBoxContainer"]
+layout_mode = 2
+text = "Mute"
+
+[node name="Back" type="Button" parent="Options/VBoxContainer"]
+layout_mode = 2
+text = "Back"
+
+[node name="Credits" type="Button" parent="Options/VBoxContainer"]
+visible = false
+layout_mode = 2
+text = "Credits"
+
+[connection signal="pressed" from="Menu/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Menu/VBoxContainer/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="Menu/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="Options/VBoxContainer/Mute" to="." method="_on_mute_pressed"]
+[connection signal="pressed" from="Options/VBoxContainer/Back" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="Options/VBoxContainer/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="Options/VBoxContainer/Credits" to="." method="_on_credits_pressed"]

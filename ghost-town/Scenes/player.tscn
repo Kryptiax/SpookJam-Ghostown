@@ -80,6 +80,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.52563477, 0)
 shape = SubResource("CapsuleShape3D_6t5aa")
 
 [connection signal="green_collected" from="." to="UIworkbench" method="_on_player_green_collected"]
+[connection signal="paused" from="." to="UIworkbench" method="_on_player_paused"]
 [connection signal="purple_collected" from="." to="UIworkbench" method="_on_player_purple_collected"]
 [connection signal="red_collected" from="." to="UIworkbench" method="_on_player_red_collected"]
 [connection signal="area_entered" from="interact" to="." method="_on_interact_area_entered"]

@@ -101,7 +101,7 @@ func _physics_process(delta: float) -> void:
 					WorldInfo.green_gem = true
 					#print("greengem retreieved again fuck u")
 					green_collected.emit(true)
-					print("emittred")
+					print("emitted")
 
 func take_damage(amount):
 	currentHealth -= amount

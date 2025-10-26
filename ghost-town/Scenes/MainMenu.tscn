@@ -125,6 +125,25 @@ text = "warm regards, pamela"
 label_settings = SubResource("LabelSettings_853f1")
 horizontal_alignment = 1
 
+[node name="Label5" type="Label" parent="Menu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -171.58286
+offset_top = -300.0
+offset_right = 2039.4172
+offset_bottom = -204.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.24667406, 0.27999997)
+theme_override_colors/font_color = Color(0.045879327, 0.07202465, 0.018224025, 1)
+text = "Controls: 			WASD - Move, Q - Flashlight Toggle, E - Interact"
+label_settings = SubResource("LabelSettings_853f1")
+horizontal_alignment = 1
+
 [node name="VBoxContainer" type="VBoxContainer" parent="Menu"]
 layout_mode = 1
 anchors_preset = 2

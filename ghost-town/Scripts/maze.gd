@@ -20,6 +20,9 @@ func _ready() -> void:
 				spawn.position = north_spawn.global_position
 				add_child(spawn)
 				
+func _process(_delta: float) -> void:
+	target = spawn.global_transform.origin
+	get_tree().call_group("ghosts", "update_target_location", target)
 
 
 func _on_north_body_entered(body: Node3D) -> void:

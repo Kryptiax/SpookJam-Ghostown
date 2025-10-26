@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://ch6fs5vo75366"]
+[gd_scene load_steps=9 format=3 uid="uid://ch6fs5vo75366"]
 
 [ext_resource type="ArrayMesh" uid="uid://blfuq1jf4iwit" path="res://Assets/Models/Maze_Self.res" id="1_3sv3c"]
 [ext_resource type="Script" uid="uid://dlvlh27jilpvn" path="res://Scripts/maze.gd" id="1_6i7gp"]
 [ext_resource type="Material" uid="uid://cpy6ihqla1m5y" path="res://Scenes/TestMaterial.tres" id="2_7fqr4"]
+[ext_resource type="PackedScene" uid="uid://bluqj0q5jre6a" path="res://Scenes/Ghost.tscn" id="4_6i7gp"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7fqr4"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -16,6 +17,10 @@ background_mode = 2
 sky = SubResource("Sky_6i7gp")
 tonemap_mode = 2
 
+[sub_resource type="NavigationMesh" id="NavigationMesh_7fqr4"]
+vertices = PackedVector3Array(-54.88136, 0.45458984, -57.38086, -54.88136, 0.45458984, 57.36914, 54.86864, 0.45458984, 57.36914, 54.86864, 0.45458984, -57.38086)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+
 [node name="Maze" type="Node3D"]
 script = ExtResource("1_6i7gp")
 
@@ -26,8 +31,11 @@ environment = SubResource("Environment_g8rmm")
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 shadow_enabled = true
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 transform = Transform3D(0.31294623, 0, 0, 0, 0.31294623, 0, 0, 0, 0.31294623, -8.740045, 4.5323353, -14.167216)
+navigation_mesh = SubResource("NavigationMesh_7fqr4")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D"]
 use_collision = true
 size = Vector3(110.76272, 0.09082031, 115.76172)
 material = ExtResource("2_7fqr4")
@@ -47,3 +55,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.561171, 7.962469, -2.5089
 [node name="Camera3D2" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -6.94, 45.825, -15.95)
 fov = 56.266533
+
+[node name="CharacterBody3D" parent="." instance=ExtResource("4_6i7gp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.327957, 4.546546, -31.137016)
+
+[node name="CharacterBody3D2" parent="." instance=ExtResource("4_6i7gp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.9402537, 5.210402, -24.572598)
+
+[node name="CharacterBody3D3" parent="." instance=ExtResource("4_6i7gp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.7373915, 4.546546, -31.389545)
+
+[node name="CharacterBody3D4" parent="." instance=ExtResource("4_6i7gp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.9758449, 5.192507, -1.6625972)
+
+[node name="CharacterBody3D5" parent="." instance=ExtResource("4_6i7gp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4055014, 5.8760996, -16.831018)

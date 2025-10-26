@@ -163,7 +163,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.81674767, 0.46652126, -8.3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.19610453, 0.46652508, -18.773958)
 
 [node name="Tree" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.735, 0, 0, 0, 0.735, 0, 0, 0, 0.735, -16.07473, 1.1362762, 10.155355)
+transform = Transform3D(0.735, 0, 0, 0, 0.735, 0, 0, 0, 0.735, -16.07473, 1.1362762, 14.155355)
+mesh = ExtResource("12_wujyd")
+
+[node name="Tree2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.735, 0, 0, 0, 0.735, 0, 0, 0, 0.735, -16.07473, 1.1362762, -0.49342537)
+mesh = ExtResource("12_wujyd")
+
+[node name="Tree3" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.735, 0, 0, 0, 0.735, 0, 0, 0, 0.735, -16.07473, 1.1362762, -14.949356)
+mesh = ExtResource("12_wujyd")
+
+[node name="Tree4" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.735, 0, 0, 0, 0.735, 0, 0, 0, 0.735, -16.07473, 1.1362762, -14.949356)
 mesh = ExtResource("12_wujyd")
 
 [node name="Mountains" type="MeshInstance3D" parent="."]

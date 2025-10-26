@@ -30,6 +30,7 @@ func _process(_delta: float) -> void:
 
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
-		if body.is_in_group("player"):
-			WorldInfo.direction = WorldInfo.DIRECTIONS.WEST
+	print("play_new_side")
+	if body.is_in_group("player"):
+			WorldInfo.direction = WorldInfo.DIRECTIONS.EAST
 			get_tree().change_scene_to_packed(new_side)

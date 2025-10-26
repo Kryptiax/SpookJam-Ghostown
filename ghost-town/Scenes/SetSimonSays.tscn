@@ -8,7 +8,7 @@
 [sub_resource type="TorusMesh" id="TorusMesh_eux5r"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ii7v6"]
-size = Vector3(3.0424805, 30.993286, 38.416748)
+size = Vector3(3.0424805, 28.478577, 32.86316)
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_ii7v6")
@@ -57,13 +57,13 @@ script = ExtResource("3_ta11i")
 wait_time = 0.5
 
 [node name="Spawn" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.482433, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.809217, -1.5101376, -4.3970337)
 
 [node name="Area3D" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.656322, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.508308, -4.9321632, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(0.99853575, 0, -0.05409624, 0, 1, 0, 0.05409624, 0, 0.99853575, -1.1999435, 14.996643, 5.8848877)
+transform = Transform3D(0.99853575, 0, -0.05409624, 0, 1, 0, 0.05409624, 0, 0.99853575, -1.0276661, 16.253998, 8.657616)
 shape = SubResource("BoxShape3D_ii7v6")
 
 [connection signal="blue" from="RespondPads" to="Before" method="_on_respond_pads_blue"]
@@ -71,5 +71,4 @@ shape = SubResource("BoxShape3D_ii7v6")
 [connection signal="red" from="RespondPads" to="Before" method="_on_respond_pads_red"]
 [connection signal="yellow" from="RespondPads" to="Before" method="_on_respond_pads_yellow"]
 [connection signal="timeout" from="Inbetweengame" to="Before" method="_on_inbetweengame_timeout"]
-[connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

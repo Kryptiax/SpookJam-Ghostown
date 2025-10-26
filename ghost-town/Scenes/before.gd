@@ -34,6 +34,7 @@ func play_game(game):
 
 func check_response(game):
 	if player_response.size() == game.size():
+		await get_tree().create_timer(0.5).timeout
 		if player_response == game:
 			print("sequence correct!")
 			player_response.clear()

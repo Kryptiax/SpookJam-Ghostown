@@ -1,7 +1,7 @@
 extends CharacterBody3D
 
 
-const SPEED = 15.0
+const SPEED = 9.0
 const JUMP_VELOCITY = 4.5
 
 # Health Calc
@@ -93,9 +93,12 @@ func _physics_process(delta: float) -> void:
 				print(item.name)
 				if item.name == "RedGem":
 					red_collected.emit(true)
+					WorldInfo.red_gem = true
 				if item.name == "PurpleGem":
 					purple_collected.emit(true)
+					WorldInfo.purple_gem = true
 				if item.name == "GreenGem":
+					WorldInfo.green_gem = true
 					#print("greengem retreieved again fuck u")
 					green_collected.emit(true)
 					print("emittred")

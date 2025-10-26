@@ -1,17 +1,17 @@
-[gd_scene load_steps=25 format=4 uid="uid://ch6fs5vo75366"]
+[gd_scene load_steps=26 format=4 uid="uid://ch6fs5vo75366"]
 
 [ext_resource type="ArrayMesh" uid="uid://blfuq1jf4iwit" path="res://Assets/Models/Maze_Self.res" id="1_3sv3c"]
 [ext_resource type="Script" uid="uid://dlvlh27jilpvn" path="res://Scripts/maze.gd" id="1_6i7gp"]
 [ext_resource type="Material" uid="uid://cpy6ihqla1m5y" path="res://Scenes/TestMaterial.tres" id="2_7fqr4"]
 [ext_resource type="PackedScene" uid="uid://bluqj0q5jre6a" path="res://Scenes/Ghost.tscn" id="4_6i7gp"]
-[ext_resource type="Material" path="res://Town_Parts/Moutain.tres" id="5_ausyp"]
+[ext_resource type="Material" uid="uid://dblqxbtcksjkg" path="res://Town_Parts/Moutain.tres" id="5_ausyp"]
 [ext_resource type="Material" uid="uid://5mk4lnifn57c" path="res://Scenes/PadsBlue'.tres" id="5_leti0"]
 [ext_resource type="Material" uid="uid://el0es42ntdjq" path="res://Scenes/PadsRed.tres" id="6_0wpuq"]
 [ext_resource type="Material" uid="uid://n17m3x17hjv2" path="res://Scenes/PadsGreen.tres" id="7_i352j"]
 [ext_resource type="Material" uid="uid://ddi5dcnpcec5" path="res://Scenes/PadsYellow.tres" id="8_p15cr"]
-[ext_resource type="PackedScene" path="res://Scenes/keys.tscn" id="9_0wpuq"]
+[ext_resource type="PackedScene" uid="uid://br36byt3uoc8" path="res://Scenes/keys.tscn" id="9_0wpuq"]
 [ext_resource type="ArrayMesh" uid="uid://dpkunxxhdgvyg" path="res://Assets/Models/mountains.obj" id="11_p15cr"]
-[ext_resource type="PackedScene" uid="uid://ltjmq60vcmre" path="res://Scenes/RedGem.tscn" id="12_ausyp"]
+[ext_resource type="PackedScene" path="res://Scenes/RedGem.tscn" id="12_ausyp"]
 [ext_resource type="ArrayMesh" uid="uid://hu7kahst5eg" path="res://Assets/Models/tree.obj" id="13_dk6la"]
 [ext_resource type="ArrayMesh" uid="uid://dd32fx42tmh7" path="res://Assets/Models/gamejamhouse.obj" id="14_0cidp"]
 
@@ -47,6 +47,10 @@ _surfaces = [{
 "vertex_count": 36,
 "vertex_data": PackedByteArray("AACEwgAAOr0AAIlCAACEwgAAOr0AAInCAACEwgAAOj0AAInCAACEQgAAOr0AAInCAACEwgAAOr0AAInCAACEwgAAOr0AAIlCAACEwgAAOj0AAInCAACEwgAAOr0AAInCAACEQgAAOr0AAInCAACEwgAAOj0AAInCAACEwgAAOj0AAIlCAACEwgAAOr0AAIlCAACEwgAAOr0AAIlCAACEwgAAOj0AAIlCAACEQgAAOj0AAIlCAACEQgAAOj0AAIlCAACEwgAAOj0AAIlCAACEwgAAOj0AAInCAACEwgAAOr0AAIlCAACEQgAAOr0AAIlCAACEQgAAOr0AAInCAACEQgAAOj0AAIlCAACEQgAAOr0AAIlCAACEwgAAOr0AAIlCAACEQgAAOr0AAInCAACEQgAAOr0AAIlCAACEQgAAOj0AAIlCAACEQgAAOr0AAInCAACEQgAAOj0AAInCAACEwgAAOj0AAInCAACEwgAAOj0AAInCAACEQgAAOj0AAInCAACEQgAAOj0AAIlCAACEQgAAOj0AAIlCAACEQgAAOj0AAInCAACEQgAAOr0AAInCAAD/f/9//n8AAP9//3/+fwAA/3//f/5//38AAP//AAD/fwAA//8AAP9/AAD//wAA/////wAA/z//////AAD/P/////8AAP8/AAD/f/9//n8AAP9//3/+fwAA/3//f/5//3//fwAA/z//f/9/AAD/P/9//38AAP8//3//////AAD/f/////8AAP9//////wAA/38AAP//AAD/fwAA//8AAP9/AAD//wAA/3//fwAA/z//f/9/AAD/P/9//38AAP8/////f/9//n////9//3/+f////3//f/5//////wAA/z//////AAD/P/////8AAP8//3//////AAD/f/////8AAP9//////wAA////f/9//n////9//3/+f////3//f/5/")
 }]
+
+[sub_resource type="BoxMesh" id="BoxMesh_0cidp"]
+material = ExtResource("5_ausyp")
+size = Vector3(8.4, 2.665, 1.14)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6i7gp"]
 size = Vector3(15.532166, 30.963623, 1)
@@ -84,6 +88,10 @@ material = SubResource("StandardMaterial3D_p15cr")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.618639, 0, -10.619141)
 visible = false
 mesh = SubResource("ArrayMesh_6i7gp")
+
+[node name="CSGMesh3D2" type="CSGMesh3D" parent="."]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 7.62, 0, 8.742278e-08, 0, -1, -8.672915, 4.535328, -32.595795)
+mesh = SubResource("BoxMesh_0cidp")
 
 [node name="CSGMesh3D" type="CSGMesh3D" parent="."]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 7.62, 0, 8.742278e-08, 0, -1, 6.9185486, 7.1165943, 5.3220024)
@@ -143,7 +151,7 @@ size = Vector3(1, 10.618652, 6)
 material = ExtResource("7_i352j")
 
 [node name="BlueDoor" type="CSGBox3D" parent="walls"]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -9.668861, 10.617946, -32.265476)
+transform = Transform3D(0.9999958, 0, -0.0028971392, 0, 1, 0, 0.0028971392, 0, 0.9999958, -3.8277655, 9.26407, -29.131031)
 size = Vector3(1, 10.618652, 6)
 material = ExtResource("5_leti0")
 

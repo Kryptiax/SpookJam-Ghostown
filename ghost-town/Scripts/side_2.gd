@@ -32,7 +32,7 @@ func _on_right_area_body_entered(body: Node3D) -> void:
 	if body.is_in_group("player"):
 		WorldInfo.direction = WorldInfo.DIRECTIONS.EAST
 		print("yippie")
-		get_tree().change_scene_to_file(city_centre)
+		get_tree().change_scene_to_file(puzzle)
 
 
 
@@ -41,4 +41,4 @@ func _on_left_area_body_entered(body: Node3D) -> void:
 	if body.is_in_group("player"):
 		WorldInfo.direction = WorldInfo.DIRECTIONS.WEST #Side we are coming from
 		print("yippie")
-		get_tree().change_scene_to_file(puzzle)
+		get_tree().change_scene_to_file(city_centre)

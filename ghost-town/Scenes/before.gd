@@ -15,6 +15,8 @@ var player_response: Array = []
 var i: int = 0
 var game = gameplay[i]
 
+const GREEN_GEM = preload("res://Scenes/GreenGem.tscn")
+
 func _ready() -> void:
 	play_game(gameplay[i])
 
@@ -73,4 +75,6 @@ func _on_respond_pads_yellow() -> void:
 	player_response.append(yellow)
 	
 func give_gem():
+	var gem_instance = GREEN_GEM.instantiate()
+	gem_instance.position = Vector3(0, 0.5, 0)
 	pass

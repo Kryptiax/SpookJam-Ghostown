@@ -2,7 +2,7 @@ extends Node3D
 @onready var origin: Node3D = $Spawn
 const north_room = preload("uid://cmoh73uocqwxi")
 const south_room = preload("uid://cmoh73uocqwxi")
-const west_room = preload("uid://c3j4n1tww7w5c")
+const west_room = "res://Scenes/SetSimonSays.tscn"
 const  east_room = preload("uid://bd2yc86l7itq1")
 const playa = preload("res://Scenes/player.tscn")
 var spawn = playa.instantiate()
@@ -55,4 +55,4 @@ func _on_east_body_entered(body: Node3D) -> void:
 func _on_west_body_entered(body: Node3D) -> void:
 	if body.is_in_group("player"):
 		WorldInfo.direction = WorldInfo.DIRECTIONS.WEST
-		get_tree().change_scene_to_packed(west_room)
+		get_tree().change_scene_to_file(west_room)

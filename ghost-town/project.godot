@@ -32,6 +32,7 @@ import/blender/enabled=false
 player=""
 ghosts=""
 torch=""
+interactable=""
 
 [input]
 

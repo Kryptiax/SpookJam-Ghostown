@@ -76,16 +76,21 @@ func _physics_process(delta: float) -> void:
 	if input_vector != Vector2.ZERO:
 		_update_animation(input_vector)
 
+	#print(get_nearest_interactable())
 	if Input.is_action_just_pressed("interact"):
+		print("interact - pressed!")
 		var item = get_nearest_interactable()
 		if item and item.has_method("interact"):
-			item.interact(self)  # Optionally pass the player
+			item.interact()  # Optionally pass the player
+			print(item.name)
 			if item.name == "RedGem":
 				red_collected.emit(true)
 			if item.name == "PurpleGem":
 				purple_collected.emit(true)
 			if item.name == "GreenGem":
+				#print("greengem retreieved again fuck u")
 				green_collected.emit(true)
+				print("emittred")
 
 func take_damage(amount):
 	currentHealth -= amount
@@ -128,14 +133,14 @@ func _on_interact_area_exited(body: Node) -> void:
 	if body.is_in_group("interactable"):
 		interactables_in_range.erase(body)
 	
-func get_nearest_interactable() -> Node:
+func get_nearest_interactable() -> Node3D:
 	if interactables_in_range.is_empty():
 		return null
-
-	var nearest = null
+	var nearest: Node3D = null
 	var min_dist = INF
-
 	for item in interactables_in_range:
+		if not item.is_in_group("interactable"):
+			continue
 		var dist = global_position.distance_to(item.global_position)
 		if dist < min_dist:
 			min_dist = dist

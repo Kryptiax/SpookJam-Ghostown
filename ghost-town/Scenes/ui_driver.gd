@@ -47,6 +47,7 @@ func update_hearts(health):
 			heart_1.play("lose")
 
 func update_Gems():
+	print_debug("poopoo")
 	if red_gem:
 		red.visible = true
 		print_debug("poopoo")
@@ -56,8 +57,7 @@ func update_Gems():
 	if purple_gem:
 		tf_is_this_color.visible = true
 		print_debug("purplooo")
-		
-	if green_gem && purple_gem && red_gem:
+	if green_gem == true && purple_gem == true && red_gem == true:
 		tf_is_this_color.visible = false
 		green.visible = false
 		red.visible = false
@@ -69,8 +69,9 @@ func _on_player_health_changed(health: Variant) -> void:
 	pass # Replace with function body.
 
 
-func _on_player_green_collected(val: Variant) -> void:
-	green_gem = val
+func _on_player_green_collected(_val: Variant) -> void:
+	print("pp")
+	green_gem = true
 	update_Gems()
 	pass # Replace with function body.
 

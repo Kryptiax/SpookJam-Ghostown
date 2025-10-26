@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://ltjmq60vcmre"]
+
+[ext_resource type="Script" uid="uid://dka10ra1toe02" path="res://Scenes/gembase.gd" id="1_j8osl"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bti4x"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bti4x"]
+albedo_color = Color(0.8, 0, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_0xstn"]
+material = SubResource("StandardMaterial3D_bti4x")
+
+[node name="RedGem" type="Area3D" groups=["interactable"]]
+script = ExtResource("1_j8osl")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_bti4x")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_0xstn")

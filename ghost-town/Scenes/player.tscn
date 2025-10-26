@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://de5bh4bi85eu3"]
+[gd_scene load_steps=8 format=3 uid="uid://de5bh4bi85eu3"]
 
 [ext_resource type="Script" uid="uid://dfgh3r1xvwkg7" path="res://Scripts/PlayerController.gd" id="1_cvnsp"]
 [ext_resource type="SpriteFrames" uid="uid://b2jj6cj5flf6f" path="res://Scenes/spriteframes.tres" id="2_6t5aa"]
+[ext_resource type="PackedScene" uid="uid://dk0venuncrvxe" path="res://Scenes/UIworkbench.tscn" id="2_vgqql"]
 [ext_resource type="Script" uid="uid://d1b1xg52rab8s" path="res://Scripts/ray_cast_3d.gd" id="3_6t5aa"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_p8bfa"]
@@ -10,9 +11,15 @@
 radius = 1.0776367
 height = 2.5283203
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6t5aa"]
+radius = 1.6450195
+height = 3.290039
+
 [node name="Player" type="CharacterBody3D" groups=["player"]]
 slide_on_ceiling = false
 script = ExtResource("1_cvnsp")
+
+[node name="UIworkbench" parent="." instance=ExtResource("2_vgqql")]
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
 pixel_size = 0.1
@@ -65,3 +72,15 @@ collide_with_areas = true
 debug_shape_custom_color = Color(0.19818997, 0.43053874, 0, 1)
 debug_shape_thickness = 5
 script = ExtResource("3_6t5aa")
+
+[node name="interact" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="interact"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.52563477, 0)
+shape = SubResource("CapsuleShape3D_6t5aa")
+
+[connection signal="green_collected" from="." to="UIworkbench" method="_on_player_green_collected"]
+[connection signal="purple_collected" from="." to="UIworkbench" method="_on_player_purple_collected"]
+[connection signal="red_collected" from="." to="UIworkbench" method="_on_player_red_collected"]
+[connection signal="area_entered" from="interact" to="." method="_on_interact_area_entered"]
+[connection signal="area_exited" from="interact" to="." method="_on_interact_area_exited"]

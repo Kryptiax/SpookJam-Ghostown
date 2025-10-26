@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://dg20a8neftngf"]
+[gd_scene load_steps=8 format=3 uid="uid://dg20a8neftngf"]
 
 [ext_resource type="Script" uid="uid://dilig58hvoljy" path="res://Scenes/set_simon_says.gd" id="1_ii7v6"]
 [ext_resource type="PackedScene" uid="uid://bjk3nw3sq1n31" path="res://Scenes/SimonSays.tscn" id="1_ta11i"]
 [ext_resource type="Material" uid="uid://05hnpiotbfqw" path="res://Scenes/Black.tres" id="3_ii7v6"]
 [ext_resource type="Script" uid="uid://cl6muaajej7od" path="res://Scenes/before.gd" id="3_ta11i"]
+[ext_resource type="PackedScene" uid="uid://m2he5is8fl3f" path="res://Scenes/GreenGem.tscn" id="4_ii7v6"]
 
 [sub_resource type="TorusMesh" id="TorusMesh_eux5r"]
 
@@ -38,12 +39,16 @@ transform = Transform3D(0.62859315, 0, -0.9946146, 0, 4.12693, 0, 6.0323143, 0, 
 size = Vector3(2.0749054, 2.605133, 0.0024414063)
 material = ExtResource("3_ii7v6")
 
+[node name="GreenGem" parent="." instance=ExtResource("4_ii7v6")]
+transform = Transform3D(0.8813034, 0, 0.47255078, 0, 1, 0, -0.47255078, 0, 0.8813034, 2.1097322, -1.519067, -1.6124897)
+visible = false
+
 [node name="Inbetweengame" type="Timer" parent="."]
 one_shot = true
 autostart = true
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Inbetweengame"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7764874, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6632776, 2.7764874, 0)
 light_energy = 1.17
 omni_range = 4096.0
 omni_attenuation = 0.13

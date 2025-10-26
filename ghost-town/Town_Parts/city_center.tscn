@@ -1,11 +1,21 @@
-[gd_scene load_steps=7 format=3 uid="uid://cfre02u3h2541"]
+[gd_scene load_steps=20 format=3 uid="uid://cfre02u3h2541"]
 
-[ext_resource type="Material" uid="uid://cpy6ihqla1m5y" path="res://Scenes/TestMaterial.tres" id="1_87s1a"]
 [ext_resource type="Script" uid="uid://b8f525xjxamr0" path="res://Scripts/city_center.gd" id="1_la81a"]
+[ext_resource type="Texture2D" uid="uid://36by4xo2ne0d" path="res://Assets/Imported/grass_3.png" id="2_lwxhc"]
+[ext_resource type="Texture2D" uid="uid://bmvv8l085mmwq" path="res://Assets/Imported/cobblestone_3.png" id="3_gh5ws"]
+[ext_resource type="Texture2D" uid="uid://b25500jl3vwpi" path="res://Assets/Imported/dirty_1.png" id="3_lwxhc"]
+[ext_resource type="Shader" uid="uid://cjubq8yq7u2yx" path="res://Shaders/grass.gdshader" id="4_etsnd"]
+[ext_resource type="Texture2D" uid="uid://gtbjharmeq4d" path="res://Assets/Imported/dirty_3.png" id="4_i5dpb"]
+[ext_resource type="Texture2D" uid="uid://xa2hvipi3fca" path="res://Shaders/GRASSJAM2.png" id="5_swef6"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lwxhc"]
-sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
-ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+sky_top_color = Color(0.38431373, 0.3529412, 0.54901963, 1)
+sky_horizon_color = Color(0.6627451, 0.67058825, 0.5568628, 1)
+ground_bottom_color = Color(0.18335032, 0.14616019, 0.034928042, 1)
+ground_horizon_color = Color(0.7915168, 0.5954092, 0.61906165, 1)
+sun_angle_max = 18.5
+sun_curve = 1.8829936
+energy_multiplier = 0.75
 
 [sub_resource type="Sky" id="Sky_gh5ws"]
 sky_material = SubResource("ProceduralSkyMaterial_lwxhc")
@@ -14,6 +24,48 @@ sky_material = SubResource("ProceduralSkyMaterial_lwxhc")
 background_mode = 2
 sky = SubResource("Sky_gh5ws")
 tonemap_mode = 2
+glow_enabled = true
+glow_intensity = 0.05
+fog_enabled = true
+fog_light_energy = 0.3
+fog_sun_scatter = 0.45
+fog_sky_affect = 0.855
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gh5ws"]
+albedo_color = Color(0.6156863, 0.6666667, 0.7529412, 1)
+albedo_texture = ExtResource("2_lwxhc")
+uv1_scale = Vector3(23.12, 23.12, 23.12)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_swef6"]
+albedo_texture = ExtResource("3_lwxhc")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1t63h"]
+albedo_texture = ExtResource("4_i5dpb")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_nac5s"]
+fractal_octaves = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_i5dpb"]
+noise = SubResource("FastNoiseLite_nac5s")
+seamless = true
+as_normal_map = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wbbc4"]
+render_priority = 0
+shader = ExtResource("4_etsnd")
+shader_parameter/albedo = ExtResource("5_swef6")
+shader_parameter/wind_noise = SubResource("NoiseTexture2D_i5dpb")
+shader_parameter/wind_speed = 0.1
+shader_parameter/wind_scale = 30.0
+shader_parameter/wind_strength = 0.2
+shader_parameter/angle = 0.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_1t63h"]
+material = SubResource("ShaderMaterial_wbbc4")
+center_offset = Vector3(0, 0.5, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_etsnd"]
+albedo_texture = ExtResource("3_gh5ws")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lwxhc"]
 size = Vector3(38.9104, 16.067627, 1)
@@ -30,16 +82,1633 @@ shadow_enabled = true
 
 [node name="City" type="CSGCombiner3D" parent="."]
 transform = Transform3D(5.5887423, 0, 0, 0, 1, 0, 0, 0, 4.678951, 4.18157, 0.31652832, 0.070453644)
-material_override = ExtResource("1_87s1a")
 use_collision = true
 
-[node name="CSGBox3D" type="CSGBox3D" parent="City"]
+[node name="Ground" type="CSGBox3D" parent="City"]
 transform = Transform3D(7.6658883, 0, 0, 0, 1.003867, 0, 0, 0, 10.026607, -0.069247484, 0, 0)
-size = Vector3(0.9819336, 1, 1)
+material = SubResource("StandardMaterial3D_gh5ws")
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="City"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1450988, 3.3495255, -0.10461544)
-size = Vector3(1, 7.699051, 1.3258057)
+[node name="Flooring" type="Node3D" parent="City"]
+
+[node name="MiddleBox" type="CSGBox3D" parent="City/Flooring"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1450988, 0.32809782, 4.927513)
+size = Vector3(1, 0.5, 1)
+material = SubResource("StandardMaterial3D_swef6")
+
+[node name="MiddleBox2" type="CSGBox3D" parent="City/Flooring"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1450988, 0.32809782, 3.961898)
+size = Vector3(1, 0.5, 1)
+material = SubResource("StandardMaterial3D_swef6")
+
+[node name="MiddleBox3" type="CSGBox3D" parent="City/Flooring"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1450988, 0.32809782, 2.9631567)
+size = Vector3(1, 0.5, 1)
+material = SubResource("StandardMaterial3D_swef6")
+
+[node name="MiddleBox4" type="CSGBox3D" parent="City/Flooring"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1450988, 0.32809782, 1.9667327)
+size = Vector3(1, 0.5, 1)
+material = SubResource("StandardMaterial3D_swef6")
+
+[node name="MiddleBox5" type="CSGBox3D" parent="City/Flooring"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1450988, 0.32809782, 0.9779782)
+size = Vector3(1, 0.5, 1)
+material = SubResource("StandardMaterial3D_swef6")
+
+[node name="MiddleBox6" type="CSGBox3D" parent="City/Flooring"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1450988, 0.32809782, -0.017667059)
+size = Vector3(1, 0.5, 1)
+material = SubResource("StandardMaterial3D_swef6")
+
+[node name="MiddleBox7" type="CSGBox3D" parent="City/Flooring"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1450988, 0.32809782, -1.0140911)
+size = Vector3(1, 0.5, 1)
+material = SubResource("StandardMaterial3D_swef6")
+
+[node name="MiddleBox8" type="CSGBox3D" parent="City/Flooring"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1450988, 0.32809782, -2.0028455)
+size = Vector3(1, 0.5, 1)
+material = SubResource("StandardMaterial3D_swef6")
+
+[node name="MiddleBox9" type="CSGBox3D" parent="City/Flooring"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1450988, 0.32809782, -3.0069983)
+size = Vector3(1, 0.5, 1)
+material = SubResource("StandardMaterial3D_swef6")
+
+[node name="MiddleBox10" type="CSGBox3D" parent="City/Flooring"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1450988, 0.32809782, -4.0034227)
+size = Vector3(1, 0.5, 1)
+material = SubResource("StandardMaterial3D_swef6")
+
+[node name="MiddleBox11" type="CSGBox3D" parent="City/Flooring"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1450988, 0.32809782, -4.9921765)
+size = Vector3(1, 0.5, 1)
+material = SubResource("StandardMaterial3D_swef6")
+
+[node name="MiddleBox12" type="CSGBox3D" parent="City/Flooring"]
+transform = Transform3D(-4.3711385e-08, 0, -0.9999999, 0, 1, 0, 1, 0, -4.3711385e-08, -4.2887144, 0.32809782, -0.012309469)
+size = Vector3(1, 0.5, 1)
+material = SubResource("StandardMaterial3D_swef6")
+
+[node name="MiddleBox26" type="CSGBox3D" parent="City/Flooring"]
+transform = Transform3D(-4.3671093e-08, 0.04292191, -0.9990781, 1.8761768e-09, 0.9990784, 0.04292193, 1, 7.336375e-16, -4.3711385e-08, -5.2593136, -0.7679095, -0.012309469)
+material_override = SubResource("StandardMaterial3D_1t63h")
+size = Vector3(1, 16.443878, 1)
+material = SubResource("StandardMaterial3D_swef6")
+
+[node name="MiddleBox13" type="CSGBox3D" parent="City/Flooring"]
+transform = Transform3D(-4.3711385e-08, 0, -0.9999999, 0, 1, 0, 1, 0, -4.3711385e-08, -3.4802935, 0.32809782, -0.014163277)
+size = Vector3(1, 0.5, 1)
+material = SubResource("StandardMaterial3D_swef6")
+
+[node name="MiddleBox14" type="CSGBox3D" parent="City/Flooring"]
+transform = Transform3D(-4.3711385e-08, 0, -0.9999999, 0, 1, 0, 1, 0, -4.3711385e-08, -2.6441388, 0.32809782, -0.016080681)
+size = Vector3(1, 0.5, 1)
+material = SubResource("StandardMaterial3D_swef6")
+
+[node name="MiddleBox15" type="CSGBox3D" parent="City/Flooring"]
+transform = Transform3D(-4.3711385e-08, 0, -0.9999999, 0, 1, 0, 1, 0, -4.3711385e-08, -1.8099244, 0.32809782, -0.017993636)
+size = Vector3(1, 0.5, 1)
+material = SubResource("StandardMaterial3D_swef6")
+
+[node name="MiddleBox16" type="CSGBox3D" parent="City/Flooring"]
+transform = Transform3D(-4.3711385e-08, 0, -0.9999999, 0, 1, 0, 1, 0, -4.3711385e-08, -0.98213065, 0.32809782, -0.019891867)
+size = Vector3(1, 0.5, 1)
+material = SubResource("StandardMaterial3D_swef6")
+
+[node name="MiddleBox17" type="CSGBox3D" parent="City/Flooring"]
+transform = Transform3D(-4.3711385e-08, 0, -0.9999999, 0, 1, 0, 1, 0, -4.3711385e-08, -0.9821306, 0.32809782, -0.9872302)
+size = Vector3(1, 0.5, 1)
+material = SubResource("StandardMaterial3D_swef6")
+
+[node name="MiddleBox23" type="CSGBox3D" parent="City/Flooring"]
+transform = Transform3D(-4.3711385e-08, 0, -0.9999999, 0, 1, 0, 1, 0, -4.3711385e-08, 0.7378199, 0.32809782, -0.9872302)
+size = Vector3(1, 0.5, 1)
+material = SubResource("StandardMaterial3D_swef6")
+
+[node name="MiddleBox24" type="CSGBox3D" parent="City/Flooring"]
+transform = Transform3D(-4.3711385e-08, 0, -0.9999999, 0, 1, 0, 1, 0, -4.3711385e-08, 0.7378199, 0.32809782, 0.9504572)
+size = Vector3(1, 0.5, 1)
+material = SubResource("StandardMaterial3D_swef6")
+
+[node name="MiddleBox25" type="CSGBox3D" parent="City/Flooring"]
+transform = Transform3D(-4.3711385e-08, 0, -0.9999999, 0, 1, 0, 1, 0, -4.3711385e-08, -1.1268455, 0.32809782, 0.9504572)
+size = Vector3(1, 0.5, 1)
+material = SubResource("StandardMaterial3D_swef6")
+
+[node name="MiddleBox18" type="CSGBox3D" parent="City/Flooring"]
+transform = Transform3D(-4.3711385e-08, 0, -0.9999999, 0, 1, 0, 1, 0, -4.3711385e-08, 0.68564653, 0.32809782, -0.023716282)
+size = Vector3(1, 0.5, 1)
+material = SubResource("StandardMaterial3D_swef6")
+
+[node name="MiddleBox19" type="CSGBox3D" parent="City/Flooring"]
+transform = Transform3D(-4.3711385e-08, 0, -0.9999999, 0, 1, 0, 1, 0, -4.3711385e-08, 1.5134399, 0.32809782, -0.025614515)
+size = Vector3(1, 0.5, 1)
+material = SubResource("StandardMaterial3D_swef6")
+
+[node name="MiddleBox20" type="CSGBox3D" parent="City/Flooring"]
+transform = Transform3D(-4.3711385e-08, 0, -0.9999999, 0, 1, 0, 1, 0, -4.3711385e-08, 2.3541253, 0.32809782, -0.027542308)
+size = Vector3(1, 0.5, 1)
+material = SubResource("StandardMaterial3D_swef6")
+
+[node name="MiddleBox21" type="CSGBox3D" parent="City/Flooring"]
+transform = Transform3D(-4.3711385e-08, 0, -0.9999999, 0, 1, 0, 1, 0, -4.3711385e-08, 3.1883402, 0.32809782, -0.029455265)
+size = Vector3(1, 0.5, 1)
+material = SubResource("StandardMaterial3D_swef6")
+
+[node name="MiddleBox22" type="CSGBox3D" parent="City/Flooring"]
+transform = Transform3D(-4.3711385e-08, 0, -0.9999999, 0, 1, 0, 1, 0, -4.3711385e-08, 4.0161333, 0.32809782, -0.031353496)
+size = Vector3(1, 0.5, 1)
+material = SubResource("StandardMaterial3D_swef6")
+
+[node name="Grass" type="Node3D" parent="City"]
+transform = Transform3D(0.17893113, 0, 0, 0, 1, 0, 7.5929706e-16, 0, 0.21372312, -0.7482127, 0.4531753, -0.015057165)
+
+[node name="GrassInstance2" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.690069, -4.7683716e-07, 4.4474087)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.212519, 0, 3.53857)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance3" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.061161, 0, 3.328867)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance4" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.0190525, 0, 4.407113)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance5" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.358215, 0, 3.328867)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance6" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.592339, 0, 6.3964105)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance7" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.9141545, 0, -6.106216)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance8" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.500441, -4.7683716e-07, 8.71821)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance9" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.846249, 0, 8.214193)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance10" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.721999, 0, -4.6776247)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance11" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.061161, 0, -6.6946516)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance12" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, -7.453144, 0, -6.936426)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance13" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, -8.101963, 0, -4.2156343)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance14" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, -8.253876, 0, -2.723814)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance15" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, -6.358696, 0, -2.1499784)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance16" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, -9.384796, 0, -10.599827)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance17" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, -10.84659, 0, -9.992809)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance18" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, -8.449411, 0, -6.6969814)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance19" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, -3.703189, 0, -7.927889)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance20" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, -3.0543694, 0, -10.648681)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance21" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.061161, 0, 12.124329)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance22" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.721999, 0, 13.202575)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance23" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.061161, 0, 15.453196)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance24" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.0190525, 0, 16.53144)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance25" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.358215, 0, 15.453196)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance26" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.431502, 0, 14.118377)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance27" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.7706637, 0, 13.040131)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance28" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.181554, 0, 14.118377)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance29" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.061161, 0, 9.697325)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance30" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.721999, 0, 7.446704)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance31" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.061161, 0, 5.429677)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance32" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, -7.453144, 0, 5.1879025)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance33" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, -8.101963, 0, 7.9086943)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance34" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, -8.253876, 0, 9.400515)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance35" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, -6.358696, 0, 9.97435)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance36" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, -3.4510086, 0, 11.350122)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance37" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, -1.5558281, 0, 11.923959)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance38" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, -8.449411, 0, 5.427347)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance39" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, -5.7270083, 0, 3.8093748)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance40" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, -9.889269, 0, -8.98391)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance41" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.739622, -0.0035233498, 12.124329)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance42" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.078783, -0.0035233498, 13.202575)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance43" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.739622, -0.0035233498, 15.453196)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance44" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.781731, -0.0035233498, 16.53144)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance45" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.6945686, 0, 15.453196)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance46" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.621283, 0, 14.118377)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance47" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.28212, 0, 13.040131)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance48" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5243015, 0, 15.005689)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance49" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6502314, 0, 10.372711)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance50" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.1501565, 0, 9.540152)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance51" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.17616129, -4.7683716e-07, 7.409382)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance52" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 9.686592, 0, 8.263378)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance53" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 6.950821, 0, 7.9086943)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance54" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 6.798908, 0, 9.400515)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance55" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 8.694088, 0, 9.97435)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance56" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 11.601775, 0, 11.350122)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance57" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 13.496956, 0, 11.923959)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance58" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 12.575823, 0, 12.866339)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance59" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 7.576533, 0, 13.954817)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance60" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 14.82456, 0, 5.51659)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance61" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.859325, 0, -14.713745)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance62" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0962777, 0, -14.371405)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance63" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.7105427, 0, -3.426293)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance64" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4205861, 0, -7.6364183)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance65" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.0266824, 0, -7.3687215)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance66" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.620491, 0, -15.787405)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance67" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.28212, 0, -7.415045)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance68" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.132843, 0, -3.909009)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance69" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.688375, 0, -19.85708)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance70" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.341309, 0, -15.320412)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance71" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.47547483, 4.7683716e-07, -11.954511)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance72" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 7.59964, 0, -15.267273)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance73" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 6.950821, 0, -12.546481)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance74" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 6.798908, 0, -11.054661)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance75" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 8.694088, 0, -10.480825)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance76" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 11.601775, 0, -9.105053)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance77" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 13.496956, 0, -8.531217)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance78" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 6.6033726, 0, -15.027828)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance79" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 11.349595, 0, -16.258736)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance80" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 11.998415, 0, -18.979527)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance81" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.04165, 1.1920929e-07, 15.335428)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance82" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.383747, -4.7683716e-07, 9.622039)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance83" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.444664, 0, 3.7140937)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance84" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.688423, 4.7683716e-07, 8.475856)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance85" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.836527, 0, 4.504238)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance86" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.763241, 0, 3.1694193)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance87" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.186094, 0, 3.3508542)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance88" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.18688, 4.7683716e-07, 6.6255064)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance89" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.648521, 0, -5.054616)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance90" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.1353855, 0, -8.592528)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance91" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.361483, 0, -12.624095)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance92" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 13.741598, 0, -5.761055)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance93" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 13.092779, 0, -3.0402632)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance94" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 12.5023365, 0, -4.138384)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance95" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 16.47607, 0, -3.3015304)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance96" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 17.520374, 0, 12.742931)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance97" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 22.95182, 0, 4.599488)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance98" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 12.745331, 0, -5.5216103)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance99" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 17.491554, 0, -6.7525177)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance100" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 18.140373, 0, -9.473309)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance101" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.787254, 0, -10.171268)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance102" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.448092, 0, -9.093022)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance103" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.787254, 0, -6.8424015)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance104" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.745146, 0, -5.7641563)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance105" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.084309, 0, -6.8424015)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance106" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.1575947, 0, -8.17722)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance107" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.4967575, 0, -9.255466)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance108" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.907647, 0, -8.17722)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance109" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.787254, 0, -12.598272)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance110" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.448092, 0, -14.848893)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance111" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.787254, 0, -16.865921)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance112" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, -9.179237, 0, -17.107695)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance113" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, -9.828056, 0, -14.386903)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance114" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, -9.979969, 0, -12.895082)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance115" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, -8.084789, 0, -12.321247)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance116" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, -5.177103, 0, -10.945475)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance117" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, -3.2819214, 0, -10.371638)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance118" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, -10.175505, 0, -16.86825)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance119" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, -5.429281, 0, -18.099157)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance120" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, -4.7804623, 0, -20.819948)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance121" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.759523, 0, 17.075863)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance122" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.420362, 0, 18.15411)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance123" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.759523, 0, 20.40473)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance124" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.717415, 0, 21.482975)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance125" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.056578, 0, 20.40473)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance126" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.129864, 0, 19.069912)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance127" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.469027, 0, 17.991665)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance128" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.879917, 0, 19.069912)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance129" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.759523, 0, 14.648859)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance130" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.420362, 0, 12.398238)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance131" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.759523, 0, 10.38121)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance132" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, -9.151506, 0, 10.139437)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance133" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, -9.800325, 0, 12.860229)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance134" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, -9.952238, 0, 14.352049)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance135" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, -8.057058, 0, 14.925884)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance136" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, -5.1493726, 0, 16.301657)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance137" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, -3.254191, 0, 16.875492)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance138" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, -10.147774, 0, 10.378881)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance139" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, -5.401551, 0, 9.147974)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance140" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, -6.385463, 0, 6.402318)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance141" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03523636, 0, 18.362766)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance142" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6960754, 0, 19.441013)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance143" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03523636, 0, 21.691633)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance144" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2160091, -4.7683716e-07, 19.027426)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance145" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.1883483, -0.05179119, 21.225952)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance146" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.8808155, -2.3841858e-07, 18.296482)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance147" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.25526, 0, 19.278568)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance148" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.15563, 0, 20.356815)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance149" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03523636, 0, 15.935762)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance150" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6960754, 0, 13.685142)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance151" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03523636, 0, 11.668114)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance152" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 8.475424, 0, 16.382807)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance153" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, -1.7681613, 4.7683716e-07, 17.18319)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance154" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 8.064934, 0, 20.943356)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance155" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 16.048594, 0, 21.302996)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance156" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 7.5749145, 0, 17.58856)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance157" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 9.470097, 0, 18.162395)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance158" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, -5.2408843, 0, 19.315744)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance159" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 7.3227363, 0, 10.434877)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance160" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 7.971555, 0, 7.7140865)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance161" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.331169, 0, 18.455784)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance162" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.67033, 0, 19.53403)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance163" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.331169, 0, 21.78465)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance164" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.373278, 0, 22.862896)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance165" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.034115, 0, 21.78465)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance166" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.960829, 0, 20.449833)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance167" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.621666, 0, 19.371586)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance168" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.210775, 0, 20.449833)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance169" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.331169, 0, 16.02878)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance170" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.67033, 0, 13.778159)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance171" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.331169, 0, 11.761131)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance172" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 14.939186, 0, 11.519358)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance173" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 14.290367, 0, 14.2401495)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance174" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 14.138454, 0, 15.73197)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance175" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 16.033634, 0, 16.305805)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance176" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 18.94132, 0, 17.681578)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance177" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 20.836502, 0, 18.255413)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance178" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 13.942919, 0, 11.758802)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance179" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 18.689142, 0, 10.527895)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance180" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 19.337961, 0, 7.807104)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance181" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.343693, 1.9073486e-06, 6.775419)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance182" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.682854, 1.9073486e-06, 7.8536663)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance183" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.343693, 1.9073486e-06, 10.104286)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance184" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.385801, 1.9073486e-06, 11.182531)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance185" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.046638, 1.9073486e-06, 10.104286)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance186" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.973352, 1.9073486e-06, 8.769468)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance187" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.63419, 1.9073486e-06, 7.691221)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance188" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.223299, 1.9073486e-06, 8.769468)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance189" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.343693, 1.9073486e-06, 4.3484154)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance190" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.584896, 1.9073486e-06, 9.165144)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance191" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.383232, 1.9073486e-06, -5.281259)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance192" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 15.852461, 2.861023e-06, 7.653531)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance193" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 16.30289, 1.9073486e-06, 2.559785)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance194" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 16.150978, 1.9073486e-06, 4.051605)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance195" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 18.046158, 1.9073486e-06, 4.6254406)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance196" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 20.953844, 1.9073486e-06, 6.001213)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance197" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 22.849026, 1.9073486e-06, 6.5750484)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance198" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 17.390087, 1.4305115e-06, 6.9240093)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance199" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 21.275131, 1.9073486e-06, 10.902437)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance200" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 21.350485, 1.9073486e-06, -3.8732605)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance201" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.439934, 1.9073486e-06, -11.349709)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance202" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.779095, 1.9073486e-06, -10.2714615)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance203" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.439934, 1.9073486e-06, -8.020842)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance204" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.482042, 1.9073486e-06, -6.9425964)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance205" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.1428795, 1.9073486e-06, -8.020842)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance206" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.069593, 1.9073486e-06, -9.3556595)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance207" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.73043, 1.9073486e-06, -10.433907)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance208" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.31954, 1.9073486e-06, -9.3556595)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance209" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.439934, 1.9073486e-06, -13.776712)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance210" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.779095, 1.9073486e-06, -16.027332)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance211" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.439934, 1.9073486e-06, -18.044361)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance212" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 16.04795, 1.9073486e-06, -18.286135)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance213" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 15.399132, 1.9073486e-06, -15.565343)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance214" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 15.247219, 1.9073486e-06, -14.073523)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance215" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 17.142399, 1.9073486e-06, -13.499687)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance216" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 20.050085, 1.9073486e-06, -12.123915)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance217" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 21.945267, 1.9073486e-06, -11.550079)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance218" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 15.051683, 1.9073486e-06, -18.04669)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance219" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 19.797907, 1.9073486e-06, -19.277597)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance220" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 20.446726, 1.9073486e-06, -21.998388)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance221" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4678421, 1.9073486e-06, -9.187107)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance222" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.1286812, 1.9073486e-06, -8.10886)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance223" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6701269, 1.9073486e-06, -7.7635665)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance224" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.4874105, 1.9073486e-06, -4.5954995)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance225" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.066837, 1.9073486e-06, -14.136219)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance226" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.35382, 1.9073486e-06, -15.050473)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance227" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.939808, 1.9073486e-06, -15.624678)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance228" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5882359, 1.9073486e-06, -7.193058)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance229" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4678421, 1.9073486e-06, -11.614111)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance230" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.1286812, 1.9073486e-06, -13.864731)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance231" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4678421, 1.9073486e-06, -15.88176)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance232" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, -0.56424165, 1.9073486e-06, -19.319149)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance233" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, -8.084648, 1.9073486e-06, -19.511473)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance234" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, -4.713822, 1.9073486e-06, -16.950972)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance235" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, -0.20758271, 1.9073486e-06, -14.739132)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance236" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 9.169998, 1.9073486e-06, -13.734042)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance237" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 8.037491, 1.9073486e-06, -9.387478)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance238" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, -7.197627, 1.9073486e-06, -10.927475)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance239" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 7.904643, 1.9073486e-06, -18.92511)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance240" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 6.53895, 1.9073486e-06, -19.835787)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance241" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6245518, 1.9073486e-06, 11.35569)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance242" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2853909, 1.9073486e-06, 12.433937)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance243" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6245518, 1.9073486e-06, 14.684557)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance244" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.41755676, 1.9073486e-06, 15.762802)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance245" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8240428, 1.9073486e-06, 15.380653)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance246" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.90373, 1.9073486e-06, 14.571716)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance247" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.665945, 1.9073486e-06, 12.271492)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance248" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.7449455, 1.9073486e-06, 13.349739)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance249" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6245518, 1.9073486e-06, 8.928686)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance250" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2276926, 1.9073486e-06, 7.7521987)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance251" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.4013147, 1.9073486e-06, 11.616996)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance252" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, -6.492031, 1.9073486e-06, 16.369654)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance253" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, -7.14085, 1.9073486e-06, 19.090445)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance254" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, -7.2927628, 1.9073486e-06, 20.582266)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance255" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, -5.397583, 1.9073486e-06, 21.156101)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance256" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 6.9855995, 1.9073486e-06, 10.581484)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance257" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 8.880781, 1.9073486e-06, 11.155319)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance258" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, -16.504223, 1.9073486e-06, -3.680252)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance259" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 12.869919, 1.9073486e-06, 17.451746)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance260" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.644951, 0, -0.76422393, 0, 1, 0, 0.76422393, 0, 0.644951, 9.199461, 1.9073486e-06, -18.03704)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance261" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.38468203, 0, 0.92304915, 0, 1, 0, -0.92304915, 0, 0.38468203, -9.437029, 1.9073486e-06, 16.737713)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance262" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.38468203, 0, 0.92304915, 0, 1, 0, -0.92304915, 0, 0.38468203, -9.080648, 1.9073486e-06, 18.685532)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance263" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.38468203, 0, 0.92304915, 0, 1, 0, -0.92304915, 0, 0.38468203, -6.364321, 1.9073486e-06, 18.018269)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance264" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.38468203, 0, 0.92304915, 0, 1, 0, -0.92304915, 0, 0.38468203, -4.9681673, 1.9073486e-06, 17.47113)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance265" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.38468203, 0, 0.92304915, 0, 1, 0, -0.92304915, 0, 0.38468203, -5.3245463, 1.9073486e-06, 15.523315)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance266" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.38468203, 0, 0.92304915, 0, 1, 0, -0.92304915, 0, 0.38468203, -5.4307947, 1.9073486e-06, 12.308334)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance267" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.38468203, 0, 0.92304915, 0, 1, 0, -0.92304915, 0, 0.38468203, -5.787175, 1.9073486e-06, 10.3605175)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance268" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.38468203, 0, 0.92304915, 0, 1, 0, -0.92304915, 0, 0.38468203, -8.412101, 1.9073486e-06, 19.462013)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance269" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.38468203, 0, 0.92304915, 0, 1, 0, -0.92304915, 0, 0.38468203, -11.677273, 1.9073486e-06, 15.804088)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance270" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.38468203, 0, 0.92304915, 0, 1, 0, -0.92304915, 0, 0.38468203, -14.3936, 1.9073486e-06, 16.47135)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance271" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.38468203, 0, 0.92304915, 0, 1, 0, -0.92304915, 0, 0.38468203, -15.616522, 1.9073486e-06, 14.162399)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance272" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.9535173, 0, 0.30133826, 0, 1, 0, -0.30133826, 0, 0.9535173, -14.451752, 1.9073486e-06, 10.739017)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance273" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.9535173, 0, 0.30133826, 0, 1, 0, -0.30133826, 0, 0.9535173, -12.189917, 1.9073486e-06, 12.384548)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance274" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.9535173, 0, 0.30133826, 0, 1, 0, -0.30133826, 0, 0.9535173, -10.871331, 1.9073486e-06, 13.098647)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance275" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.9535173, 0, 0.30133826, 0, 1, 0, -0.30133826, 0, 0.9535173, -9.612611, 1.9073486e-06, 11.570047)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance276" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.9535173, 0, 0.30133826, 0, 1, 0, -0.30133826, 0, 0.9535173, -7.2241707, 1.9073486e-06, 9.415345)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance277" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.9535173, 0, 0.30133826, 0, 1, 0, -0.30133826, 0, 0.9535173, -5.9654503, 1.9073486e-06, 7.8867435)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance278" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.9535173, 0, 0.30133826, 0, 1, 0, -0.30133826, 0, 0.9535173, -14.613979, 1.9073486e-06, 11.7507305)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance279" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.9535173, 0, 0.30133826, 0, 1, 0, -0.30133826, 0, 0.9535173, -13.924379, 1.9073486e-06, 6.896225)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="GrassInstance280" type="MeshInstance3D" parent="City/Grass"]
+transform = Transform3D(0.9535173, 0, 0.30133826, 0, 1, 0, -0.30133826, 0, 0.9535173, -16.186214, 1.9073486e-06, 5.2506933)
+mesh = SubResource("QuadMesh_1t63h")
+skeleton = NodePath("../../..")
+
+[node name="Walls" type="Node3D" parent="City"]
+transform = Transform3D(-4.3711385e-08, 0, 0.9999999, 0, 1, 0, -0.9999999, 0, -4.3711385e-08, -3.8292344, 3.3495255, 3.4711308)
+
+[node name="Walls8" type="CSGBox3D" parent="City/Walls"]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, 1, 0, 0, 0, 1, 6.901598, 0, 7.1525574e-07)
+size = Vector3(3, 8, 0.1)
+material = SubResource("StandardMaterial3D_etsnd")
+
+[node name="Walls9" type="CSGBox3D" parent="City/Walls"]
+transform = Transform3D(1, 0, -1.4210855e-14, 0, 1, 0, 0, 0, 1, 5.448765, 0, -0.0031654835)
+size = Vector3(3, 8, 0.1)
+material = SubResource("StandardMaterial3D_etsnd")
+
+[node name="Walls16" type="CSGBox3D" parent="City/Walls"]
+transform = Transform3D(-4.3711385e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 3.9931881, 0, -1.4615526)
+size = Vector3(3, 8, 0.1)
+material = SubResource("StandardMaterial3D_etsnd")
+
+[node name="Walls3" type="CSGBox3D" parent="City/Walls"]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, 1, 0, 0, 0, 1, 0.035573483, 0, 7.520709)
+size = Vector3(3, 8, 0.1)
+material = SubResource("StandardMaterial3D_etsnd")
+
+[node name="Walls13" type="CSGBox3D" parent="City/Walls"]
+transform = Transform3D(1, 0, -1.4210855e-14, 0, 1, 0, 0, 0, 1, 1.4946048, 0, 7.5323653)
+size = Vector3(3, 8, 0.1)
+material = SubResource("StandardMaterial3D_etsnd")
+
+[node name="Walls5" type="CSGBox3D" parent="City/Walls"]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, 1, 0, 0, 0, 1, 6.9724636, 0, 7.520709)
+size = Vector3(3, 8, 0.1)
+material = SubResource("StandardMaterial3D_etsnd")
+
+[node name="Walls12" type="CSGBox3D" parent="City/Walls"]
+transform = Transform3D(1, 0, -1.4210855e-14, 0, 1, 0, 0, 0, 1, 5.4974136, 0, 7.521386)
+size = Vector3(3, 8, 0.1)
+material = SubResource("StandardMaterial3D_etsnd")
+
+[node name="Walls2" type="CSGBox3D" parent="City/Walls"]
+transform = Transform3D(-4.3711406e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -1.4787357, 0, 1.5562592)
+size = Vector3(3.2597656, 8, 0.1)
+material = SubResource("StandardMaterial3D_etsnd")
+
+[node name="Walls4" type="CSGBox3D" parent="City/Walls"]
+transform = Transform3D(-4.3711406e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -1.4787357, 0, 5.8781633)
+size = Vector3(3.3774414, 8, 0.1)
+material = SubResource("StandardMaterial3D_etsnd")
+
+[node name="Walls6" type="CSGBox3D" parent="City/Walls"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 8.458186, 0, 6.066885)
+size = Vector3(3, 8, 0.1)
+material = SubResource("StandardMaterial3D_etsnd")
+
+[node name="Walls11" type="CSGBox3D" parent="City/Walls"]
+transform = Transform3D(-4.3711402e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 8.48931, 0, 5.69693)
+size = Vector3(3, 8, 0.1)
+material = SubResource("StandardMaterial3D_etsnd")
+
+[node name="Walls7" type="CSGBox3D" parent="City/Walls"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 8.458186, 0, 1.3475966)
+size = Vector3(2.9267578, 8, 0.1)
+material = SubResource("StandardMaterial3D_etsnd")
+
+[node name="Walls10" type="CSGBox3D" parent="City/Walls"]
+transform = Transform3D(-4.3711402e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 8.477592, 0, 1.7214326)
+size = Vector3(2.9267578, 8, 0.1)
+material = SubResource("StandardMaterial3D_etsnd")
+
+[node name="Walls" type="CSGBox3D" parent="City/Walls"]
+transform = Transform3D(1, 0, -3.5527137e-15, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+size = Vector3(3, 8, 0.1)
+material = SubResource("StandardMaterial3D_etsnd")
+
+[node name="Walls14" type="CSGBox3D" parent="City/Walls"]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, 1, 0, 0, 0, 1, 1.4747143, 0, -0.019837141)
+size = Vector3(3, 8, 0.1)
+material = SubResource("StandardMaterial3D_etsnd")
+
+[node name="Walls15" type="CSGBox3D" parent="City/Walls"]
+transform = Transform3D(-4.3711385e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 2.9461532, 0, -1.4734163)
+size = Vector3(3, 8, 0.1)
+material = SubResource("StandardMaterial3D_etsnd")
+
+[node name="CSGTorus3D" type="CSGTorus3D" parent="City"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13599789, 0.6037712, 0)
 
 [node name="North" type="Area3D" parent="."]
 
@@ -81,7 +1750,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.255611, 0, 0)
 transform = Transform3D(1, 0, 0, 0, 0.6841781, 0.72931504, 0, -0.72931504, 0.6841781, 2.035406, 21.023586, 30.440138)
 
 [node name="Spawn" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.1243658, 5.918457, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.06517, 5.918457, 0)
 
 [connection signal="body_entered" from="North" to="." method="_on_north_body_entered"]
 [connection signal="body_entered" from="South" to="." method="_on_south_body_entered"]

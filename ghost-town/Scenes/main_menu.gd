@@ -1,17 +1,19 @@
 extends Control
 
 @onready var options: TextureRect = $Options
-
+@onready var credits_bg: TextureRect = $"Options/VBoxContainer/Credits/Credits BG"
+@onready var optionsBox: VBoxContainer = $Options/VBoxContainer
 var muted
-
+var credits
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	muted = false
+	credits = false
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 
 
@@ -43,4 +45,15 @@ func _on_mute_pressed() -> void:
 	muted = !muted
 
 	print("Nuke Inbound for France. Thank you for your patronage.")
+	pass # Replace with function body.
+
+
+func _on_credits_pressed() -> void:
+	credits = !credits
+	if credits == true:
+		optionsBox.hide()
+		credits_bg.show()
+	else:
+		optionsBox.show()
+		credits_bg.hide()
 	pass # Replace with function body.

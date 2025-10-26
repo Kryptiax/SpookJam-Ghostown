@@ -56,7 +56,6 @@ layout_mode = 2
 text = "Quit"
 
 [node name="Options" type="TextureRect" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -64,6 +63,20 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture1D_853f1")
+
+[node name="CreditsText" type="RichTextLabel" parent="Options"]
+visible = false
+layout_mode = 0
+offset_left = 521.5
+offset_top = 273.5
+offset_right = 630.5
+offset_bottom = 273.5
+scale = Vector2(0.6338607, 1.4630994)
+text = "Credits to:
+
+Arexxuru - Itch.io
+Thomas Gamboa - Itch.io
+Alexis Tjarks - ERAU GDC"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Options"]
 layout_mode = 1
@@ -88,9 +101,15 @@ text = "Mute"
 layout_mode = 2
 text = "Back"
 
+[node name="Credits" type="Button" parent="Options/VBoxContainer"]
+visible = false
+layout_mode = 2
+text = "Credits"
+
 [connection signal="pressed" from="Menu/VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="Menu/VBoxContainer/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="Menu/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="Options/VBoxContainer/Mute" to="." method="_on_mute_pressed"]
 [connection signal="pressed" from="Options/VBoxContainer/Back" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="Options/VBoxContainer/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="Options/VBoxContainer/Credits" to="." method="_on_credits_pressed"]

@@ -256,7 +256,6 @@ grow_vertical = 2
 position = Vector2(72, 72.00001)
 scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_heiww")
-frame_progress = 0.056926556
 speed_scale = 0.1
 
 [node name="GemHolder" type="AnimatedSprite2D" parent="CanvasLayer/GridContainer"]

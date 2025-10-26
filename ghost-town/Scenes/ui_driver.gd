@@ -23,9 +23,9 @@ signal changePause(val)
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# instantiate gem state - may be an issue LATER
-	red_gem = false
-	green_gem = false
-	purple_gem = false
+	red_gem = WorldInfo.red_gem
+	green_gem = WorldInfo.green_gem
+	purple_gem = WorldInfo.purple_gem
 	update_Gems()
 	
 	paused = false

@@ -5,10 +5,10 @@
 [ext_resource type="ArrayMesh" uid="uid://blba5nip6ahg6" path="res://Assets/Models/gamejamfountain (1).obj" id="2_i24hd"]
 [ext_resource type="ArrayMesh" uid="uid://dpkunxxhdgvyg" path="res://Assets/Models/mountains.obj" id="3_0hmb4"]
 [ext_resource type="PackedScene" uid="uid://dk7346dyrdsro" path="res://Scenes/Tree.tscn" id="3_wqpna"]
-[ext_resource type="Material" uid="uid://dblqxbtcksjkg" path="res://Town_Parts/Moutain.tres" id="4_jsoup"]
+[ext_resource type="Material" path="res://Town_Parts/Moutain.tres" id="4_jsoup"]
 [ext_resource type="Material" uid="uid://n17m3x17hjv2" path="res://Scenes/PadsGreen.tres" id="5_0hmb4"]
 [ext_resource type="ArrayMesh" uid="uid://dd32fx42tmh7" path="res://Assets/Models/gamejamhouse.obj" id="5_jsoup"]
-[ext_resource type="Material" uid="uid://gqi6k6j4t8ne" path="res://Town_Parts/Grass.tres" id="6_1tux0"]
+[ext_resource type="Material" path="res://Town_Parts/Grass.tres" id="6_1tux0"]
 [ext_resource type="Texture2D" uid="uid://c0kx5p11yq7ui" path="res://Assets/Imported/sand_3.png" id="10_vxe0p"]
 [ext_resource type="Texture2D" uid="uid://b25500jl3vwpi" path="res://Assets/Imported/dirty_1.png" id="11_jsoup"]
 

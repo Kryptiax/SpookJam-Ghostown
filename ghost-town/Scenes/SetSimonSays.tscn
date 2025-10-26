@@ -1,0 +1,62 @@
+[gd_scene load_steps=7 format=3 uid="uid://c3j4n1tww7w5c"]
+
+[ext_resource type="Script" uid="uid://dilig58hvoljy" path="res://Scenes/set_simon_says.gd" id="1_ii7v6"]
+[ext_resource type="PackedScene" uid="uid://bjk3nw3sq1n31" path="res://Scenes/SimonSays.tscn" id="1_ta11i"]
+[ext_resource type="Material" uid="uid://cpy6ihqla1m5y" path="res://Scenes/TestMaterial.tres" id="2_eux5r"]
+[ext_resource type="PackedScene" uid="uid://de5bh4bi85eu3" path="res://Scenes/player.tscn" id="3_eux5r"]
+[ext_resource type="Script" uid="uid://cl6muaajej7od" path="res://Scenes/before.gd" id="3_ta11i"]
+
+[sub_resource type="TorusMesh" id="TorusMesh_eux5r"]
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_ii7v6")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.9998675, -0.016283184, 0, 0.016283184, 0.9998675, -0.45110226, 4.152307, 20.121859)
+
+[node name="RespondPads" parent="." instance=ExtResource("1_ta11i")]
+transform = Transform3D(3.250465, 0, 0, 0, 3.250465, 0, 0, 0, 3.250465, 0.23331642, -5.5840406, 1.3498412)
+
+[node name="Simon Says" type="CSGCombiner3D" parent="."]
+transform = Transform3D(3.250465, 0, 0, 0, 3.250465, 0, 0, 0, 3.250465, -0.070000716, -2.4166393, 3.9139838)
+material_override = ExtResource("2_eux5r")
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Simon Says"]
+transform = Transform3D(10.404807, 0, 0, 0, 0.84209067, 0, 0, 0, 9.372475, 1.1148461, -0.35546875, -0.31119543)
+size = Vector3(2.6322632, 0.2890625, 1.0664063)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Simon Says"]
+transform = Transform3D(6.064977, 0, 0, 0, 4.12693, 0, 0, 0, 1, 4.8766, 4.1453433, -4.714445)
+size = Vector3(3.2456913, 2.2227173, 0.0024414063)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Simon Says"]
+transform = Transform3D(0.62859315, 0, -0.99461454, 0, 4.12693, 0, 6.0323143, 0, 0.10364312, -4.757485, 4.2328825, -1.3876953)
+size = Vector3(2.0749054, 2.1253052, 0.0024414063)
+
+[node name="Inbetweengame" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Inbetweengame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7764874, 0)
+light_energy = 1.558
+omni_range = 4096.0
+omni_attenuation = 0.13
+
+[node name="Before" type="MeshInstance3D" parent="."]
+transform = Transform3D(8.272433, 0, 0, 0, 0.78526, -8.235079, 0, 8.235079, 0.78526, -0.070000716, 11.222199, -10.481392)
+mesh = SubResource("TorusMesh_eux5r")
+script = ExtResource("3_ta11i")
+
+[node name="GameTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="Player" parent="." instance=ExtResource("3_eux5r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.2725406, 1.580167, 8.528011)
+
+[connection signal="blue" from="RespondPads" to="Before" method="_on_respond_pads_blue"]
+[connection signal="green" from="RespondPads" to="Before" method="_on_respond_pads_green"]
+[connection signal="red" from="RespondPads" to="Before" method="_on_respond_pads_red"]
+[connection signal="yellow" from="RespondPads" to="Before" method="_on_respond_pads_yellow"]
+[connection signal="timeout" from="Inbetweengame" to="Before" method="_on_inbetweengame_timeout"]

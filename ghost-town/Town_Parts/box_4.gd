@@ -16,24 +16,23 @@ func _process(delta: float) -> void:
 	pass
 
 
-func _on_one_blue() -> void:
+func _on_four_blue() -> void:
 	set_surface_override_material(0, blue)
 	correct = false
 
 
-func _on_one_red() -> void:
+func _on_four_red() -> void:
 	set_surface_override_material(0, red)
-	correct = false
+	correct = true
 	
 
 
-func _on_one_green() -> void:
+func _on_four_green() -> void:
 	set_surface_override_material(0, green)
 	correct = false
 
 
-func _on_one_yellow() -> void:
+func _on_four_yellow() -> void:
 	set_surface_override_material(0, yellow)
-	correct = true
+	correct = false
 	activate.emit()
-	

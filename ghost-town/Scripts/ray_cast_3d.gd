@@ -12,6 +12,6 @@ func _process(delta: float) -> void:
 			print(get_collision_point())
 			print("boilolo")
 			var body = get_collider()
-			if body.is_in_group("ghosts") && body:
+			if body &&  body.is_in_group("ghosts"):
 				print("youi")
 				body.die()

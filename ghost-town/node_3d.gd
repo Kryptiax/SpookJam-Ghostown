@@ -1,8 +1,8 @@
 extends Node3D
-@onready var blu: CSGBox3D = $Blu
-@onready var yello: CSGBox3D = $Yello
-@onready var greenn: CSGBox3D = $Green2
-@onready var redi: CSGBox3D = $Red5
+@onready var blu: CSGCylinder3D = $Blu
+@onready var yello: CSGCylinder3D = $Yello
+@onready var greenn: CSGCylinder3D = $Gree
+@onready var redi: CSGCylinder3D = $Re
 
 var distance: float = 0.25
 signal red
@@ -13,14 +13,6 @@ signal green
 
 func reset_steps(step):
 	step.position.y += distance
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
 
 
 func _on_red_body_entered(body: Node3D) -> void:
@@ -34,12 +26,12 @@ func _on_blue_body_entered(body: Node3D) -> void:
 		blue.emit()
 		blu.position.y -= distance
 
-func _on_yellow_2_body_entered(body: Node3D) -> void:
+func _on_yellow_body_entered(body: Node3D) -> void:
 	if body.is_in_group("player"):
 		yellow.emit()
 		yello.position.y -= distance
 
-func _on_greenb_body_entered(body: Node3D) -> void:
+func _on_green_body_entered(body: Node3D) -> void:
 	if body.is_in_group("player"):
 		green.emit()
 		greenn.position.y -= distance
@@ -56,11 +48,11 @@ func _on_blue_body_exited(body: Node3D) -> void:
 		reset_steps(blu)
 
 
-func _on_greenb_body_exited(body: Node3D) -> void:
+func _on_green_body_exited(body: Node3D) -> void:
 	if body.is_in_group("player"):
 		reset_steps(greenn)
 
 
-func _on_yellow_2_body_exited(body: Node3D) -> void:
+func _on_yellow_body_exited(body: Node3D) -> void:
 	if body.is_in_group("player"):
 		reset_steps(yello)

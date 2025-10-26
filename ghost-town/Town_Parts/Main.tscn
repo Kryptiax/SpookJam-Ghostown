@@ -1,11 +1,15 @@
-[gd_scene load_steps=15 format=3 uid="uid://0lf8n6v1j6bu"]
+[gd_scene load_steps=20 format=3 uid="uid://0lf8n6v1j6bu"]
 
 [ext_resource type="Script" uid="uid://b5xvcjqbkjabn" path="res://main.gd" id="1_o7mvt"]
 [ext_resource type="Texture2D" uid="uid://ttcehit6uald" path="res://Assets/Dark/texture_08.png" id="2_lau5f"]
+[ext_resource type="BoxMesh" uid="uid://bmdhgyklhlfog" path="res://Town_Parts/BoxMesh.tres" id="3_0te4u"]
 [ext_resource type="PackedScene" uid="uid://dk7346dyrdsro" path="res://Scenes/Tree.tscn" id="3_6nc8a"]
 [ext_resource type="Script" uid="uid://kj5qio3yldpe" path="res://Scripts/box_one.gd" id="3_rmln3"]
+[ext_resource type="Script" uid="uid://dmn0jaraxuroa" path="res://Town_Parts/box_2.gd" id="4_rr8wn"]
+[ext_resource type="Script" uid="uid://pfdceqy1yw1d" path="res://Town_Parts/box_4.gd" id="5_0maa8"]
 [ext_resource type="PackedScene" uid="uid://bluqj0q5jre6a" path="res://Scenes/Ghost.tscn" id="5_6nc8a"]
 [ext_resource type="PackedScene" uid="uid://bd117desyxv0m" path="res://Scenes/Pads.tscn" id="5_rmln3"]
+[ext_resource type="Script" uid="uid://4mvenybxqrwt" path="res://Town_Parts/box_3.gd" id="6_864rk"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_idj7w"]
 sky_curve = 0.19792612
@@ -24,6 +28,9 @@ tonemap_mode = 2
 albedo_texture = ExtResource("2_lau5f")
 uv1_triplanar = true
 uv1_world_triplanar = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rr8wn"]
+size = Vector3(1.0756836, 5.991577, 1.1176758)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0te4u"]
 size = Vector3(42.268005, 14.877441, 1)
@@ -57,22 +64,50 @@ use_collision = true
 [node name="CSGBox3D" type="CSGBox3D" parent="City"]
 transform = Transform3D(7.6658883, 0, 0, 0, 1.003867, 0, 0, 0, 10.0266075, 0, 0, 0)
 
-[node name="Box2" type="CSGBox3D" parent="City"]
+[node name="BoxTwo" type="MeshInstance3D" parent="City"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8419139, 2.8789673, 1.1793265)
-size = Vector3(1, 6.7579346, 1)
+mesh = ExtResource("3_0te4u")
+script = ExtResource("4_rr8wn")
 
-[node name="Box4" type="CSGBox3D" parent="City"]
+[node name="RigidBody3D" type="StaticBody3D" parent="City/BoxTwo"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.044161797)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="City/BoxTwo/RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.037841797, 0.8722534, -0.058837414)
+shape = SubResource("BoxShape3D_rr8wn")
+
+[node name="BoxFour" type="MeshInstance3D" parent="City"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8419139, 2.8789673, -3.9952753)
-size = Vector3(1, 6.7579346, 1)
+mesh = ExtResource("3_0te4u")
+script = ExtResource("5_0maa8")
 
-[node name="Box3" type="CSGBox3D" parent="City"]
+[node name="RigidBody3D" type="StaticBody3D" parent="City/BoxFour"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="City/BoxFour/RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.029929161, 0.8722515, -0.0090408325)
+shape = SubResource("BoxShape3D_rr8wn")
+
+[node name="BoxThree" type="MeshInstance3D" parent="City"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8419139, 2.8789673, -1.5998367)
-size = Vector3(1, 6.7579346, 1)
+mesh = ExtResource("3_0te4u")
+script = ExtResource("6_864rk")
 
-[node name="BoxOne" type="CSGBox3D" parent="City"]
+[node name="RigidBody3D" type="StaticBody3D" parent="City/BoxThree"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="City/BoxThree/RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.03464055, 0.81910515, 0.022123575)
+shape = SubResource("BoxShape3D_rr8wn")
+
+[node name="BoxOne" type="MeshInstance3D" parent="City"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8419139, 2.8789673, 3.7400331)
-size = Vector3(1, 6.7579346, 1)
+mesh = ExtResource("3_0te4u")
 script = ExtResource("3_rmln3")
+
+[node name="RigidBody3D" type="StaticBody3D" parent="City/BoxOne"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="City/BoxOne/RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.037841797, 0.8722534, -0.058837414)
+shape = SubResource("BoxShape3D_rr8wn")
 
 [node name="CSGBox3D6" type="CSGBox3D" parent="City"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.9755833, 6.9380493, -0.059906013)
@@ -186,3 +221,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.19610453, 0.46652508, -18.
 [connection signal="red" from="One" to="City/BoxOne" method="_on_one_red"]
 [connection signal="yellow" from="One" to="." method="_on_one_yellow"]
 [connection signal="yellow" from="One" to="City/BoxOne" method="_on_one_yellow"]
+[connection signal="blue" from="Two" to="City/BoxTwo" method="_on_two_blue"]
+[connection signal="green" from="Two" to="City/BoxTwo" method="_on_two_green"]
+[connection signal="red" from="Two" to="City/BoxTwo" method="_on_two_red"]
+[connection signal="yellow" from="Two" to="City/BoxTwo" method="_on_two_yellow"]
+[connection signal="blue" from="Three" to="City/BoxThree" method="_on_three_blue"]
+[connection signal="green" from="Three" to="City/BoxThree" method="_on_three_green"]
+[connection signal="red" from="Three" to="City/BoxThree" method="_on_three_red"]
+[connection signal="yellow" from="Three" to="City/BoxThree" method="_on_three_yellow"]
+[connection signal="blue" from="Four" to="City/BoxFour" method="_on_four_blue"]
+[connection signal="green" from="Four" to="City/BoxFour" method="_on_four_green"]
+[connection signal="red" from="Four" to="City/BoxFour" method="_on_four_red"]
+[connection signal="yellow" from="Four" to="City/BoxFour" method="_on_four_yellow"]

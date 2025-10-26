@@ -1,0 +1,67 @@
+[gd_scene load_steps=7 format=3 uid="uid://bjk3nw3sq1n31"]
+
+[ext_resource type="Script" uid="uid://d2lc43o4xjupv" path="res://node_3d.gd" id="1_10cs0"]
+[ext_resource type="Material" uid="uid://el0es42ntdjq" path="res://Scenes/PadsRed.tres" id="2_we5pa"]
+[ext_resource type="Material" uid="uid://ddi5dcnpcec5" path="res://Scenes/PadsYellow.tres" id="3_sjwmx"]
+[ext_resource type="Material" uid="uid://n17m3x17hjv2" path="res://Scenes/PadsGreen.tres" id="4_o3bca"]
+[ext_resource type="Material" uid="uid://5mk4lnifn57c" path="res://Scenes/PadsBlue'.tres" id="5_iu3b4"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_arpje"]
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_10cs0")
+
+[node name="Re" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.672698, 0, 0)
+material = ExtResource("2_we5pa")
+
+[node name="Yello" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0388643, 0, 0)
+material = ExtResource("3_sjwmx")
+
+[node name="Gree" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.92047834, 0, 0)
+material = ExtResource("4_o3bca")
+
+[node name="Blu" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.764293, 0, 0)
+material = ExtResource("5_iu3b4")
+
+[node name="Yellow" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.09419942, 0.16971707)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Yellow"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0556977, 0.6473782, 0)
+shape = SubResource("BoxShape3D_arpje")
+
+[node name="Green" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9262376, 0.09419942, 0.16971707)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Green"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0556977, 0.6473782, 0)
+shape = SubResource("BoxShape3D_arpje")
+
+[node name="Blue" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8150058, 0.09419942, 0.16971707)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Blue"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0556977, 0.6473782, 0)
+shape = SubResource("BoxShape3D_arpje")
+
+[node name="Red" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6871334, 0.09419942, 0.16971707)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Red"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0556977, 0.6473782, 0)
+shape = SubResource("BoxShape3D_arpje")
+
+[connection signal="area_entered" from="Yellow" to="." method="_on_yellow_area_entered"]
+[connection signal="area_exited" from="Yellow" to="." method="_on_yellow_area_exited"]
+[connection signal="body_entered" from="Yellow" to="." method="_on_yellow_body_entered"]
+[connection signal="body_exited" from="Yellow" to="." method="_on_yellow_body_exited"]
+[connection signal="body_entered" from="Green" to="." method="_on_green_body_entered"]
+[connection signal="body_exited" from="Green" to="." method="_on_green_body_exited"]
+[connection signal="body_entered" from="Blue" to="." method="_on_blue_body_entered"]
+[connection signal="body_exited" from="Blue" to="." method="_on_blue_body_exited"]
+[connection signal="body_entered" from="Red" to="." method="_on_red_body_entered"]
+[connection signal="body_exited" from="Red" to="." method="_on_red_body_exited"]

@@ -6,6 +6,13 @@ var spawn = playa.instantiate()
 @onready var west: Node3D = $WestSpawn
 @onready var station: Node3D = $Station
 
+@onready var box_one: MeshInstance3D = $City/BoxOne
+@onready var box_two: MeshInstance3D = $City/BoxTwo
+@onready var box_three: MeshInstance3D = $City/BoxThree
+@onready var box_four: MeshInstance3D = $City/BoxFour
+
+
+
 var target = Vector3(0,0,0)
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

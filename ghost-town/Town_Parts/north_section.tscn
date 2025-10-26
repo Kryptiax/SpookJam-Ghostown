@@ -73,10 +73,10 @@ current = true
 fov = 39.9
 
 [node name="South Spawn" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.9079094, 12.1977005)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4263515, 20.563457)
 
 [node name="North Spawn" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.123575, -12.281517)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1338863, 2.422618, -14.6685505)
 
 [connection signal="body_entered" from="North" to="." method="_on_north_body_entered"]
 [connection signal="body_entered" from="South" to="." method="_on_south_body_entered"]

@@ -66,22 +66,22 @@ transform = Transform3D(0.0015184437, 0, 0.99999887, 0, 1, 0, -0.99999887, 0, 0.
 shape = SubResource("BoxShape3D_lwxhc")
 
 [node name="NorthSpawn" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.413476, -20.58352)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.077115, -20.138905)
 
 [node name="SouthSpawn" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 20.049835)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.076191, 20.049835)
 
 [node name="EastSpawn" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.611988, 0, 0)
 
 [node name="WestSpawn" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.255611, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.486269, 1.9277897, 0)
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.6841781, 0.72931504, 0, -0.72931504, 0.6841781, 2.035406, 21.023586, 30.440138)
 
 [node name="Spawn" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.1243658, 5.918457, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5434275, 2.9517746, 6.6251125)
 
 [connection signal="body_entered" from="North" to="." method="_on_north_body_entered"]
 [connection signal="body_entered" from="South" to="." method="_on_south_body_entered"]

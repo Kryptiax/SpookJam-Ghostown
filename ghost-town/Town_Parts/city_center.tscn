@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-[gd_scene load_steps=35 format=3 uid="uid://b2fxfv5ekjcux"]
-=======
-[gd_scene load_steps=39 format=3 uid="uid://cfre02u3h2541"]
->>>>>>> 58152817ffa004a797f1081c43b64f8e0480c71e
-
 [ext_resource type="Script" uid="uid://b8f525xjxamr0" path="res://Scripts/city_center.gd" id="1_la81a"]
 [ext_resource type="PackedScene" uid="uid://de5bh4bi85eu3" path="res://Scenes/player.tscn" id="2_2ul3p"]
 [ext_resource type="Texture2D" uid="uid://36by4xo2ne0d" path="res://Assets/Imported/grass_3.png" id="2_lwxhc"]
@@ -268,7 +262,6 @@ size = Vector3(1, 0.5, 1)
 material = ExtResource("4_t6v16")
 
 [node name="MiddleBox19" type="CSGBox3D" parent="City/Flooring"]
-<<<<<<< HEAD
 transform = Transform3D(-4.3711385e-08, 0, -0.9999999, 0, 1, 0, 1, 0, -4.3711385e-08, 1.5134399, 0.32809782, -0.025614515)
 size = Vector3(1, 0.5, 1)
 material = ExtResource("4_t6v16")
@@ -282,21 +275,6 @@ material = ExtResource("4_t6v16")
 transform = Transform3D(-4.3711385e-08, 0, -0.9999999, 0, 1, 0, 1, 0, -4.3711385e-08, 3.1883402, 0.32809782, -0.029455265)
 size = Vector3(1, 0.5, 1)
 material = ExtResource("4_t6v16")
-=======
-transform = Transform3D(-4.3711385e-08, 0, -0.9999999, 0, 1, 0, 1, 0, -4.3711385e-08, 1.5861328, 0.32809782, -0.025614511)
-size = Vector3(1, 0.5, 0.85461426)
-material = SubResource("StandardMaterial3D_swef6")
-
-[node name="MiddleBox20" type="CSGBox3D" parent="City/Flooring"]
-transform = Transform3D(-4.3711385e-08, 0, -0.9999999, 0, 1, 0, 1, 0, -4.3711385e-08, 2.4341424, 0.32809782, -0.027542304)
-size = Vector3(1, 0.5, 0.8399658)
-material = SubResource("StandardMaterial3D_swef6")
-
-[node name="MiddleBox21" type="CSGBox3D" parent="City/Flooring"]
-transform = Transform3D(-4.3711385e-08, 0, -0.9999999, 0, 1, 0, 1, 0, -4.3711385e-08, 3.2657325, 0.32809782, -0.029455263)
-size = Vector3(1, 0.5, 0.84521484)
-material = SubResource("StandardMaterial3D_swef6")
->>>>>>> 58152817ffa004a797f1081c43b64f8e0480c71e
 
 [node name="MiddleBox22" type="CSGBox3D" parent="City/Flooring"]
 transform = Transform3D(-4.3711385e-08, 0, -0.9999999, 0, 1, 0, 1, 0, -4.3711385e-08, 4.0161333, 0.32809782, -0.031353496)
@@ -1874,12 +1852,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.338406, 1.7830973, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.125329, 1.9277897, 0.48255157)
 
 [node name="Camera3D" type="Camera3D" parent="."]
-<<<<<<< HEAD
 transform = Transform3D(1, 0, 0, 0, 0.75980496, 0.65015113, 0, -0.65015113, 0.75980496, 2.035406, 21.023586, 25.802725)
-=======
-transform = Transform3D(1, 0, 0, 0, 0.6841781, 0.72931504, 0, -0.72931504, 0.6841781, 2.035406, 21.023586, 30.440138)
-visible = false
->>>>>>> 58152817ffa004a797f1081c43b64f8e0480c71e
 
 [node name="Spawn" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.06517, 5.918457, 0)
@@ -1937,13 +1910,8 @@ mesh = ExtResource("9_neva4")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_rbuvu")
 
-<<<<<<< HEAD
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/Houses/Houses"]
-transform = Transform3D(0.91069686, 0, -2.9802322e-08, 0, 1.1388427, 0, 2.9802322e-08, 0, 1.0000001, 2.30513, 8.592973, -2.035242)
-=======
 [node name="MeshInstance3D" type="MeshInstance3D" parent="House/Houses/Houses"]
 transform = Transform3D(0.9106968, 0, 0, 0, 1.1388427, 0, 0, 0, 1, 2.30513, 8.592973, -2.035244)
->>>>>>> 58152817ffa004a797f1081c43b64f8e0480c71e
 mesh = SubResource("BoxMesh_ug3c1")
 surface_material_override/0 = SubResource("StandardMaterial3D_2ul3p")
 

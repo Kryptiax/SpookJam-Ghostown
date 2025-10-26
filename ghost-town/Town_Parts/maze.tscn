@@ -9,9 +9,9 @@
 [ext_resource type="Material" uid="uid://el0es42ntdjq" path="res://Scenes/PadsRed.tres" id="6_0wpuq"]
 [ext_resource type="Material" uid="uid://n17m3x17hjv2" path="res://Scenes/PadsGreen.tres" id="7_i352j"]
 [ext_resource type="Material" uid="uid://ddi5dcnpcec5" path="res://Scenes/PadsYellow.tres" id="8_p15cr"]
-[ext_resource type="PackedScene" uid="uid://br36byt3uoc8" path="res://Scenes/keys.tscn" id="9_0wpuq"]
+[ext_resource type="PackedScene" path="res://Scenes/keys.tscn" id="9_0wpuq"]
 [ext_resource type="ArrayMesh" uid="uid://dpkunxxhdgvyg" path="res://Assets/Models/mountains.obj" id="11_p15cr"]
-[ext_resource type="PackedScene" path="res://Scenes/RedGem.tscn" id="12_ausyp"]
+[ext_resource type="PackedScene" uid="uid://ltjmq60vcmre" path="res://Scenes/RedGem.tscn" id="12_ausyp"]
 [ext_resource type="ArrayMesh" uid="uid://hu7kahst5eg" path="res://Assets/Models/tree.obj" id="13_dk6la"]
 [ext_resource type="ArrayMesh" uid="uid://dd32fx42tmh7" path="res://Assets/Models/gamejamhouse.obj" id="14_0cidp"]
 

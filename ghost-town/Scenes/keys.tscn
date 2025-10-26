@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=3 uid="uid://br36byt3uoc8"]
+
+[ext_resource type="Material" uid="uid://ddi5dcnpcec5" path="res://Scenes/PadsYellow.tres" id="1_61kc5"]
+[ext_resource type="Script" uid="uid://62udj7vbk3g7" path="res://Scenes/keys.gd" id="2_j2x1u"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_j0b8o"]
+top_radius = 0.0
+bottom_radius = 0.0
+
+[sub_resource type="TorusMesh" id="TorusMesh_36kie"]
+inner_radius = 0.427
+outer_radius = 0.855
+rings = 8
+
+[sub_resource type="BoxMesh" id="BoxMesh_gd55d"]
+size = Vector3(6.925, 0.685, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_61kc5"]
+size = Vector3(0.385, 0.16, 1.83)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_36kie"]
+size = Vector3(4.902405, 1, 2.790039)
+
+[node name="Keys" type="MeshInstance3D"]
+mesh = SubResource("CylinderMesh_j0b8o")
+surface_material_override/0 = ExtResource("1_61kc5")
+script = ExtResource("2_j2x1u")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.92393297, 0, 0.38255444, 0, 1, 0, -0.38255444, 0, 0.92393297, 0.09612656, 0, 0)
+mesh = SubResource("TorusMesh_36kie")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.33715507, 0, 0, 0, 0.44754893, 0, 0, 0, 0.45758486, 2.0027013, 0, 0)
+mesh = SubResource("BoxMesh_gd55d")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.9447722, 0, 0, 0, 1, 0, 0, 0, 0.8766949, 2.130044, 0, 0.72094584)
+mesh = SubResource("BoxMesh_61kc5")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.9447722, 0, 0, 0, 1, 0, 0, 0, 0.8766949, 2.9869556, 0, 0.72094584)
+mesh = SubResource("BoxMesh_61kc5")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6622009, 0, 0.37548828)
+shape = SubResource("BoxShape3D_36kie")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

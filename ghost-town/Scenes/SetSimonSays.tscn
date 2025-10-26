@@ -27,12 +27,12 @@ transform = Transform3D(10.404807, 0, 0, 0, 0.84209067, 0, 0, 0, 9.372475, 1.114
 size = Vector3(2.6322632, 0.2890625, 1.0664063)
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="Simon Says"]
-transform = Transform3D(6.064977, 0, 0, 0, 4.12693, 0, 0, 0, 1, 4.8766, 4.1453433, -4.714445)
-size = Vector3(3.2456913, 2.2227173, 0.0024414063)
+transform = Transform3D(6.064977, 0, 0, 0, 4.12693, 0, 0, 0, 1, 4.8766, 5.2634106, -4.714445)
+size = Vector3(3.2456913, 2.764557, 0.0024414063)
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="Simon Says"]
-transform = Transform3D(0.62859315, 0, -0.99461454, 0, 4.12693, 0, 6.0323143, 0, 0.10364312, -4.757485, 4.2328825, -1.3876953)
-size = Vector3(2.0749054, 2.1253052, 0.0024414063)
+transform = Transform3D(0.62859315, 0, -0.9946146, 0, 4.12693, 0, 6.0323143, 0, 0.10364312, -4.757486, 5.2229905, -1.3876956)
+size = Vector3(2.0749054, 2.605133, 0.0024414063)
 
 [node name="Inbetweengame" type="Timer" parent="."]
 one_shot = true

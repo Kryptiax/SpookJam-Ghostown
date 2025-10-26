@@ -38,6 +38,8 @@ func check_response(game):
 			print("sequence correct!")
 			player_response.clear()
 			i+= 1
+			if i == 5:
+				give_gem()
 			play_game(gameplay[i])	
 		else:
 			print("wrong!!")
@@ -68,3 +70,6 @@ func _on_respond_pads_red() -> void:
 func _on_respond_pads_yellow() -> void:
 	set_surface_override_material(0, yellow)
 	player_response.append(yellow)
+	
+func give_gem():
+	pass

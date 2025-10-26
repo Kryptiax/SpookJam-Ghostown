@@ -1,12 +1,16 @@
-[gd_scene load_steps=13 format=3 uid="uid://bd2yc86l7itq1"]
+[gd_scene load_steps=27 format=3 uid="uid://bd2yc86l7itq1"]
 
 [ext_resource type="Script" uid="uid://rcxqt2dhflsc" path="res://Scripts/side_2.gd" id="1_u05wf"]
 [ext_resource type="Material" uid="uid://cpy6ihqla1m5y" path="res://Scenes/TestMaterial.tres" id="2_fg4fm"]
-[ext_resource type="Material" uid="uid://5mk4lnifn57c" path="res://Scenes/PadsBlue'.tres" id="3_i24hd"]
+[ext_resource type="ArrayMesh" uid="uid://blba5nip6ahg6" path="res://Assets/Models/gamejamfountain (1).obj" id="2_i24hd"]
+[ext_resource type="ArrayMesh" uid="uid://dpkunxxhdgvyg" path="res://Assets/Models/mountains.obj" id="3_0hmb4"]
 [ext_resource type="PackedScene" uid="uid://dk7346dyrdsro" path="res://Scenes/Tree.tscn" id="3_wqpna"]
-[ext_resource type="Material" uid="uid://el0es42ntdjq" path="res://Scenes/PadsRed.tres" id="4_yc132"]
+[ext_resource type="Material" uid="uid://dblqxbtcksjkg" path="res://Town_Parts/Moutain.tres" id="4_jsoup"]
 [ext_resource type="Material" uid="uid://n17m3x17hjv2" path="res://Scenes/PadsGreen.tres" id="5_0hmb4"]
-[ext_resource type="Material" uid="uid://ddi5dcnpcec5" path="res://Scenes/PadsYellow.tres" id="6_jsoup"]
+[ext_resource type="ArrayMesh" uid="uid://dd32fx42tmh7" path="res://Assets/Models/gamejamhouse.obj" id="5_jsoup"]
+[ext_resource type="Material" uid="uid://gqi6k6j4t8ne" path="res://Town_Parts/Grass.tres" id="6_1tux0"]
+[ext_resource type="Texture2D" uid="uid://c0kx5p11yq7ui" path="res://Assets/Imported/sand_3.png" id="10_vxe0p"]
+[ext_resource type="Texture2D" uid="uid://b25500jl3vwpi" path="res://Assets/Imported/dirty_1.png" id="11_jsoup"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_55n1c"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -20,11 +24,45 @@ background_mode = 2
 sky = SubResource("Sky_kis7x")
 tonemap_mode = 2
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_jsoup"]
+size = Vector3(10.425293, 7.854706, 14.278778)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1tux0"]
+albedo_color = Color(4.042983e-06, 0, 0.83234936, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_jsoup"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_baqor"]
+albedo_color = Color(0.47843137, 0.65882355, 0.8352941, 0.2627451)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_mbl57"]
 size = Vector3(42.268005, 14.877441, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_i3nr6"]
 size = Vector3(41.918213, 13.377014, 1.0535889)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vxe0p"]
+albedo_color = Color(0.3958915, 0.39589143, 9.62615e-08, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8jcp7"]
+albedo_color = Color(0.51375306, 1.11904e-06, 1.92523e-07, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kannu"]
+albedo_texture = ExtResource("10_vxe0p")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t6v16"]
+albedo_texture = ExtResource("10_vxe0p")
+uv1_scale = Vector3(4.63, 4.63, 4.63)
+uv1_offset = Vector3(3.86, 0, 0)
+uv1_triplanar = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ltjjp"]
+lightmap_size_hint = Vector2i(12, 12)
+material = SubResource("StandardMaterial3D_t6v16")
+size = Vector2(3, 3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ltjjp"]
+albedo_texture = ExtResource("11_jsoup")
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_u05wf")
@@ -36,6 +74,26 @@ shadow_enabled = true
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_1r2xf")
 
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.4395143, 0, 0, 0, 0.93078643, 0, 0, 0, 1.5763099, -27.107424, 1.3165286, 28.070454)
+mesh = ExtResource("3_0hmb4")
+skeleton = NodePath("../MeshInstance3D")
+surface_material_override/0 = ExtResource("4_jsoup")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.7993926, 0, 0, 0, 1.1634827, 0, 0, 0, 1.9703876, 10.667026, 1.3165286, 0.070453644)
+mesh = ExtResource("2_i24hd")
+skeleton = NodePath("../MultiMeshInstance3D")
+
+[node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="."]
+transform = Transform3D(42.842674, 0, 0, 0, 1.003867, 0, 0, 0, 46.913998, 3.7945638, 0.31652832, 0.070453644)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.420898, 3.2654572, 0.7448273)
+shape = SubResource("BoxShape3D_jsoup")
+
 [node name="City" type="CSGCombiner3D" parent="."]
 transform = Transform3D(5.5887423, 0, 0, 0, 1, 0, 0, 0, 4.678951, 4.18157, 0.31652832, 0.070453644)
 use_collision = true
@@ -44,29 +102,30 @@ use_collision = true
 transform = Transform3D(7.6658883, 0, 0, 0, 1.003867, 0, 0, 0, 10.026607, -0.069247484, 0, 0)
 material_override = ExtResource("2_fg4fm")
 size = Vector3(0.9819336, 1, 1)
+material = ExtResource("6_1tux0")
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="City"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8419139, 9.801544, 1.1312305)
-size = Vector3(1, 20.603088, 2.7036133)
-material = ExtResource("3_i24hd")
+[node name="Gamejamhouse" type="MeshInstance3D" parent="City"]
+transform = Transform3D(0.056455743, 0, -0.20280617, 0, 1, 0, 0.16979136, 0, 0.067433186, -1.6061436, 1.501934, 1.2025504)
+mesh = ExtResource("5_jsoup")
+surface_material_override/0 = SubResource("StandardMaterial3D_1tux0")
 
-[node name="CSGBox3D5" type="CSGBox3D" parent="City"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8419139, 2.8789673, -3.9952753)
-size = Vector3(1, 6.7579346, 1)
-material = ExtResource("4_yc132")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="City/Gamejamhouse"]
+transform = Transform3D(0.91069686, 0, -2.9802322e-08, 0, 1.1388427, 0, 2.9802322e-08, 0, 1.0000001, 2.30513, 8.592973, -2.035242)
+mesh = SubResource("BoxMesh_jsoup")
+surface_material_override/0 = SubResource("StandardMaterial3D_baqor")
 
-[node name="CSGBox3D3" type="CSGBox3D" parent="City"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8419139, 2.8789673, -1.5998366)
-size = Vector3(1, 6.7579346, 1)
-material = ExtResource("5_0hmb4")
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="City/Gamejamhouse"]
+transform = Transform3D(1.4165591, 0, -4.4703484e-08, 0, 1.7714314, 0, 4.0978193e-08, 0, 1.5554672, 3.703042, 4.546378, -2.1863425)
+mesh = SubResource("BoxMesh_jsoup")
+surface_material_override/0 = SubResource("StandardMaterial3D_baqor")
 
-[node name="CSGBox3D4" type="CSGBox3D" parent="City"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8419139, 2.8789673, 3.7400331)
-size = Vector3(1, 6.7579346, 1)
-material = ExtResource("6_jsoup")
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="City/Gamejamhouse"]
+transform = Transform3D(1.4165591, 0, -4.4703484e-08, 0, 1.7714314, 0, 3.7252903e-08, 0, 1.5554674, -1.579586, 4.546378, -2.3631546)
+mesh = SubResource("BoxMesh_jsoup")
+surface_material_override/0 = SubResource("StandardMaterial3D_baqor")
 
 [node name="TreeLine" type="Node3D" parent="."]
-transform = Transform3D(-0.04534556, 0, 0.9989713, 0, 1, 0, -0.9989713, 0, -0.04534556, -15.335189, 0, 18)
+transform = Transform3D(-0.04534556, 0, 0.9989713, 0, 1, 0, -0.9989713, 0, -0.04534556, -4.335189, 0, 18)
 
 [node name="HintTree" parent="TreeLine" instance=ExtResource("3_wqpna")]
 transform = Transform3D(1, 0, 7.450581e-09, 0, 1, 0, -7.450581e-09, 0, 1, 0, 0, 0)
@@ -96,7 +155,7 @@ transform = Transform3D(1, 0, 1.4901161e-08, 0, 1, 0, -1.4901161e-08, 0, 1, 29.2
 transform = Transform3D(1, 0, 1.8626451e-08, 0, 1, 0, -1.8626451e-08, 0, 1, 26.86082, 0, 1.2192755)
 
 [node name="HintTree10" parent="TreeLine" instance=ExtResource("3_wqpna")]
-transform = Transform3D(1, 0, 1.8626451e-08, 0, 1, 0, -1.8626451e-08, 0, 1, 35.89707, 0, 1.6294489)
+transform = Transform3D(0.86602527, 0, -0.4999999, 0, 1, 0, 0.4999999, 0, 0.86602527, 36.66931, 0, 6.66965)
 
 [node name="RightArea" type="Area3D" parent="."]
 
@@ -107,20 +166,119 @@ shape = SubResource("BoxShape3D_mbl57")
 [node name="LeftArea" type="Area3D" parent="."]
 
 [node name="Left" type="CollisionShape3D" parent="LeftArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.737671, 7.766552, 24.55184)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.737671, 7.766552, 22.565569)
 shape = SubResource("BoxShape3D_i3nr6")
 
 [node name="RightSpawn" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0901604, -20.718666)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.875214, 2.0901604, -20.718666)
 
 [node name="LeftSpawn" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 21.032835)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 1, 18.032835)
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-4.4703484e-08, -0.013665496, 0.99990666, -5.9733307e-10, 0.99990666, 0.013665496, -1, 1.361794e-11, -4.4707477e-08, 60.52121, 9.124836, 0.087064505)
+transform = Transform3D(-4.4614666e-08, -0.064706475, 0.99790436, -2.879274e-09, 0.99790436, 0.064706475, -1, 1.3617772e-11, -4.4707477e-08, 59.018444, 13.7911, 0.087064505)
 fov = 29.7
 size = 25.587
 near = 0.001
+
+[node name="Gamejamhouse" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.03345171, 0, -0.9994403, 0, 1, 0, 0.9994403, 0, 0.03345171, -4.0375285, 1, 18.350603)
+mesh = ExtResource("5_jsoup")
+surface_material_override/0 = SubResource("StandardMaterial3D_vxe0p")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Gamejamhouse"]
+transform = Transform3D(0.91069686, 0, -2.9802322e-08, 0, 1.1388427, 0, 2.9802322e-08, 0, 1.0000001, 2.30513, 8.592973, -2.035242)
+mesh = SubResource("BoxMesh_jsoup")
+surface_material_override/0 = SubResource("StandardMaterial3D_baqor")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Gamejamhouse"]
+transform = Transform3D(1.4165591, 0, -4.4703484e-08, 0, 1.7714314, 0, 4.0978193e-08, 0, 1.5554672, 3.703042, 4.546378, -2.3320415)
+mesh = SubResource("BoxMesh_jsoup")
+surface_material_override/0 = SubResource("StandardMaterial3D_baqor")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Gamejamhouse"]
+transform = Transform3D(1.4165591, 0, -4.4703484e-08, 0, 1.7714314, 0, 3.7252903e-08, 0, 1.5554674, -1.579586, 4.546378, -2.5088537)
+mesh = SubResource("BoxMesh_jsoup")
+surface_material_override/0 = SubResource("StandardMaterial3D_baqor")
+
+[node name="Gamejamhouse2" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.006728653, 0, -0.8326448, 0, 0.832672, 0, 0.8326448, 0, -0.006728653, -3.9884758, 1, -7.20759)
+mesh = ExtResource("5_jsoup")
+surface_material_override/0 = ExtResource("5_0hmb4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Gamejamhouse2"]
+transform = Transform3D(0.91069686, 0, -2.9802322e-08, 0, 1.1388427, 0, 2.9802322e-08, 0, 1.0000001, 2.30513, 8.38744, -2.1405754)
+mesh = SubResource("BoxMesh_jsoup")
+surface_material_override/0 = SubResource("StandardMaterial3D_baqor")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Gamejamhouse2"]
+transform = Transform3D(1.4165591, 0, -4.4703484e-08, 0, 1.7714314, 0, 4.0978193e-08, 0, 1.5554672, 3.703042, 4.546378, -2.2186527)
+mesh = SubResource("BoxMesh_jsoup")
+surface_material_override/0 = SubResource("StandardMaterial3D_baqor")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Gamejamhouse2"]
+transform = Transform3D(1.4165591, 0, -4.4703484e-08, 0, 1.7714314, 0, 3.7252903e-08, 0, 1.5554674, -1.579586, 4.546378, -2.2031188)
+mesh = SubResource("BoxMesh_jsoup")
+surface_material_override/0 = SubResource("StandardMaterial3D_baqor")
+
+[node name="Gamejamhouse3" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.2752357, 0, -0.76224166, 0, 0.8104118, 0, 0.76224166, 0, -0.2752357, -5.8225756, 2, -17.188732)
+mesh = ExtResource("5_jsoup")
+surface_material_override/0 = SubResource("StandardMaterial3D_8jcp7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Gamejamhouse3"]
+transform = Transform3D(0.91069686, 0, -2.9802322e-08, 0, 1.1388427, 0, 2.9802322e-08, 0, 1.0000001, 2.30513, 8.592973, -2.035242)
+mesh = SubResource("BoxMesh_jsoup")
+surface_material_override/0 = SubResource("StandardMaterial3D_baqor")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Gamejamhouse3"]
+transform = Transform3D(1.4165591, 0, -4.4703484e-08, 0, 1.7714314, 0, 4.0978193e-08, 0, 1.5554672, 3.703042, 4.546378, -2.3320415)
+mesh = SubResource("BoxMesh_jsoup")
+surface_material_override/0 = SubResource("StandardMaterial3D_baqor")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Gamejamhouse3"]
+transform = Transform3D(1.4165591, 0, -4.4703484e-08, 0, 1.7714314, 0, 3.7252903e-08, 0, 1.5554674, -1.579586, 4.546378, -2.4307523)
+mesh = SubResource("BoxMesh_jsoup")
+surface_material_override/0 = SubResource("StandardMaterial3D_baqor")
+
+[node name="Ground" type="CSGBox3D" parent="."]
+transform = Transform3D(7.6658883, 0, 0, 0, 1.003867, 0, 0, 0, 10.026607, -0.069247484, 0, 0)
+material = ExtResource("6_1tux0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(0.56893003, 0, 0, 0, 1.0000006, 0, 0, 0, 0.5421855, 0.0010290667, 0.021301866, 0.0004304687)
+material_override = SubResource("StandardMaterial3D_kannu")
+mesh = SubResource("PlaneMesh_ltjjp")
+
+[node name="MiddleBox15" type="CSGBox3D" parent="."]
+transform = Transform3D(-4.3711385e-08, 0, -0.9999999, 0, 1, 0, 1, 0, -4.3711385e-08, 10.539004, 0.6398287, -19.166044)
+size = Vector3(9.104431, 0.5, 9.716736)
+material = SubResource("StandardMaterial3D_ltjjp")
+
+[node name="MiddleBox16" type="CSGBox3D" parent="."]
+transform = Transform3D(-4.3711385e-08, 0, -0.9999999, 0, 1, 0, 1, 0, -4.3711385e-08, 10.539004, 0.6398287, -10.067002)
+size = Vector3(9.104431, 0.5, 9.716736)
+material = SubResource("StandardMaterial3D_ltjjp")
+
+[node name="MiddleBox17" type="CSGBox3D" parent="."]
+transform = Transform3D(-4.3711385e-08, 0, -0.9999999, 0, 1, 0, 1, 0, -4.3711385e-08, 10.539004, 0.6398287, -0.986351)
+size = Vector3(9.104431, 0.5, 9.716736)
+material = SubResource("StandardMaterial3D_ltjjp")
+
+[node name="MiddleBox18" type="CSGBox3D" parent="."]
+transform = Transform3D(-4.3711385e-08, 0, -0.9999999, 0, 1, 0, 1, 0, -4.3711385e-08, 10.539004, 0.6398287, 8.136034)
+size = Vector3(9.104431, 0.5, 9.716736)
+material = SubResource("StandardMaterial3D_ltjjp")
+
+[node name="MiddleBox19" type="CSGBox3D" parent="."]
+transform = Transform3D(-4.3711385e-08, 0, -0.9999999, 0, 1, 0, 1, 0, -4.3711385e-08, 10.539004, 0.6398287, 17.235077)
+size = Vector3(9.104431, 0.5, 9.716736)
+material = SubResource("StandardMaterial3D_ltjjp")
+
+[node name="MiddleBox20" type="CSGBox3D" parent="."]
+transform = Transform3D(-4.3711385e-08, 0, -0.9999999, 0, 1, 0, 1, 0, -4.3711385e-08, 10.539004, 0.6398287, 26.315727)
+size = Vector3(9.104431, 0.5, 9.716736)
+material = SubResource("StandardMaterial3D_ltjjp")
 
 [connection signal="body_entered" from="RightArea" to="." method="_on_right_area_body_entered"]
 [connection signal="body_entered" from="LeftArea" to="." method="_on_left_area_body_entered"]

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dfgh3r1xvwkg7" path="res://Scripts/PlayerController.gd" id="1_cvnsp"]
 [ext_resource type="SpriteFrames" uid="uid://b2jj6cj5flf6f" path="res://Scenes/spriteframes.tres" id="2_6t5aa"]
-[ext_resource type="PackedScene" uid="uid://dk0venuncrvxe" path="res://Scenes/UIworkbench.tscn" id="2_vgqql"]
+[ext_resource type="PackedScene" path="res://Scenes/UIworkbench.tscn" id="2_vgqql"]
 [ext_resource type="Script" uid="uid://d1b1xg52rab8s" path="res://Scripts/ray_cast_3d.gd" id="3_6t5aa"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_p8bfa"]
@@ -43,8 +43,13 @@ visible = false
 [node name="Flashlight" type="Node3D" parent="."]
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Flashlight"]
-spot_range = 5.3320603
+light_energy = 12.326
+light_indirect_energy = 9.989
+light_volumetric_fog_energy = 9.629
+spot_range = 24.292
+spot_attenuation = 0.2
 spot_angle = 63.13604
+spot_angle_attenuation = 0.68302023
 
 [node name="RayCast3D" type="RayCast3D" parent="Flashlight" groups=["torch"]]
 transform = Transform3D(1, 0, 0, 0, 0.9999966, 0.0026179908, 0, -0.0026179908, 0.9999966, 0, 0, 0)

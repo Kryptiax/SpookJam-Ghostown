@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://c0kx5p11yq7ui" path="res://Assets/Imported/sand_3.png" id="3_ug3c1"]
 [ext_resource type="Shader" uid="uid://cjubq8yq7u2yx" path="res://Shaders/grass.gdshader" id="4_etsnd"]
 [ext_resource type="Texture2D" uid="uid://gtbjharmeq4d" path="res://Assets/Imported/dirty_3.png" id="4_i5dpb"]
-[ext_resource type="Material" uid="uid://v4w62fiwdxp4" path="res://Town_Parts/Ground.tres" id="4_t6v16"]
+[ext_resource type="Material" path="res://Town_Parts/Ground.tres" id="4_t6v16"]
 [ext_resource type="Texture2D" uid="uid://xa2hvipi3fca" path="res://Shaders/GRASSJAM2.png" id="5_swef6"]
 [ext_resource type="ArrayMesh" uid="uid://blba5nip6ahg6" path="res://Assets/Models/gamejamfountain (1).obj" id="8_1t63h"]
 [ext_resource type="ArrayMesh" uid="uid://dd32fx42tmh7" path="res://Assets/Models/gamejamhouse.obj" id="9_neva4"]
@@ -188,8 +188,8 @@ size = Vector3(1, 0.5, 1)
 material = ExtResource("4_t6v16")
 
 [node name="MiddleBox9" type="CSGBox3D" parent="City/Flooring"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1450988, 0.32809782, -3.0069983)
-size = Vector3(1, 0.5, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1450988, 0.32809782, -2.997721)
+size = Vector3(1, 0.5, 1.0185547)
 material = ExtResource("4_t6v16")
 
 [node name="MiddleBox10" type="CSGBox3D" parent="City/Flooring"]

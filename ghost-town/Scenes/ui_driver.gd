@@ -79,9 +79,9 @@ func update_Gems():
 func _on_player_health_changed(health: Variant) -> void:
 	update_hearts(health)
 	if health == 0:
-		death_screen.show()
+		death_screen.show() 
 		get_tree().paused = 1
-		
+		# game over
 	pass # Replace with function body.
 
 

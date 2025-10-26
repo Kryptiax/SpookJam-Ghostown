@@ -1818,12 +1818,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13599789, 0.6037712, 0)
 transform = Transform3D(0.99999547, 0, -0.0030194782, 0, 1, 0, 0.0030194782, 0, 0.99999547, 3.3434365, 9.847534, -23.641634)
 shape = SubResource("BoxShape3D_lwxhc")
 
-[node name="South" type="Area3D" parent="."]
-
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="South"]
-transform = Transform3D(0.99999547, 0, -0.0030194782, 0, 1, 0, 0.0030194782, 0, 0.99999547, 3.3434365, 9.847534, 23.661942)
-shape = SubResource("BoxShape3D_lwxhc")
-
 [node name="East" type="Area3D" parent="."]
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="East"]
@@ -1840,7 +1834,7 @@ shape = SubResource("BoxShape3D_lwxhc")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.423418, 2.1239023, -20.138905)
 
 [node name="SouthSpawn" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.076191, 20.049835)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1.076191, 11.049835)
 
 [node name="EastSpawn" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.211994, 1.7830973, 0)
@@ -2307,6 +2301,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.0441895, 3.2654572, -0.3889
 shape = SubResource("BoxShape3D_t6v16")
 
 [connection signal="body_entered" from="North" to="." method="_on_north_body_entered"]
-[connection signal="body_entered" from="South" to="." method="_on_south_body_entered"]
 [connection signal="body_entered" from="East" to="." method="_on_east_body_entered"]
 [connection signal="body_entered" from="West" to="." method="_on_west_body_entered"]

@@ -18,6 +18,7 @@ var game = gameplay[i]
 const GREEN_GEM = preload("res://Scenes/GreenGem.tscn")
 
 func _ready() -> void:
+	i = 0
 	play_game(gameplay[i])
 
 
@@ -35,6 +36,8 @@ func play_game(game):
 	
 
 func check_response(game):
+	print(player_response)
+	print(game)
 	if player_response.size() == game.size():
 		await get_tree().create_timer(0.5).timeout
 		if player_response == game:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dwpv4qcau1h0s"]
+[gd_scene load_steps=9 format=3 uid="uid://bkynirlfacl72"]
 
 [ext_resource type="Script" uid="uid://dka10ra1toe02" path="res://Scenes/gembase.gd" id="1_vpj13"]
 [ext_resource type="ArrayMesh" uid="uid://bos3p6m4nu8hl" path="res://Assets/Models/geodeREAL.obj" id="2_gssg6"]
@@ -14,10 +14,49 @@ metallic_specular = 0.0
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_byk8n"]
 albedo_color = Color(0.3300662, 0.17841172, 0.79177415, 1)
 
+[sub_resource type="Animation" id="Animation_gssg6"]
+resource_name = "turn"
+length = 0.929
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.066930056, 1.1920929e-07, -2.3210278), Vector3(-0.067, 0.765, -2.321)]
+}
+
+[sub_resource type="Animation" id="Animation_ti8cr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.066930056, 1.1920929e-07, -2.3210278)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_byk8n"]
+_data = {
+&"RESET": SubResource("Animation_ti8cr"),
+&"turn": SubResource("Animation_gssg6")
+}
+
 [node name="PurpleGem" type="Area3D" groups=["interactable"]]
 script = ExtResource("1_vpj13")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(-0.21132481, 0, -0.9774159, 0, 1, 0, 0.9774159, 0, -0.21132481, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_bti4x")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -33,3 +72,8 @@ light_energy = 6.53
 light_indirect_energy = 7.78
 light_volumetric_fog_energy = 3.64
 light_specular = 16.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_byk8n")
+}

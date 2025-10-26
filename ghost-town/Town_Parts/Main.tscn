@@ -1,17 +1,19 @@
-[gd_scene load_steps=20 format=3 uid="uid://0lf8n6v1j6bu"]
+[gd_scene load_steps=24 format=3 uid="uid://0lf8n6v1j6bu"]
 
 [ext_resource type="Script" uid="uid://b5xvcjqbkjabn" path="res://main.gd" id="1_o7mvt"]
-[ext_resource type="Material" path="res://Town_Parts/Grass.tres" id="2_864rk"]
+[ext_resource type="Material" uid="uid://gqi6k6j4t8ne" path="res://Town_Parts/Grass.tres" id="2_864rk"]
 [ext_resource type="BoxMesh" uid="uid://bmdhgyklhlfog" path="res://Town_Parts/BoxMesh.tres" id="3_0te4u"]
 [ext_resource type="Script" uid="uid://kj5qio3yldpe" path="res://Scripts/box_one.gd" id="3_rmln3"]
-[ext_resource type="Script" path="res://Town_Parts/box_2.gd" id="4_rr8wn"]
-[ext_resource type="Script" path="res://Town_Parts/box_4.gd" id="5_0maa8"]
+[ext_resource type="Script" uid="uid://dmn0jaraxuroa" path="res://Town_Parts/box_2.gd" id="4_rr8wn"]
+[ext_resource type="Script" uid="uid://pfdceqy1yw1d" path="res://Town_Parts/box_4.gd" id="5_0maa8"]
 [ext_resource type="PackedScene" uid="uid://bluqj0q5jre6a" path="res://Scenes/Ghost.tscn" id="5_6nc8a"]
 [ext_resource type="PackedScene" uid="uid://bd117desyxv0m" path="res://Scenes/Pads.tscn" id="5_rmln3"]
-[ext_resource type="Script" path="res://Town_Parts/box_3.gd" id="6_864rk"]
+[ext_resource type="Script" uid="uid://4mvenybxqrwt" path="res://Town_Parts/box_3.gd" id="6_864rk"]
 [ext_resource type="ArrayMesh" uid="uid://dpkunxxhdgvyg" path="res://Assets/Models/mountains.obj" id="11_864rk"]
-[ext_resource type="Material" path="res://Town_Parts/Moutain.tres" id="12_2557j"]
+[ext_resource type="Material" uid="uid://n17m3x17hjv2" path="res://Scenes/PadsGreen.tres" id="11_wujyd"]
+[ext_resource type="Material" uid="uid://dblqxbtcksjkg" path="res://Town_Parts/Moutain.tres" id="12_2557j"]
 [ext_resource type="ArrayMesh" uid="uid://hu7kahst5eg" path="res://Assets/Models/tree.obj" id="12_wujyd"]
+[ext_resource type="PackedScene" uid="uid://bkynirlfacl72" path="res://Scenes/PurpleGem.tscn" id="13_2557j"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_idj7w"]
 sky_curve = 0.19792612
@@ -39,6 +41,13 @@ size = Vector3(41.918213, 13.377014, 1.0535889)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qfpwd"]
 albedo_color = Color(0.36647794, 0.30129933, 0.23620394, 1)
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_wujyd"]
+vertices = PackedVector3Array(-25.0425, 1.3708696, -23.3675, -25.0425, 1.3708696, 23.3825, 24.9575, 1.3708696, 23.3825, 24.9575, 1.3708696, -23.3675)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_qfpwd"]
+size = Vector2(51.085, 47.735)
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_o7mvt")
@@ -108,8 +117,8 @@ shape = SubResource("BoxShape3D_rr8wn")
 transform = Transform3D(-0.04534556, 0, 0.9989713, 0, 1, 0, -0.9989713, 0, -0.04534556, -15.335189, 0, 18)
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-4.3204953e-08, -0.15177839, 0.9884146, -6.6344428e-09, 0.9884146, 0.15177839, -1, -1.7763568e-15, -4.3711367e-08, 52.36785, 17.587326, 0.08706474)
-fov = 27.1
+transform = Transform3D(-4.333793e-08, -0.13043967, 0.9914563, -5.701699e-09, 0.9914563, 0.13043967, -1, 0, -4.3711392e-08, 49.703, 11.425371, 0.087)
+fov = 29.6
 size = 25.587
 near = 0.001
 
@@ -163,23 +172,55 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.81674767, 0.46652126, -8.3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.19610453, 0.46652508, -18.773958)
 
 [node name="Tree" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.735, 0, 0, 0, 0.735, 0, 0, 0, 0.735, -16.07473, 1.1362762, 14.155355)
+transform = Transform3D(0.735, 0, 0, 0, 0.735, 0, 0, 0, 0.735, -16.359503, 0.24899673, 12.87092)
 mesh = ExtResource("12_wujyd")
+surface_material_override/0 = ExtResource("2_864rk")
+surface_material_override/1 = ExtResource("2_864rk")
 
 [node name="Tree2" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.735, 0, 0, 0, 0.735, 0, 0, 0, 0.735, -16.07473, 1.1362762, -0.49342537)
+transform = Transform3D(0.735, 0, 0, 0, 0.735, 0, 0, 0, 0.735, -14.811321, 0.24899673, 2.0942097)
 mesh = ExtResource("12_wujyd")
+surface_material_override/0 = ExtResource("2_864rk")
+surface_material_override/1 = ExtResource("11_wujyd")
 
 [node name="Tree3" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.735, 0, 0, 0, 0.735, 0, 0, 0, 0.735, -16.07473, 1.1362762, -14.949356)
+transform = Transform3D(0.735, 0, 0, 0, 0.735, 0, 0, 0, 0.735, -11.642338, 0.24899673, 5.04282)
 mesh = ExtResource("12_wujyd")
+surface_material_override/0 = ExtResource("2_864rk")
+surface_material_override/1 = ExtResource("2_864rk")
 
 [node name="Tree4" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.735, 0, 0, 0, 0.735, 0, 0, 0, 0.735, -16.07473, 1.1362762, -14.949356)
+transform = Transform3D(0.735, 0, 0, 0, 0.735, 0, 0, 0, 0.735, -14.631845, 0.6687536, 8.373697)
 mesh = ExtResource("12_wujyd")
+surface_material_override/0 = ExtResource("2_864rk")
+surface_material_override/1 = ExtResource("11_wujyd")
+
+[node name="Tree5" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.735, 0, 0, 0, 0.735, 0, 0, 0, 0.735, -16.359503, 0.24899673, -3.4747734)
+mesh = ExtResource("12_wujyd")
+surface_material_override/0 = ExtResource("2_864rk")
+surface_material_override/1 = ExtResource("2_864rk")
+
+[node name="Tree6" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.735, 0, 0, 0, 0.735, 0, 0, 0, 0.735, -14.811321, 0.24899673, -14.251484)
+mesh = ExtResource("12_wujyd")
+surface_material_override/0 = ExtResource("2_864rk")
+surface_material_override/1 = ExtResource("11_wujyd")
+
+[node name="Tree7" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.735, 0, 0, 0, 0.735, 0, 0, 0, 0.735, -11.642338, 0.24899673, -11.302874)
+mesh = ExtResource("12_wujyd")
+surface_material_override/0 = ExtResource("2_864rk")
+surface_material_override/1 = ExtResource("2_864rk")
+
+[node name="Tree8" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.735, 0, 0, 0, 0.735, 0, 0, 0, 0.735, -14.631845, 0.6687536, -7.9719963)
+mesh = ExtResource("12_wujyd")
+surface_material_override/0 = ExtResource("2_864rk")
+surface_material_override/1 = ExtResource("11_wujyd")
 
 [node name="Mountains" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -92.784355, -13.146669, 26.324871)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -80.100426, -13.146669, 28.96542)
 mesh = ExtResource("11_864rk")
 surface_material_override/0 = SubResource("StandardMaterial3D_qfpwd")
 
@@ -187,6 +228,18 @@ surface_material_override/0 = SubResource("StandardMaterial3D_qfpwd")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.492798, -14.785823, 20.137814)
 mesh = ExtResource("11_864rk")
 surface_material_override/0 = ExtResource("12_2557j")
+
+[node name="PurpleGem" parent="." instance=ExtResource("13_2557j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.485956, 3.9745245, -1.6896191)
+visible = false
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_wujyd")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.87086964, 0)
+visible = false
+mesh = SubResource("PlaneMesh_qfpwd")
 
 [connection signal="body_entered" from="RightArea" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_entered" from="RightArea" to="." method="_on_right_area_body_entered"]

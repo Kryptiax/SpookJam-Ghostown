@@ -13,6 +13,7 @@ var init: bool = false #left is true right is false
 var red_gem = false
 var green_gem = false
 var purple_gem = false
+var all_gems: bool = false
 
 func _ready() -> void:
 	pass # Replace with function body.

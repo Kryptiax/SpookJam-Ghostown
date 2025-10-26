@@ -2,6 +2,7 @@ extends Node3D
 const new_side = preload("uid://bd2yc86l7itq1")
 const playa = preload("res://Scenes/player.tscn")
 var spawn = playa.instantiate()
+var gem_collected: bool = false 
 @onready var east: Node3D = $EastSpawn
 @onready var west: Node3D = $WestSpawn
 @onready var station: Node3D = $Station
@@ -10,6 +11,7 @@ var spawn = playa.instantiate()
 @onready var box_two: MeshInstance3D = $City/BoxTwo
 @onready var box_three: MeshInstance3D = $City/BoxThree
 @onready var box_four: MeshInstance3D = $City/BoxFour
+@onready var purple_gem: Area3D = $PurpleGem
 
 
 
@@ -39,6 +41,8 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	target = spawn.global_transform.origin
 	get_tree().call_group("ghosts", "update_target_location", target)
+	
+	check_success()
 
 
 
@@ -54,10 +58,11 @@ func _on_right_area_body_entered(body: Node3D) -> void:
 		WorldInfo.direction = WorldInfo.DIRECTIONS.EAST
 		get_tree().change_scene_to_packed(new_side)
 
-
-func _on_one_blue() -> void:
-	pass # Replace with function body.
-
-
-func _on_one_yellow() -> void:
-	pass # Replace with function body.
+func give_gem():
+		purple_gem.visible = true
+	
+	
+func check_success():
+	if box_one.correct and box_two.correct and box_three.correct and box_four.correct:
+		if !gem_collected:
+			give_gem()

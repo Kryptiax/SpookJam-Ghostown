@@ -46,3 +46,11 @@ func _on_right_area_body_entered(body: Node3D) -> void:
 	if body.is_in_group("player"):
 		WorldInfo.direction = WorldInfo.DIRECTIONS.EAST
 		get_tree().change_scene_to_packed(new_side)
+
+
+func _on_one_blue() -> void:
+	pass # Replace with function body.
+
+
+func _on_one_yellow() -> void:
+	pass # Replace with function body.

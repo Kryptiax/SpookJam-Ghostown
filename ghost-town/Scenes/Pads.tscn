@@ -1,0 +1,74 @@
+[gd_scene load_steps=7 format=3 uid="uid://bd117desyxv0m"]
+
+[ext_resource type="Script" uid="uid://52aulcci13fr" path="res://Scenes/pads.gd" id="1_ip1wh"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vtbns"]
+albedo_color = Color(0, 0, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p0ct0"]
+albedo_color = Color(1, 1, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cqxde"]
+albedo_color = Color(0, 1, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a2u5e"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vtbns"]
+size = Vector3(1.1157227, 1, 1.1993408)
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_ip1wh")
+
+[node name="Blu" type="CSGBox3D" parent="."]
+transform = Transform3D(1.7786286, 0, 0, 0, 1.7786286, 0, 0, 0, 1.7786286, 1.7670743, 0.37299326, 2.1674783)
+size = Vector3(1, 0.34716797, 1)
+material = SubResource("StandardMaterial3D_vtbns")
+
+[node name="Yello" type="CSGBox3D" parent="."]
+transform = Transform3D(1.7786286, 0, 0, 0, 1.7786286, 0, 0, 0, 1.7786286, -0.45041674, 0.37299326, -0.15842223)
+material_override = SubResource("StandardMaterial3D_p0ct0")
+size = Vector3(1, 0.34716797, 1)
+
+[node name="Green2" type="CSGBox3D" parent="."]
+transform = Transform3D(1.7786286, 0, 0, 0, 1.7786286, 0, 0, 0, 1.7786286, 1.7670743, 0.37299326, -0.17704621)
+size = Vector3(1, 0.34716797, 1)
+material = SubResource("StandardMaterial3D_cqxde")
+
+[node name="Red5" type="CSGBox3D" parent="."]
+transform = Transform3D(1.7786286, 0, 0, 0, 1.7786286, 0, 0, 0, 1.7786286, -0.40736943, 0.37299326, 2.1674783)
+material_override = SubResource("StandardMaterial3D_a2u5e")
+size = Vector3(1, 0.34716797, 1)
+
+[node name="Red" type="Area3D" parent="."]
+transform = Transform3D(1.7786286, 0, 0, 0, 1.7786286, 0, 0, 0, 1.7786286, -0.50041574, 0.16019964, 0.036547802)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Red"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.057861328, 0.1218251, 1.2051342)
+shape = SubResource("BoxShape3D_vtbns")
+
+[node name="Blue" type="Area3D" parent="."]
+transform = Transform3D(1.7786286, 0, 0, 0, 1.7786286, 0, 0, 0, 1.7786286, 1.7363734, 0.16019964, 0.036547802)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Blue"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.057861328, 0.1218251, 1.2051342)
+shape = SubResource("BoxShape3D_vtbns")
+
+[node name="Greenb" type="Area3D" parent="."]
+transform = Transform3D(1.7786286, 0, 0, 0, 1.7786286, 0, 0, 0, 1.7786286, 1.7363734, 0.16019964, -2.2240467)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Greenb"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.057861328, 0.1218251, 1.2051342)
+shape = SubResource("BoxShape3D_vtbns")
+
+[node name="Yellow2" type="Area3D" parent="."]
+transform = Transform3D(1.7786286, 0, 0, 0, 1.7786286, 0, 0, 0, 1.7786286, -0.5071848, 0.16019964, -2.2240467)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Yellow2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.057861328, 0.1218251, 1.2051342)
+shape = SubResource("BoxShape3D_vtbns")
+
+[connection signal="body_entered" from="Red" to="." method="_on_red_body_entered"]
+[connection signal="body_entered" from="Blue" to="." method="_on_blue_body_entered"]
+[connection signal="body_entered" from="Greenb" to="." method="_on_greenb_body_entered"]
+[connection signal="body_entered" from="Yellow2" to="." method="_on_yellow_2_body_entered"]

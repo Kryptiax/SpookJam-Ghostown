@@ -8,6 +8,7 @@ extends Control
 @onready var green: Sprite2D = $CanvasLayer/GridContainer/GemHolder/GreenGem
 @onready var red: Sprite2D = $CanvasLayer/GridContainer/GemHolder/RedGem
 @onready var gem_holder: AnimatedSprite2D = $CanvasLayer/GridContainer/GemHolder
+@onready var death_screen: Control = $CanvasLayer/DeathScreen
 
 var health_found
 var red_gem
@@ -77,6 +78,10 @@ func update_Gems():
 
 func _on_player_health_changed(health: Variant) -> void:
 	update_hearts(health)
+	if health == 0:
+		death_screen.show()
+		get_tree().paused = 1
+		
 	pass # Replace with function body.
 
 
@@ -113,3 +118,10 @@ func _on_resume_pressed() -> void:
 	paused = !paused
 	pauseMenu()
 	changePause.emit(paused)
+
+
+func _on_try_again_pressed() -> void:
+	death_screen.hide()
+	get_tree().reload_current_scene()
+	get_tree().paused = 0
+	pass # Replace with function body.

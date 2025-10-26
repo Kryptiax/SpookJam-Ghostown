@@ -1,13 +1,33 @@
-[gd_scene load_steps=6 format=3 uid="uid://p436v43h7hfg"]
+[gd_scene load_steps=9 format=3 uid="uid://p436v43h7hfg"]
 
 [ext_resource type="Script" uid="uid://c2o76o2yf67fd" path="res://Scenes/main_menu.gd" id="1_tt5f1"]
 
 [sub_resource type="Gradient" id="Gradient_853f1"]
-offsets = PackedFloat32Array(0.06666667, 0.41333333, 0.6888889)
-colors = PackedColorArray(0.28628203, 0.28628203, 0.28628203, 1, 0.51000094, 0.20773235, 0.47985828, 1, 0.825946, 0.47512603, 0.6445318, 1)
+offsets = PackedFloat32Array(0.06666667, 0.41333333, 0.56, 0.6888889, 0.85333335)
+colors = PackedColorArray(0.28628203, 0.28628203, 0.28628203, 1, 0.43137255, 0.32941177, 0.40784314, 1, 1.4920532e-06, 0.57460624, 0.3472084, 1, 0.12967882, 0.7021519, 0.57537276, 1, 0, 0.69577044, 0.6636088, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_8saeu"]
 gradient = SubResource("Gradient_853f1")
+fill_to = Vector2(1, 0.8286604)
+
+[sub_resource type="FontVariation" id="FontVariation_tt5f1"]
+variation_embolden = 2.0
+variation_transform = Transform2D(0.77, 0.48, 0.3, 1.7, 0, -7.165)
+
+[sub_resource type="LabelSettings" id="LabelSettings_853f1"]
+font = SubResource("FontVariation_tt5f1")
+font_size = 70
+font_color = Color(1, 0.9372549, 1, 1)
+outline_size = 3
+outline_color = Color(1, 0.019607844, 1, 1)
+shadow_size = 14
+shadow_color = Color(0, 0, 0, 0.89411765)
+stacked_outline_count = 1
+stacked_outline_0/size = 250
+stacked_outline_0/color = Color(0.3882353, 0.2784314, 0.3647059, 1)
+
+[sub_resource type="Theme" id="Theme_tt5f1"]
+/styles/Button = null
 
 [sub_resource type="Gradient" id="Gradient_tt5f1"]
 
@@ -33,29 +53,111 @@ grow_vertical = 2
 scale = Vector2(1.0088594, 1)
 texture = SubResource("GradientTexture2D_8saeu")
 
+[node name="Label" type="Label" parent="Menu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -181.0
+offset_top = -48.0
+offset_right = 181.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Ghostown"
+label_settings = SubResource("LabelSettings_853f1")
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="Menu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 304.20197
+offset_top = 180.0
+offset_right = 1284.2019
+offset_bottom = 276.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.24667406, 0.27999997)
+text = "A Ghoul of a mistake (farts)"
+label_settings = SubResource("LabelSettings_853f1")
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="Menu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 98.0285
+offset_top = 268.00006
+offset_right = 2309.0286
+offset_bottom = 364.00006
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.24667406, 0.27999997)
+text = "Version 112.11.22.3.11.11.1111.1111111111.3423546576869.65"
+label_settings = SubResource("LabelSettings_853f1")
+horizontal_alignment = 1
+
+[node name="Label4" type="Label" parent="Menu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -734.595
+offset_top = -300.0
+offset_right = 1476.405
+offset_bottom = -204.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.24667406, 0.27999997)
+theme_override_colors/font_color = Color(0.045879327, 0.07202465, 0.018224025, 1)
+text = "warm regards, pamela"
+label_settings = SubResource("LabelSettings_853f1")
+horizontal_alignment = 1
+
 [node name="VBoxContainer" type="VBoxContainer" parent="Menu"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -101.0
-offset_right = 70.0
+offset_left = 87.22723
+offset_top = -232.0
+offset_right = 157.22723
+offset_bottom = -131.0
 grow_vertical = 0
-scale = Vector2(1.0242378, 0.9030831)
+scale = Vector2(2.284, 2.014)
 
 [node name="Play" type="Button" parent="Menu/VBoxContainer"]
 layout_mode = 2
+theme = SubResource("Theme_tt5f1")
+theme_override_colors/font_color = Color(0.43137255, 0.32941177, 0.40784314, 1)
+theme_override_constants/outline_size = 85
 text = "Play"
 
 [node name="Options" type="Button" parent="Menu/VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.38431373, 0.29411766, 0.3647059, 1)
+theme_override_constants/outline_size = 35
 text = "Options"
 
 [node name="Quit" type="Button" parent="Menu/VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.39215687, 0.3019608, 0.36862746, 1)
+theme_override_constants/outline_size = 80
 text = "Quit"
 
 [node name="Options" type="TextureRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

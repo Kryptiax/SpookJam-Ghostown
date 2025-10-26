@@ -1,6 +1,7 @@
-[gd_scene load_steps=35 format=3 uid="uid://cfre02u3h2541"]
+[gd_scene load_steps=36 format=3 uid="uid://cfre02u3h2541"]
 
 [ext_resource type="Script" uid="uid://b8f525xjxamr0" path="res://Scripts/city_center.gd" id="1_la81a"]
+[ext_resource type="PackedScene" uid="uid://de5bh4bi85eu3" path="res://Scenes/player.tscn" id="2_2ul3p"]
 [ext_resource type="Texture2D" uid="uid://36by4xo2ne0d" path="res://Assets/Imported/grass_3.png" id="2_lwxhc"]
 [ext_resource type="Texture2D" uid="uid://bmvv8l085mmwq" path="res://Assets/Imported/cobblestone_3.png" id="3_gh5ws"]
 [ext_resource type="Texture2D" uid="uid://b25500jl3vwpi" path="res://Assets/Imported/dirty_1.png" id="3_lwxhc"]
@@ -113,6 +114,9 @@ albedo_color = Color(0.06666667, 0.21176471, 0, 1)
 
 [node name="CityCenter" type="Node3D"]
 script = ExtResource("1_la81a")
+
+[node name="Player" parent="." instance=ExtResource("2_2ul3p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.2624464, 5.575095, 15.830031)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_etsnd")
@@ -1759,25 +1763,25 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13599789, 0.6037712, 0)
 [node name="North" type="Area3D" parent="."]
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="North"]
-transform = Transform3D(0.99999547, 0, -0.0030194782, 0, 1, 0, 0.0030194782, 0, 0.99999547, 3.3434365, 9.847534, -22.398571)
+transform = Transform3D(0.99999547, 0, -0.0030194782, 0, 1, 0, 0.0030194782, 0, 0.99999547, 3.3434365, 9.847534, -23.641634)
 shape = SubResource("BoxShape3D_lwxhc")
 
 [node name="South" type="Area3D" parent="."]
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="South"]
-transform = Transform3D(0.99999547, 0, -0.0030194782, 0, 1, 0, 0.0030194782, 0, 0.99999547, 3.3434365, 9.847534, 23.087112)
+transform = Transform3D(0.99999547, 0, -0.0030194782, 0, 1, 0, 0.0030194782, 0, 0.99999547, 3.3434365, 9.847534, 23.661942)
 shape = SubResource("BoxShape3D_lwxhc")
 
 [node name="East" type="Area3D" parent="."]
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="East"]
-transform = Transform3D(0.0015184437, 0, 0.99999887, 0, 1, 0, -0.99999887, 0, 0.0015184437, 23.99053, 9.847534, 1.1950907)
+transform = Transform3D(0.0015184437, 0, 0.99999887, 0, 1, 0, -0.99999887, 0, 0.0015184437, 25.2519, 9.847534, 1.1950907)
 shape = SubResource("BoxShape3D_lwxhc")
 
 [node name="West" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="West"]
-transform = Transform3D(0.0015184437, 0, 0.99999887, 0, 1, 0, -0.99999887, 0, 0.0015184437, -16.555544, 9.847534, 1.1311766)
+transform = Transform3D(0.0015184437, 0, 0.99999887, 0, 1, 0, -0.99999887, 0, 0.0015184437, -17.638023, 9.847534, 1.1311766)
 shape = SubResource("BoxShape3D_lwxhc")
 
 [node name="NorthSpawn" type="Node3D" parent="."]
@@ -1794,6 +1798,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.486269, 1.9277897, 0)
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.6841781, 0.72931504, 0, -0.72931504, 0.6841781, 2.035406, 21.023586, 30.440138)
+visible = false
 
 [node name="Spawn" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.06517, 5.918457, 0)
@@ -1802,108 +1807,110 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.06517, 5.918457, 0)
 transform = Transform3D(-0.44088203, 0.044588815, -1.9502909, 0.20124438, 1.9898494, 0, 1.9403926, -0.19624254, -0.44313103, 3.0434308, 0, 0)
 mesh = ExtResource("8_1t63h")
 
-[node name="Node3D" type="Node3D" parent="."]
+[node name="House" type="Node3D" parent="."]
 
-[node name="Gamejamhouse2" type="MeshInstance3D" parent="Node3D"]
+[node name="Gamejamhouse2" type="MeshInstance3D" parent="House"]
 transform = Transform3D(-0.7916077, 0, 0.61103, 0, 1, 0, -0.61103, 0, -0.7916077, -29.52258, 0.14743042, 25.38215)
 mesh = ExtResource("9_neva4")
 skeleton = NodePath("../Gamejamhouse3")
 surface_material_override/0 = SubResource("StandardMaterial3D_rbuvu")
 
-[node name="Gamejamhouse3" type="MeshInstance3D" parent="Node3D"]
+[node name="Gamejamhouse3" type="MeshInstance3D" parent="House"]
 transform = Transform3D(-0.9575615, 0, -0.28822964, 0, 1, 0, 0.28822964, 0, -0.9575615, -26.419933, 0.14743233, 12.8030205)
 mesh = ExtResource("9_neva4")
 skeleton = NodePath("../Gamejamhouse4")
 surface_material_override/0 = SubResource("StandardMaterial3D_rbuvu")
 
-[node name="Gamejamhouse4" type="MeshInstance3D" parent="Node3D"]
+[node name="Gamejamhouse4" type="MeshInstance3D" parent="House"]
 transform = Transform3D(-0.32279444, 0, -0.9464691, 0, 1, 0, 0.9464691, 0, -0.32279444, 29.512543, 0.14743233, 34.8447)
 mesh = ExtResource("9_neva4")
 skeleton = NodePath("../Gamejamhouse")
 surface_material_override/0 = SubResource("StandardMaterial3D_rbuvu")
 
-[node name="Gamejamhouse" type="MeshInstance3D" parent="Node3D"]
+[node name="Gamejamhouse" type="MeshInstance3D" parent="House"]
 transform = Transform3D(0.5818959, 0, -0.8132633, 0, 1, 0, 0.8132633, 0, 0.5818959, 17.034386, 0.14743233, 39.297367)
 mesh = ExtResource("9_neva4")
 skeleton = NodePath("../Houses")
 surface_material_override/0 = SubResource("StandardMaterial3D_rbuvu")
 
-[node name="Houses" type="MeshInstance3D" parent="Node3D"]
+[node name="Houses" type="MeshInstance3D" parent="House"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.065273, 0.14743233, 31.12932)
 mesh = ExtResource("9_neva4")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_rbuvu")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/Houses"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="House/Houses"]
 transform = Transform3D(0.9106968, 0, 0, 0, 1.1388427, 0, 0, 0, 1, 2.30513, 8.592973, -2.035244)
 mesh = SubResource("BoxMesh_ug3c1")
 surface_material_override/0 = SubResource("StandardMaterial3D_2ul3p")
 
-[node name="Houses" type="MeshInstance3D" parent="Node3D/Houses"]
+[node name="Houses" type="MeshInstance3D" parent="House/Houses"]
 transform = Transform3D(-0.31687424, 0, -0.94846755, 0, 1, 0, 0.94846755, 0, -0.31687424, -12.809513, 0.14743233, -48.52334)
 mesh = ExtResource("9_neva4")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_rbuvu")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/Houses/Houses"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="House/Houses/Houses"]
 transform = Transform3D(0.9106968, 0, 0, 0, 1.1388427, 0, 0, 0, 1, 2.30513, 8.592973, -2.035244)
 mesh = SubResource("BoxMesh_ug3c1")
 surface_material_override/0 = SubResource("StandardMaterial3D_2ul3p")
 
-[node name="Houses2" type="MeshInstance3D" parent="Node3D/Houses"]
+[node name="Houses2" type="MeshInstance3D" parent="House/Houses"]
 transform = Transform3D(-0.97934306, 0, -0.2022062, 0, 1, 0, 0.2022062, 0, -0.97934306, 2.026968, 0.14743233, -67.43615)
 mesh = ExtResource("9_neva4")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_rbuvu")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/Houses/Houses2"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="House/Houses/Houses2"]
 transform = Transform3D(0.9106968, 0, 0, 0, 1.1388427, 0, 0, 0, 1, 2.30513, 8.592973, -2.035244)
 mesh = SubResource("BoxMesh_ug3c1")
 surface_material_override/0 = SubResource("StandardMaterial3D_2ul3p")
 
-[node name="Houses3" type="MeshInstance3D" parent="Node3D/Houses"]
+[node name="Houses3" type="MeshInstance3D" parent="House/Houses"]
 transform = Transform3D(-0.783162, 0, 0.62181777, 0, 1, 0, -0.62181777, 0, -0.783162, 29.478956, 0.14743233, -66.89368)
 mesh = ExtResource("9_neva4")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_rbuvu")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/Houses/Houses3"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="House/Houses/Houses3"]
 transform = Transform3D(0.9106968, 0, 0, 0, 1.1388427, 0, 0, 0, 1, 2.30513, 8.592973, -2.035244)
 mesh = SubResource("BoxMesh_ug3c1")
 surface_material_override/0 = SubResource("StandardMaterial3D_2ul3p")
 
-[node name="Houses4" type="MeshInstance3D" parent="Node3D/Houses"]
+[node name="Houses4" type="MeshInstance3D" parent="House/Houses"]
 transform = Transform3D(-0.66950667, 0, 0.742806, 0, 1, 0, -0.742806, 0, -0.66950667, 47.330494, 0.14743423, -61.215755)
 mesh = ExtResource("9_neva4")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_rbuvu")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/Houses/Houses4"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="House/Houses/Houses4"]
 transform = Transform3D(0.9106968, 0, 0, 0, 1.1388427, 0, 0, 0, 1, 2.30513, 8.592973, -2.035244)
 mesh = SubResource("BoxMesh_ug3c1")
 surface_material_override/0 = SubResource("StandardMaterial3D_2ul3p")
 
-[node name="Houses5" type="MeshInstance3D" parent="Node3D/Houses"]
+[node name="Houses5" type="MeshInstance3D" parent="House/Houses"]
 transform = Transform3D(-0.16323996, 0, 0.9865864, 0, 1, 0, -0.9865864, 0, -0.16323996, 47.330494, 0.52062225, -41.912445)
 mesh = ExtResource("9_neva4")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_rbuvu")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/Houses/Houses5"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="House/Houses/Houses5"]
 transform = Transform3D(0.9106968, 0, 0, 0, 1.1388427, 0, 0, 0, 1, 2.30513, 8.592973, -2.035244)
 mesh = SubResource("BoxMesh_ug3c1")
 surface_material_override/0 = SubResource("StandardMaterial3D_2ul3p")
 
-[node name="HintTree" parent="." instance=ExtResource("10_rbuvu")]
+[node name="TreeCity" type="Node3D" parent="."]
+
+[node name="HintTree" parent="TreeCity" instance=ExtResource("10_rbuvu")]
 transform = Transform3D(0.78786033, 0, -0.61585397, 0, 1, 0, 0.61585397, 0, 0.78786033, -23.059687, 2.2096586, 6.457386)
 
-[node name="HintTree2" parent="." instance=ExtResource("10_rbuvu")]
+[node name="HintTree2" parent="TreeCity" instance=ExtResource("10_rbuvu")]
 transform = Transform3D(0.78786033, 0, -0.61585397, 0, 1, 0, 0.61585397, 0, 0.78786033, -23.059687, 2.2096586, 25.567514)
 
-[node name="HintTree3" parent="." instance=ExtResource("10_rbuvu")]
+[node name="HintTree3" parent="TreeCity" instance=ExtResource("10_rbuvu")]
 transform = Transform3D(0.8501409, 0, 0.52655524, 0, 1, 0, -0.52655524, 0, 0.8501409, 18.71204, 2.2096586, 27.673124)
 
-[node name="HintTree4" parent="." instance=ExtResource("10_rbuvu")]
+[node name="HintTree4" parent="TreeCity" instance=ExtResource("10_rbuvu")]
 transform = Transform3D(0.922814, 0, -0.3852458, 0, 1, 0, 0.3852458, 0, 0.922814, 30.84493, 2.2096586, 18.499777)
 
 [node name="Mountains" type="Node3D" parent="."]

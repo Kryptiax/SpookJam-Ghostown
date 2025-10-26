@@ -34,13 +34,6 @@ func _ready() -> void:
 				spawn.position = east.global_position
 				add_child(spawn)
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
-
-
 func _on_north_body_entered(body: Node3D) -> void:
 	if body.is_in_group("player"):
 		WorldInfo.direction = WorldInfo.DIRECTIONS.NORTH

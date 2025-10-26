@@ -16,6 +16,7 @@ radius = 1.6450195
 height = 3.290039
 
 [node name="Player" type="CharacterBody3D" groups=["player"]]
+process_mode = 3
 slide_on_ceiling = false
 script = ExtResource("1_cvnsp")
 
@@ -80,6 +81,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.52563477, 0)
 shape = SubResource("CapsuleShape3D_6t5aa")
 
 [connection signal="green_collected" from="." to="UIworkbench" method="_on_player_green_collected"]
+[connection signal="health_changed" from="." to="UIworkbench" method="_on_player_health_changed"]
 [connection signal="paused" from="." to="UIworkbench" method="_on_player_paused"]
 [connection signal="purple_collected" from="." to="UIworkbench" method="_on_player_purple_collected"]
 [connection signal="red_collected" from="." to="UIworkbench" method="_on_player_red_collected"]

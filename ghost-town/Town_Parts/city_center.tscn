@@ -2303,6 +2303,7 @@ shape = SubResource("BoxShape3D_t6v16")
 
 [node name="People" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6577396, 1.0851545, 17.652597)
+visible = false
 
 [node name="Node3D" parent="People" instance=ExtResource("15_x0d7p")]
 
